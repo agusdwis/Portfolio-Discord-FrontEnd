@@ -4,5 +4,39 @@
 }
 
 body {
-    background: #282c34;
+    background: #2F3136;
+}
+
+.MuiTab-wrapper{
+    background-color: #36393F;
+}
+
+.MuiTab-wrapper:active{
+    background-color: #4FB581 !important;
+}
+
+.MuiTab-wrapper:hover{
+    background-color: #4FB581;
+    border-radius: 20px;
+    -webkit-transition: background-color 0.1s linear;
+    -moz-transition: background-color 0.1s linear;
+    -o-transition: background-color 0.1s linear;
+}
+
+.MuiSvgIcon-root{
+    width: 2rem !important;
+    height: 2rem !important;
+    color: #4FB581;
+}
+
+.MuiSvgIcon-root:active{
+    color: #fff;
+}
+
+.MuiSvgIcon-root:hover{
+    color: #fff;
+}
+
+.MuiTab-wrapper:hover .MuiSvgIcon-root{
+    color: #fff;
 }
