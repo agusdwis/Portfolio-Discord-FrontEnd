@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MediaCard from "../components/CardComponent";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +34,19 @@ const useStyles = makeStyles((theme) => ({
     container: {
         padding: theme.spacing(1),
         border: 'none'
+    },
+    footer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: theme.spacing(5)
+    },
+    footerText:{
+        paddingTop: theme.spacing(1),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imgFooter:{
+        width: theme.spacing(10)
     }
 }));
 
@@ -43,10 +57,11 @@ export default function GuildPage () {
                 <Container className={classes.container} maxWidth={'lg'}>
                     <Grid container spacing={0}>
                         <Grid item xs={12} >
-                            <img className={classes.paper} src={require('../assets/images/guild-banner.png')} alt="Guild Banner" />
+                            <img id="banner" className={classes.paper} src={require('../assets/images/guild-banner.png')} alt="Guild Banner" />
 
                             <Typography className={classes.text}>Popular Communities</Typography>
                         </Grid>
+
                         <Grid item xs={12}>
                             <Grid className={classes.card} container spacing={2}>
                                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
@@ -55,6 +70,19 @@ export default function GuildPage () {
                                     </Grid>
                                 ))}
                             </Grid>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Grid container className={classes.footer} spacing={1}>
+                                <img className={classes.imgFooter} src={require('../assets/images/Bottom-Icon.svg')} alt="Go"/>
+                            </Grid>
+                            <Grid container className={classes.footerText}>
+                                <Typography className={classes.footerText}>There are more communities out there!</Typography>
+                            </Grid>
+                            <Grid container className={classes.footerText}>
+                                <Link href="#"><Typography style={{color: '#2DA8EE'}} className={classes.footerText}>Try searching for them.</Typography></Link>
+                            </Grid>
+
                         </Grid>
                     </Grid>
                 </Container>
