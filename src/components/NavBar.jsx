@@ -18,10 +18,8 @@ import {
 
 import ExplorePage from "../pages/ExplorePage";
 
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -57,36 +55,24 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         display: 'flex',
         color: '#fff',
-        // height: '100%',
-        // width: '100%',
-        // minWidth: theme.spacing(10),
-        // minHeight: theme.spacing(6),
-
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
         background: '#202225',
         color: '#fff',
         minHeight: theme.spacing(80),
+        minWidth: theme.spacing(9),
+        position: 'sticky'
     },
-    tabRoot: {
-        // minWidth: theme.spacing(9),
-        // width: theme.spacing(9),
-        // minHeight: theme.spacing(6),
-        // height: theme.spacing(6),
-
-    },
-}));
-
-const MyTab = withStyles(theme => ({
-    root: {
+    myRoot: {
         borderRadius: theme.shape.borderRadius,
         height: theme.spacing(9),
         minHeight: theme.spacing(9),
         width: theme.spacing(9),
         minWidth: theme.spacing(9),
+
     },
-    wrapper: {
+    myWrapper:{
         padding: theme.spacing(0),
         justifyContent: 'center',
         alignItems: 'center',
@@ -95,11 +81,8 @@ const MyTab = withStyles(theme => ({
         minWidth: theme.spacing(7),
         width: theme.spacing(7),
         height: theme.spacing(7)
-    },
-    icon : {
-        fontSize: 1000
     }
-}))(Tab);
+}));
 
 export default function NavigationBar() {
     const classes = useStyles();
@@ -108,9 +91,9 @@ export default function NavigationBar() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    // style={{position: "fixed", bottom:"0", width:"100%"}}
+
     return (
-        <div className={classes.root} >
+        <div className={classes.root}>
             <Tabs
                 orientation="vertical"
                 variant="scrollable"
@@ -118,13 +101,13 @@ export default function NavigationBar() {
                 aria-label="Vertical tabs example"
                 className={classes.tabs}
             >
-                <MyTab icon={<HomeDiscordIcon/> } {...a11yProps(0)} />
-                <MyTab icon={<AddServerIcon/> } {...a11yProps(1)} />
-                <MyTab icon={<ExploreIcon/> } {...a11yProps(2)} />
-                <MyTab icon={<DownloadIcon/> } {...a11yProps(3)} />
+                <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} icon={<HomeDiscordIcon/> } {...a11yProps(0)} />
+                <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} icon={<AddServerIcon/> } {...a11yProps(1)} />
+                <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} icon={<ExploreIcon/> } {...a11yProps(2)} />
+                <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} icon={<DownloadIcon/> } {...a11yProps(3)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                AA
+                <><ExplorePage/></>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 BB

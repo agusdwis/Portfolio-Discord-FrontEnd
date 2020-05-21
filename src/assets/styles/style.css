@@ -7,36 +7,48 @@ body {
     background: #2F3136;
 }
 
-.MuiTab-wrapper{
-    background-color: #36393F;
-}
+/*.MuiTab-wrapper{*/
+/*    background-color: #36393F;*/
+/*}*/
 
-.MuiTab-wrapper:active{
-    background-color: #4FB581 !important;
+.MuiTab-wrapper:active, .MuiTab-wrapper:focus{
+    background-color: #7289DB !important;
 }
 
 .MuiTab-wrapper:hover{
-    background-color: #4FB581;
-    border-radius: 20px;
+    background-color: #36393F;
+    border-radius: 5px;
     -webkit-transition: background-color 0.1s linear;
     -moz-transition: background-color 0.1s linear;
     -o-transition: background-color 0.1s linear;
 }
 
-.MuiSvgIcon-root{
-    width: 2rem !important;
-    height: 2rem !important;
-    color: #4FB581;
+/*.MuiSvgIcon-root{*/
+/*    width: 2rem !important;*/
+/*    height: 2rem !important;*/
+/*    color: #4FB581;*/
+/*}*/
+
+/*.MuiSvgIcon-root:active{*/
+/*    color: #fff;*/
+/*}*/
+
+/*.MuiSvgIcon-root:hover{*/
+/*    color: #fff;*/
+/*}*/
+
+/*.MuiTab-wrapper:hover .MuiSvgIcon-root{*/
+/*    color: #fff;*/
+/*}*/
+
+.myTabs {
+    border-radius: 0;
+    height: 0;
+    min-height: 0;
+    width: 9px !important;
+    min-width: 9px;
 }
 
-.MuiSvgIcon-root:active{
-    color: #fff;
-}
-
-.MuiSvgIcon-root:hover{
-    color: #fff;
-}
-
-.MuiTab-wrapper:hover .MuiSvgIcon-root{
-    color: #fff;
+.MuiCard-root {
+    background-color: #292B2F;
 }

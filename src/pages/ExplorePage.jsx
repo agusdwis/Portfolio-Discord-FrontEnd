@@ -15,11 +15,8 @@ import {
     ScienceIcon,
     ContentIcon,
     AnimeMangaIcon,
-    MoviesTVIcon
-} from '../utils/CustomIcon';
-import withStyles from "@material-ui/core/styles/withStyles";
+    MoviesTVIcon } from '../utils/CustomIcon';
 import GuildPage from "./GuildPage";
-import Icon from "@material-ui/core/Icon";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -58,51 +55,47 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         display: 'flex',
-        height: theme.spacing(300),
-        width: '100%',
         background: '#36393F',
         color: '#fff',
-    },
-    tabRoot: {
-        width: theme.spacing(30),
-        minWidth: theme.spacing(20),
-        height: theme.spacing(6),
-        background: '#2F3136',
-        textTransform: "none",
-
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
         background: '#2F3136',
         color: '#fff',
-        minHeight: theme.spacing(80),
-        fontSize: theme.spacing(20),
-
+        minWidth: theme.spacing(30),
+        width: theme.spacing(30),
+        position: 'sticky'
     },
     title: {
         fontSize: theme.spacing(3),
+        fontWeight: 'bold',
         padding: theme.spacing(2)
     },
     icon: {
         paddingRight: theme.spacing(2),
     },
-}));
 
-const MyTab = withStyles(theme => ({
-    root: {
+    myRoot: {
         borderRadius: theme.shape.borderRadius,
-        height: theme.spacing(5),
-        width: 200
+        height: theme.spacing(6),
+        minHeight: theme.spacing(6),
+        width: theme.spacing(30),
+        minWidth: theme.spacing(30),
+        paddingTop: theme.spacing(0),
+        paddingBottom: theme.spacing(0),
     },
-    wrapper: {
+    myWrapper:{
+        paddingLeft: theme.spacing(1),
         marginBottom: theme.spacing(4),
         borderRadius: theme.shape.borderRadius,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-
-    },
-}))(Tab);
+        minHeight: theme.spacing(6),
+        height: theme.spacing(6),
+        textTransform: 'none'
+    }
+}));
 
 export default function Explore() {
     const classes = useStyles();
@@ -122,27 +115,28 @@ export default function Explore() {
                     onChange={handleChange}
                     aria-label="Vertical tabs example"
                     className={classes.tabs}
+
                 >
                     <Typography className={classes.title}>
                         Discover
                     </Typography>
-                    <MyTab className={classes.tabRoot} label={<> <ExploreIcon className={classes.icon}/> Home </>} {...a11yProps(0)} />
-                    <MyTab className={classes.tabRoot} label={<> <GamingIcon className={classes.icon}/> Gaming </>} {...a11yProps(1)} />
-                    <MyTab className={classes.tabRoot} label={<> <MusicIcon className={classes.icon}/> Music </>} {...a11yProps(2)} />
-                    <MyTab className={classes.tabRoot} label={<> <EducationIcon className={classes.icon}/> Education </>} {...a11yProps(3)} />
-                    <MyTab className={classes.tabRoot} label={<> <ScienceIcon className={classes.icon}/> Science & Tech </>} {...a11yProps(4)} />
-                    <MyTab className={classes.tabRoot} label={<> <ContentIcon className={classes.icon}/> Content Creator </>} {...a11yProps(5)} />
-                    <MyTab className={classes.tabRoot} label={<> <AnimeMangaIcon className={classes.icon}/> Anime & Manga </>} {...a11yProps(6)} />
-                    <MyTab className={classes.tabRoot} label={<> <MoviesTVIcon className={classes.icon}/> Movies & TV </>} {...a11yProps(7)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <ExploreIcon className={classes.icon}/> Home </>} {...a11yProps(0)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <GamingIcon className={classes.icon}/> Gaming </>} {...a11yProps(1)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <MusicIcon className={classes.icon}/> Music </>} {...a11yProps(2)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <EducationIcon className={classes.icon}/> Education </>} {...a11yProps(3)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <ScienceIcon className={classes.icon}/> Science & Tech </>} {...a11yProps(4)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <ContentIcon className={classes.icon}/> Content Creator </>} {...a11yProps(5)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <AnimeMangaIcon className={classes.icon}/> Anime & Manga </>} {...a11yProps(6)} />
+                    <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <MoviesTVIcon className={classes.icon}/> Movies & TV </>} {...a11yProps(7)} />
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    AA
+                    <GuildPage/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    AA
+                    <GuildPage/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    Gaming
+                    <GuildPage/>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     Music
