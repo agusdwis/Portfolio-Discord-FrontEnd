@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         minHeight: theme.spacing(80),
         minWidth: theme.spacing(9),
-        position: 'sticky'
+        position: 'relative'
     },
     myRoot: {
         borderRadius: theme.shape.borderRadius,

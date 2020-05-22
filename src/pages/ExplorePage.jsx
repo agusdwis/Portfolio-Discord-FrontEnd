@@ -17,6 +17,7 @@ import {
     AnimeMangaIcon,
     MoviesTVIcon } from '../utils/CustomIcon';
 import GuildPage from "./GuildPage";
+import Button from "@material-ui/core/Button";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         background: '#36393F',
         color: '#fff',
+        position: 'relative'
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -64,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         minWidth: theme.spacing(30),
         width: theme.spacing(30),
-        position: 'sticky'
+        // position: 'fixed'
     },
     title: {
         fontSize: theme.spacing(3),
@@ -128,6 +130,7 @@ export default function Explore() {
                     <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <ContentIcon className={classes.icon}/> Content Creator </>} {...a11yProps(5)} />
                     <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <AnimeMangaIcon className={classes.icon}/> Anime & Manga </>} {...a11yProps(6)} />
                     <Tab classes={{root:classes.myRoot, wrapper:classes.myWrapper}} label={<> <MoviesTVIcon className={classes.icon}/> Movies & TV </>} {...a11yProps(7)} />
+
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     <GuildPage/>
