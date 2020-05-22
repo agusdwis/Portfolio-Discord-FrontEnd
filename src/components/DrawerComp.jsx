@@ -193,11 +193,12 @@ function MainNavbar(props) {
                     </Drawer>
                 </Hidden>
             </nav>
-            <main className={classes.content}>
-                <React.Fragment>
-                    <SideNavbar/>
-                </React.Fragment>
-            </main>
+            {/*<main className={classes.content}>*/}
+            {/*    <React.Fragment>*/}
+            {/*        /!*<SideNavbar/>*!/*/}
+            {/*        <ExplorePage/>*/}
+            {/*    </React.Fragment>*/}
+            {/*</main>*/}
         </div>
     );
 }
