@@ -12,7 +12,6 @@ import List from '@material-ui/core/List';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../assets/styles/style.css';
-import Home from "../pages/HomePage";
 import {
     AddServerIcon,
     DownloadIcon,
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
             width: drawerWidth,
             flexShrink: 0,
         },
+        backgroundColor: '#202225'
     },
     appBar: {
         [theme.breakpoints.up('sm')]: {

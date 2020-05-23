@@ -67,3 +67,7 @@ body {
 .name {
     text-decoration: none;
 }
+
+.MuiPaper-root {
+    background-color: #202225 !important;
+}
