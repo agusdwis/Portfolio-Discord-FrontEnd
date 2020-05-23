@@ -1,16 +1,19 @@
 import React from "react";
-import MainNavbar from "../components/DrawerComp";
-import NavigationBar from "../components/NavBar";
-
+import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
-import ExplorePage from "./ExplorePage";
+import SideNavbar from "../components/SideNavbar";
 
-const useStyles = theme => ({
+import NavigationBar from "../components/NavBar";
+import ExplorePage from "./ExplorePage";
+import ProfileIndicator from "../components/ProfileIndicator";
+import BottomNavBar from "../components/BottomNavigation";
+
+const useStyles = () => ({
     root: {
         display: 'flex',
     },
     content: {
-        flexGrow: 1
+        flexGrow: 1,
     },
 });
 
@@ -20,18 +23,19 @@ class Home extends React.Component {
     return(
         <React.Fragment>
             <div className={classes.root}>
-                <MainNavbar/>
+                <MainNavbar {...this.props}/>
                 {/*<NavigationBar/>*/}
+                {/*<ProfileIndicator/>*/}
+                {/*<BottomNavBar/>*/}
+
 
                 <main className={classes.content}>
                     <React.Fragment>
-                        {/*<SideNavbar/>*/}
-                        <ExplorePage/>
+                        <SideNavbar {...this.props}/>
+                        {/*<ExplorePage {...this.props}/>*/}
                     </React.Fragment>
                 </main>
             </div>
-
-
         </React.Fragment>
     )
   }

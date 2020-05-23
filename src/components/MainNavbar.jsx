@@ -11,15 +11,15 @@ import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SideNavbar from "../components/SideNavbar";
-
 import '../assets/styles/style.css';
+import Home from "../pages/HomePage";
 import {
     AddServerIcon,
     DownloadIcon,
     ExploreIcon,
     HomeDiscordIcon} from "../utils/CustomIcon";
-import Home from "../pages/HomePage";
+
+import SideNavbar from "../components/SideNavbar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import ExplorePage from "../pages/ExplorePage";
@@ -56,10 +56,6 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
         backgroundColor: '#202225',
-    },
-    content: {
-        flexGrow: 1,
-        // padding: theme.spacing(3),
     },
     listRoot: {
         textAlign: 'center',
@@ -134,8 +130,8 @@ function MainNavbar(props) {
         <div>
             <List style={{padding: '0px'}}>
                 {Menu.map((item, index) => (
-                    <Link to={item.pathname}>
-                        <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}} button key={index}>
+                    <Link to={item.pathname} key={index}>
+                        <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
                             <ListItemIcon classes={{root: classes.iconRoot}}>{item.icon}</ListItemIcon>
                         </ListItem>
                     </Link>
@@ -193,21 +189,11 @@ function MainNavbar(props) {
                     </Drawer>
                 </Hidden>
             </nav>
-            {/*<main className={classes.content}>*/}
-            {/*    <React.Fragment>*/}
-            {/*        /!*<SideNavbar/>*!/*/}
-            {/*        <ExplorePage/>*/}
-            {/*    </React.Fragment>*/}
-            {/*</main>*/}
         </div>
     );
 }
 
 MainNavbar.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 };
 
