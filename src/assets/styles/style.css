@@ -67,3 +67,11 @@ body {
 .name {
     text-decoration: none;
 }
+
+/*.MuiBottomNavigationAction-root{*/
+/*    color: #fff !important;*/
+/*}*/
+
+/*.MuiBottomNavigationAction-root.Mui-selected{*/
+/*    color: #ff1c24 !important;*/
+/*}*/
