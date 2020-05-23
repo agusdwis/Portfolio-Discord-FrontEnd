@@ -3,11 +3,6 @@ import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
 import SideNavbar from "../components/SideNavbar";
 
-import NavigationBar from "../components/NavBar";
-import ExplorePage from "./ExplorePage";
-import ProfileIndicator from "../components/ProfileIndicator";
-import BottomNavBar from "../components/BottomNavigation";
-
 const useStyles = () => ({
     root: {
         display: 'flex',

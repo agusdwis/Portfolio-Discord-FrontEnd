@@ -14,10 +14,6 @@ import {
     MoviesTVIcon, HomeDiscordIcon
 } from '../utils/CustomIcon';
 
-import Container from "@material-ui/core/Container";
-import {Link} from 'react-router-dom';
-import GuildPage from "../pages/GuildPage";
-import ProfileIndicator from "./ProfileIndicator";
 
 const myTab = [
     {

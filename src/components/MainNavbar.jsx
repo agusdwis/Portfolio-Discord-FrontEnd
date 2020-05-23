@@ -19,10 +19,6 @@ import {
     ExploreIcon,
     HomeDiscordIcon} from "../utils/CustomIcon";
 
-import SideNavbar from "../components/SideNavbar";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import ExplorePage from "../pages/ExplorePage";
 
 const drawerWidth = 72;
 

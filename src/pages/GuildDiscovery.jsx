@@ -2,13 +2,11 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MediaCard from "../components/CardComponent";
 import Link from "@material-ui/core/Link";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from '@material-ui/icons/Search';
 import CardMedia from "@material-ui/core/CardMedia";
-import Card from "@material-ui/core/Card";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
