@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
             width: drawerWidth,
             flexShrink: 0,
         },
-        backgroundColor: '#202225'
+        backgroundColor: '#202225 !important'
     },
     appBar: {
         [theme.breakpoints.up('sm')]: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
         },
-        backgroundColor: 'transparent',
+        backgroundColor: 'transparent !important',
     },
     menuButton: {
         marginRight: theme.spacing(2),

@@ -3,13 +3,15 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
-import MediaCard from "../components/CardComponent";
+import MediaCard from "./CardComponent";
 import Link from "@material-ui/core/Link";
 import CardMedia from "@material-ui/core/CardMedia";
 import {fade} from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import {SearchIcon} from "../utils/CustomIcon";
-
+import Fab from "@material-ui/core/Fab";
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import ScrollTop from "../utils/ScrollTop";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -118,26 +120,29 @@ const useStyles = makeStyles((theme) => ({
 
     },
     footerText2:{
-        paddingBottom: theme.spacing(5),
         paddingTop: theme.spacing(1),
         justifyContent: 'center',
         alignItems: 'center',
-        [theme.breakpoints.up('lg')]: {
-            paddingBottom: theme.spacing(0),
-        },
     },
     imgFooter:{
         width: theme.spacing(10)
     },
+    scroll : {
+        paddingBottom: theme.spacing(5),
+        justifyContent: 'flex-end',
+        [theme.breakpoints.up('lg')]: {
+            paddingBottom: theme.spacing(0),
+        },
+    },
 }));
 
-export default function GuildDiscovery () {
+export default function GuildDiscovery (props) {
     const classes = useStyles();
     return (
         <React.Fragment>
             <Container className={classes.root} maxWidth={'lg'}>
                 <Grid container spacing={1} >
-                    <Grid item xs={12}>
+                    <Grid id="back-to-top-anchor" item xs={12}>
                         <div className={classes.searchHeader}>
                             <CardMedia
                                 className={classes.media}
@@ -198,10 +203,16 @@ export default function GuildDiscovery () {
                         <Grid container className={classes.footerText2}>
                             <Link href="#"><Typography style={{color: '#2DA8EE'}} className={classes.footerText}>Try searching for them.</Typography></Link>
                         </Grid>
-
                     </Grid>
 
                 </Grid>
+                <div className={classes.scroll}>
+                    <ScrollTop {...props}>
+                        <Fab color="secondary" size="small" aria-label="scroll back to top">
+                            <KeyboardArrowUpIcon />
+                        </Fab>
+                    </ScrollTop>
+                </div>
             </Container>
         </React.Fragment>
     );
