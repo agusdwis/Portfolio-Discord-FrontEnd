@@ -14,6 +14,7 @@ const useStyles = makeStyles({
         flexGrow: 1,
         borderRadius: 10,
         border: 'none',
+        backgroundColor: 'none'
     },
     media: {
         height: 160,
