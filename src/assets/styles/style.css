@@ -68,10 +68,6 @@ body {
     text-decoration: none;
 }
 
-/*.MuiBottomNavigationAction-root{*/
-/*    color: #fff !important;*/
-/*}*/
-
-/*.MuiBottomNavigationAction-root.Mui-selected{*/
-/*    color: #ff1c24 !important;*/
-/*}*/
+.MuiPaper-root {
+    background-color: #292B2F !important;
+}
