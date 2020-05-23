@@ -19,15 +19,9 @@ class Home extends React.Component {
         <React.Fragment>
             <div className={classes.root}>
                 <MainNavbar {...this.props}/>
-                {/*<NavigationBar/>*/}
-                {/*<ProfileIndicator/>*/}
-                {/*<BottomNavBar/>*/}
-
-
                 <main className={classes.content}>
                     <React.Fragment>
                         <SideNavbar {...this.props}/>
-                        {/*<ExplorePage {...this.props}/>*/}
                     </React.Fragment>
                 </main>
             </div>
