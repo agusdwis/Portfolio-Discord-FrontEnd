@@ -11,7 +11,7 @@ import {
     ScienceIcon,
     ContentIcon,
     AnimeMangaIcon,
-    MoviesTVIcon, HomeDiscordIcon
+    MoviesTVIcon,
 } from '../utils/CustomIcon';
 
 
@@ -111,8 +111,8 @@ export default function Explore () {
         const classes = useStyles();
         return (
             <React.Fragment>
-                <Grid container spacing={40}>
-                    <Grid item lg={2} sm={12} style={{backgroundColor: '#2F3136'}}>
+                <Grid container spacing={0}>
+                    <Grid item xs={12} sm={12} md={2} lg={2} xl={2}  style={{backgroundColor: '#2F3136'}}>
                         <Grid container spacing={0}>
                         <div className={classes.root}>
                             <div className={classes.sideBar}>
@@ -143,7 +143,7 @@ export default function Explore () {
                         </Grid>
 
                     </Grid>
-                    <Grid item lg={10} xs={12} style={{backgroundColor: '#36393F', position: 'relative'}}>
+                    <Grid item xs={12} lg={10}  style={{backgroundColor: '#36393F', position: 'relative'}}>
                         <GuildDiscovery/>
                     </Grid>
                 </Grid>

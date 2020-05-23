@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         '&:focus':{
             color: '#ff3335'
         },
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             // display: 'none',
             width: '16%',
             zIndex: 0

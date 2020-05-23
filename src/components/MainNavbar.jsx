@@ -12,7 +12,6 @@ import List from '@material-ui/core/List';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../assets/styles/style.css';
-import Home from "../pages/HomePage";
 import {
     AddServerIcon,
     DownloadIcon,

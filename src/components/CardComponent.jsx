@@ -5,10 +5,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({

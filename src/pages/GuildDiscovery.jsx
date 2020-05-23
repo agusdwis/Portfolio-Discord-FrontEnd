@@ -51,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(1),
         justifyContent: 'center',
         alignItems: 'center',
+
+    },
+    footerText2:{
+        paddingBottom: theme.spacing(5),
+        paddingTop: theme.spacing(1),
+        justifyContent: 'center',
+        alignItems: 'center',
+        [theme.breakpoints.up('lg')]: {
+            paddingBottom: theme.spacing(0),
+        },
     },
     imgFooter:{
         width: theme.spacing(10)
@@ -151,7 +161,7 @@ export default function GuildDiscovery () {
                     <Grid item xs={12}>
                         <Grid className={classes.card} container spacing={2}>
                             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
-                                <Grid key={value} item xs={12} md={4}>
+                                <Grid key={value} item xs={12} sm={6} md={4}>
                                     <MediaCard/>
                                 </Grid>
                             ))}
@@ -165,7 +175,7 @@ export default function GuildDiscovery () {
                         <Grid container className={classes.footerText}>
                             <Typography className={classes.footerText}>There are more communities out there!</Typography>
                         </Grid>
-                        <Grid container className={classes.footerText}>
+                        <Grid container className={classes.footerText2}>
                             <Link href="#"><Typography style={{color: '#2DA8EE'}} className={classes.footerText}>Try searching for them.</Typography></Link>
                         </Grid>
 
