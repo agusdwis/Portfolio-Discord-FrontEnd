@@ -17,6 +17,8 @@ import {
     DownloadIcon,
     ExploreIcon,
     HomeDiscordIcon} from "../utils/CustomIcon";
+import Avatar from "@material-ui/core/Avatar";
+import deepPurple from "@material-ui/core/colors/deepPurple";
 
 
 const drawerWidth = 72;
@@ -86,7 +88,11 @@ const useStyles = makeStyles((theme) => ({
     },
     toolBar: {
         boxShadow: 'none'
-    }
+    },
+    purple: {
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
+    },
 }));
 
 const Menu = [
@@ -107,9 +113,22 @@ const Menu = [
     },
     {
         label: "Download",
-        pathname: "/login",
+        pathname: "#",
         icon: <DownloadIcon/>
     },
+];
+
+const Channel = [
+    {
+        label : "Dota 2",
+        pathname: "/channel/1",
+        icon: <HomeDiscordIcon/>
+    },
+    {
+        label : "PUBG",
+        pathname: "/channel/2",
+        icon: <HomeDiscordIcon/>
+    }
 ];
 
 function MainNavbar(props) {
@@ -129,6 +148,20 @@ function MainNavbar(props) {
                     <Link to={item.pathname} key={index}>
                         <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
                             <ListItemIcon classes={{root: classes.iconRoot}}>{item.icon}</ListItemIcon>
+                        </ListItem>
+                    </Link>
+                ))}
+            </List>
+        </div>
+    );
+
+    const channels = (
+        <div>
+            <List style={{padding: '0px'}}>
+                {Channel.map((item, index) => (
+                    <Link to={item.pathname} key={index}>
+                        <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
+                            <Avatar className={classes.purple}>{item.label.slice(0,1)}</Avatar>
                         </ListItem>
                     </Link>
                 ))}
@@ -170,6 +203,7 @@ function MainNavbar(props) {
                         }}
                     >
                         {drawer}
+                        {channels}
                     </Drawer>
 
                 </Hidden>
@@ -182,6 +216,7 @@ function MainNavbar(props) {
                         open
                     >
                         {drawer}
+                        {channels}
                     </Drawer>
                 </Hidden>
             </nav>
