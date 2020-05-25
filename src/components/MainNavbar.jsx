@@ -107,7 +107,7 @@ const Menu = [
     },
     {
         label: "Download",
-        pathname: "#",
+        pathname: "/login",
         icon: <DownloadIcon/>
     },
 ];
