@@ -7,6 +7,7 @@ const initialState = {
     token: "",
     status: false,
     is_login: false,
+    reg_status: false,
 
     infos:[],
 };
@@ -38,12 +39,13 @@ export default function userReducer(userState = initialState, action) {
                 password: action.payload.password,
                 email: action.payload.email,
                 status: action.payload.status,
+                reg_status: true,
             };
         case "ERROR_REGISTER":
             return {
                 ...userState,
-                reg_error: true,
-                visible: true
+                visible: true,
+                reg_status: false,
             };
         case "SUCCESS_LOGOUT":
             return {

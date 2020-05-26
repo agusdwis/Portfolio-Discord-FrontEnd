@@ -14,6 +14,8 @@ import {Link} from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import {fade, makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import HelpIcon from '@material-ui/icons/Help';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -76,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    help: {
+        display: 'flex',
+        color: 'inherit'
+    }
 }));
 
 export default function TopNavbar (){
@@ -168,6 +174,31 @@ export default function TopNavbar (){
                         MINECRAFT
                     </Typography>
                     <div className={classes.grow} />
+                    <div className={classes.sectionDesktop}>
+                        <IconButton aria-label="show 4 new notifications" color="inherit">
+                            <Badge badgeContent={4} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton aria-label="show 4 friend request" color="inherit">
+                            <Badge badgeContent={7} color="secondary">
+                                <PeopleIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={handleProfileMenuOpen}
+                            color="inherit"
+                        >
+                            <Badge badgeContent={4} color="secondary">
+                                <ChatIcon />
+                            </Badge>
+                        </IconButton>
+                    </div>
+
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
@@ -181,28 +212,17 @@ export default function TopNavbar (){
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
+
+                    <div className={classes.help}>
+                        <IconButton color="inherit">
+                            <GroupIcon/>
                         </IconButton>
-                        <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge color="secondary">
-                                <PeopleIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <ChatIcon />
+
+                        <IconButton color="inherit">
+                            <HelpIcon/>
                         </IconButton>
                     </div>
+
                     <div className={classes.sectionMobile}>
                         <IconButton
                             aria-label="show more"

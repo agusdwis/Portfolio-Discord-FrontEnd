@@ -5,10 +5,11 @@ export const doRegister = () => {
         const bodyRequest= {
             username: getState().user.username,
             password: getState().user.password,
-            email: getState().user.email
+            email: getState().user.email,
+            name: getState().user.name,
         };
 
-        if(!getState().user.username || !getState().user.password || !getState().user.email){
+        if(!getState().user.username || !getState().user.password || !getState().user.email || !getState().user.name) {
             dispatch({
                 type: "ERROR_REGISTER",
             })

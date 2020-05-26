@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 
 import '../assets/styles/chatpages.css';
 import BottomNavBar from "../components/BottomNavBar";
+import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
+import {connect} from "react-redux";
 
 const useStyles = () => ({
     root: {
@@ -80,15 +82,15 @@ class Group extends React.Component {
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.chats} item xs={12} lg={12}>
-                                <TopNavbar/>
+                                <TopNavbar {...this.props}/>
 
                                 <Grid container>
                                     <Grid className={classes.channelSection} item xs={12} lg={2}>
                                         <Paper className={classes.myPaper}>
-                                            <ChannelNavbar/>
+                                            <ChannelNavbar {...this.props}/>
                                         </Paper>
 
-                                        <BottomNavBar/>
+                                        <BottomNavBar {...this.props}/>
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
@@ -119,4 +121,17 @@ class Group extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(Group)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Group));

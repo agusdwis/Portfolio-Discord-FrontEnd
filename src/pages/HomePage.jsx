@@ -3,7 +3,12 @@ import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
 import SideNavbar from "../components/SideNavbar";
 import {connect} from "react-redux";
-import {changeInputUser, doLogin, doRegister, getProfile} from "../stores/action/userAction";
+import {
+    changeInputUser,
+    doLogin,
+    doRegister,
+    getProfile,
+    doSignOut } from "../stores/action/userAction";
 
 const useStyles = () => ({
     root: {
@@ -27,7 +32,9 @@ class Home extends React.Component {
                 <MainNavbar {...this.props}/>
                 <main className={classes.content}>
                     <React.Fragment>
-                        <SideNavbar {...this.props}/>
+                        <SideNavbar {...this.props}
+                                doSignOut = {this.props.doSignOut}
+                        />
                     </React.Fragment>
                 </main>
             </div>
@@ -45,7 +52,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
 
 };
 

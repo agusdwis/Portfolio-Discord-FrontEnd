@@ -97,9 +97,7 @@ class Register extends React.Component {
     postRegister = async () => {
         await this.props.doRegister();
 
-        console.log(this.props.data.reg_error);
-
-        if(this.props.data.reg_error){
+        if(!this.props.data.reg_status){
             this.props.history.push('/register');
         } else {
             this.props.history.push("/login")
@@ -159,6 +157,8 @@ class Register extends React.Component {
                                                                                 id="name"
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -171,6 +171,8 @@ class Register extends React.Component {
                                                                                 id="username"
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -183,6 +185,8 @@ class Register extends React.Component {
                                                                                 id="password"
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -195,6 +199,8 @@ class Register extends React.Component {
                                                                                 autoComplete="off"
                                                                                 autoFocus
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <Grid item xs>
                                                                                 <Link className={classes.loginLink} to="#" variant="body2">
@@ -202,11 +208,11 @@ class Register extends React.Component {
                                                                                 </Link>
                                                                             </Grid>
                                                                             <Button
-                                                                                type="submit"
                                                                                 fullWidth
                                                                                 variant="contained"
                                                                                 color="primary"
                                                                                 className={classes.submit}
+                                                                                onClick={() => this.postRegister()}
                                                                             >
                                                                                 Continue
                                                                             </Button>

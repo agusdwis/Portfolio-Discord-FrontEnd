@@ -41,7 +41,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function BottomNavBar(props) {
+export default function BottomNavBar(props, postLogout) {
+
+    postLogout = async () => {
+        await props.doSignOut();
+    };
+
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -67,13 +72,13 @@ export default function BottomNavBar(props) {
         >
             {props.login || is_login ?
                 <BottomNavigationAction classes={{root: classes.actionRoot, selected: classes.selectedRoot}}
-                                        label="agsdws" icon={<HomeDiscordIcon style={{color: status}}/>}/>
+                                        label={props.data.username} icon={<HomeDiscordIcon style={{color: status}}/>}/>
                 :
                 <BottomNavigationAction classes={{root: classes.actionRoot, selected: classes.selectedRoot}}
                                         label="guest" icon={<HomeDiscordIcon style={{color: '#ff150c'}}/>}/>
             }
 
-                <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<MicrophoneIcon style={{color: '#fff'}} />} />
+            <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<MicrophoneIcon style={{color: '#fff'}} />} />
             <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<HeadphoneIcon style={{color: '#fff'}} />} />
             <BottomNavigationAction onClick={handleClick} classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<SettingIcon style={{color: '#fff'}} />} />
             <Menu
@@ -85,7 +90,7 @@ export default function BottomNavBar(props) {
             >
                 <Link to={'#'}><MenuItem onClick={handleClose}>My account</MenuItem></Link>
                 {props.login || is_login ?
-                    <Link to={'#'}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+                    <Link onClick={()=>postLogout()} to={'#'}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
                     :
                     <Link to={'/login'}><MenuItem onClick={handleClose}>Login</MenuItem></Link>
                 }
