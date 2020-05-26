@@ -187,6 +187,7 @@ function MainNavbar(props) {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+
             <nav className={classes.drawer} aria-label="mailbox folders">
                 <Hidden smUp implementation="css">
                     <Drawer
