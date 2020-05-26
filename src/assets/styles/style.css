@@ -77,3 +77,23 @@ body {
         transform: scale(1.5);
     }
 }
+
+/** scroller **/
+/* Track */
+::-webkit-scrollbar-track {
+    background: #36393F;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #202225;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #616671;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}

@@ -21,7 +21,7 @@ class Home extends React.Component {
                 <MainNavbar {...this.props}/>
                 <main className={classes.content}>
                     <React.Fragment>
-                        <SideNavbar {...this.props}/>
+                        Home
                     </React.Fragment>
                 </main>
             </div>
