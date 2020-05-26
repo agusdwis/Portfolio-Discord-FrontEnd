@@ -80,7 +80,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         fontSize: '24px',
         lineHeight: '30px',
-        color: '#fff'
+        color: '#fff',
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '120px'
+        },
     },
     icon: {
         paddingRight: theme.spacing(2),

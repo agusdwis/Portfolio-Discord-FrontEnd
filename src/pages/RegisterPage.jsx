@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import {withStyles} from "@material-ui/core";
 import CardMedia from "@material-ui/core/CardMedia";
 
-import '../assets/styles/style.css';
+import '../assets/styles/loginpage.css';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
