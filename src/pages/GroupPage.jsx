@@ -25,7 +25,6 @@ const useStyles = () => ({
     channelSection: {
         backgroundColor: '#2F3136',
         maxHeight: '562px',
-        minHeight: '562px'
     },
     chatSection: {
         backgroundColor: '#36393F',
@@ -35,7 +34,6 @@ const useStyles = () => ({
     memberSection: {
         backgroundColor: '#2F3136',
         maxHeight: '562px',
-        minHeight: '562px'
     },
     myPaper: {
         maxHeight: '562px',
@@ -100,7 +98,11 @@ class Group extends React.Component {
 
                                     <Grid className={classes.memberSection} item xs={12} lg={2}>
                                         <Paper className={classes.myPaper}>
-                                            <MemberList/>
+                                            <MemberList username={'agsdws'}
+                                                        fullName={'Agus D Sasongko'}
+                                                        status={'happy man'}
+                                                        avatar={'...'}
+                                            />
                                         </Paper>
                                     </Grid>
                                 </Grid>
