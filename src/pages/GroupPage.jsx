@@ -10,6 +10,9 @@ import MemberList from "../components/GroupMember";
 import Paper from "@material-ui/core/Paper";
 
 import '../assets/styles/chatpages.css';
+import BottomNavBar from "../components/BottomNavBar";
+import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
+import {connect} from "react-redux";
 
 const useStyles = () => ({
     root: {
@@ -25,7 +28,6 @@ const useStyles = () => ({
     channelSection: {
         backgroundColor: '#2F3136',
         maxHeight: '562px',
-        minHeight: '562px'
     },
     chatSection: {
         backgroundColor: '#36393F',
@@ -35,7 +37,6 @@ const useStyles = () => ({
     memberSection: {
         backgroundColor: '#2F3136',
         maxHeight: '562px',
-        minHeight: '562px'
     },
     myPaper: {
         maxHeight: '562px',
@@ -81,13 +82,15 @@ class Group extends React.Component {
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.chats} item xs={12} lg={12}>
-                                <TopNavbar/>
+                                <TopNavbar {...this.props}/>
 
                                 <Grid container>
                                     <Grid className={classes.channelSection} item xs={12} lg={2}>
                                         <Paper className={classes.myPaper}>
-                                            <ChannelNavbar/>
+                                            <ChannelNavbar {...this.props}/>
                                         </Paper>
+
+                                        <BottomNavBar {...this.props}/>
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
@@ -100,7 +103,11 @@ class Group extends React.Component {
 
                                     <Grid className={classes.memberSection} item xs={12} lg={2}>
                                         <Paper className={classes.myPaper}>
-                                            <MemberList/>
+                                            <MemberList username={'agsdws'}
+                                                        fullName={'Agus D Sasongko'}
+                                                        status={'happy man'}
+                                                        avatar={'...'}
+                                            />
                                         </Paper>
                                     </Grid>
                                 </Grid>
@@ -114,4 +121,17 @@ class Group extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(Group)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Group));

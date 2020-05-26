@@ -3,11 +3,13 @@ import Grid from "@material-ui/core/Grid";
 import {withStyles} from "@material-ui/core";
 import CardMedia from "@material-ui/core/CardMedia";
 import CloseIcon from '@material-ui/icons/Close';
-
-import '../assets/styles/loginpage.css';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
+import '../assets/styles/loginpage.css';
+
+import {connect} from "react-redux";
+import {doLogin, changeInputUser} from "../stores/action/userAction";
 
 const useStyles = (theme) => ({
     appMount: {
@@ -93,6 +95,14 @@ const useStyles = (theme) => ({
 });
 
 class Login extends React.Component {
+    postLogin = async () => {
+        await this.props.doLogin();
+        const is_login = this.props.login;
+        if (is_login) {
+            this.props.history.push("/");
+        }
+    };
+
     render() {
         const { classes } = this.props;
         return(
@@ -154,12 +164,13 @@ class Login extends React.Component {
                                                                                 margin="normal"
                                                                                 required
                                                                                 fullWidth
-                                                                                id="email"
-                                                                                label="Email Address"
-                                                                                name="email"
-                                                                                autoComplete="email"
+                                                                                id="username"
+                                                                                label="Username"
+                                                                                name="username"
+                                                                                autoComplete="username"
                                                                                 autoFocus
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -172,6 +183,7 @@ class Login extends React.Component {
                                                                                 id="password"
                                                                                 autoComplete="current-password"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
                                                                             />
                                                                             <Grid item xs>
                                                                                 <Link className={classes.loginLink} to="#" variant="body2">
@@ -179,11 +191,11 @@ class Login extends React.Component {
                                                                                 </Link>
                                                                             </Grid>
                                                                             <Button
-                                                                                type="submit"
                                                                                 fullWidth
                                                                                 variant="contained"
                                                                                 color="primary"
                                                                                 className={classes.submit}
+                                                                                onClick={() => this.postLogin()}
                                                                             >
                                                                                 Login
                                                                             </Button>
@@ -214,4 +226,17 @@ class Login extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(Login)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin,
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Login));

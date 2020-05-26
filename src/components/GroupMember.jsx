@@ -1,55 +1,54 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
-import { red } from '@material-ui/core/colors';
-
-// import IconButton from '@material-ui/core/IconButton';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 300,
-        backgroundColor: 'none'
+        width: '100%',
+        maxWidth: '36ch',
+        backgroundColor: 'transparent',
+        padding: theme.spacing(0)
     },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+    inline: {
+        display: 'inline',
     },
-    avatar: {
-        backgroundColor: red[500],
-    },
+    myRoot: {
+        paddingBottom: '4px',
+        paddingTop: '4px'
+    }
 }));
 
-export default function MemberList() {
+export default function MemberList(props) {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        A
-                    </Avatar>
-                }
-                title="agdws"
-                subheader="doing THR"
-            />
-        </Card>
-        // <List>
-        //     <ListItem button>
-        //         <ListItemAvatar>
-        //             <Avatar aria-label="recipe" className={classes.avatar}>
-        //                 D
-        //             </Avatar>
-        //         </ListItemAvatar>
-        //         <ListItemText style={{color: '#fff'}} secondary="Default" />
-        //     </ListItem>
-        // </List>
+        <List className={classes.root}>
+            <ListItem classes={{root: classes.myRoot}} button alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt={props.fullName} src={props.avatar} />
+                </ListItemAvatar>
+                <ListItemText style={{color: '#fff'}}
+                    primary={props.username}
+                    secondary={
+                        <React.Fragment>
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                className={classes.inline}
+                                color="textSecondary"
+                                style={{color: '#ffbcc1'}}
+                            >
+                                {props.status}
+                            </Typography>
+                        </React.Fragment>
+                    }
+                />
+            </ListItem>
+        </List>
     );
 }

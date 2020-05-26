@@ -7,6 +7,8 @@ import '../assets/styles/loginpage.css';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
+import {changeInputUser, doLogin, doRegister} from "../stores/action/userAction";
+import {connect} from "react-redux";
 
 const useStyles = (theme) => ({
     appMount: {
@@ -92,6 +94,16 @@ const useStyles = (theme) => ({
 });
 
 class Register extends React.Component {
+    postRegister = async () => {
+        await this.props.doRegister();
+
+        if(!this.props.data.reg_status){
+            this.props.history.push('/register');
+        } else {
+            this.props.history.push("/login")
+        }
+    };
+
     render() {
         const { classes } = this.props;
         return(
@@ -139,12 +151,14 @@ class Register extends React.Component {
                                                                                 margin="normal"
                                                                                 required
                                                                                 fullWidth
-                                                                                id="email"
-                                                                                label="Email Address"
-                                                                                name="email"
+                                                                                name="name"
+                                                                                label="Full Name"
+                                                                                type="name"
+                                                                                id="name"
                                                                                 autoComplete="off"
-                                                                                autoFocus
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -157,6 +171,8 @@ class Register extends React.Component {
                                                                                 id="username"
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <TextField
                                                                                 variant="outlined"
@@ -169,6 +185,22 @@ class Register extends React.Component {
                                                                                 id="password"
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
+                                                                            />
+                                                                            <TextField
+                                                                                variant="outlined"
+                                                                                margin="normal"
+                                                                                required
+                                                                                fullWidth
+                                                                                id="email"
+                                                                                label="Email Address"
+                                                                                name="email"
+                                                                                autoComplete="off"
+                                                                                autoFocus
+                                                                                InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+
                                                                             />
                                                                             <Grid item xs>
                                                                                 <Link className={classes.loginLink} to="#" variant="body2">
@@ -176,11 +208,11 @@ class Register extends React.Component {
                                                                                 </Link>
                                                                             </Grid>
                                                                             <Button
-                                                                                type="submit"
                                                                                 fullWidth
                                                                                 variant="contained"
                                                                                 color="primary"
                                                                                 className={classes.submit}
+                                                                                onClick={() => this.postRegister()}
                                                                             >
                                                                                 Continue
                                                                             </Button>
@@ -211,4 +243,17 @@ class Register extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(Register)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Register));

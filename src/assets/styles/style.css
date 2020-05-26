@@ -53,6 +53,7 @@ body {
 .breadcrumb {
     color: red;
     width: 20px;
+    z-index: -1;
     -webkit-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
     animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
 }
@@ -81,7 +82,7 @@ body {
 /** scroller **/
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #36393F;
+    background: #2F3136;
 }
 
 /* Handle */
@@ -91,9 +92,9 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #616671;
+    background: #712118;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
 }

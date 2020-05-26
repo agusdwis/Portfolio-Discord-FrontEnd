@@ -2,6 +2,8 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import MainNavbar from "../components/MainNavbar";
 import SideNavbar from "../components/SideNavbar";
+import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
+import {connect} from "react-redux";
 
 const useStyles = () => ({
     root: {
@@ -30,4 +32,17 @@ class ExplorePage extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(ExplorePage)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(ExplorePage));

@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Explore () {
+export default function Explore (props) {
         const classes = useStyles();
         return (
             <React.Fragment>
@@ -141,12 +141,14 @@ export default function Explore () {
                         </Grid>
 
                         <Grid container>
-                            <BottomNavBar/>
+                            <BottomNavBar {...props}
+                            doSignOut = {props.doSignOut}
+                            />
                         </Grid>
 
                     </Grid>
                     <Grid item xs={12} lg={10}  style={{backgroundColor: '#36393F', position: 'relative'}}>
-                        <GuildDiscovery/>
+                        <GuildDiscovery {...props}/>
                     </Grid>
                 </Grid>
             </React.Fragment>
