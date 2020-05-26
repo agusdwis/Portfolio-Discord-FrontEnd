@@ -6,6 +6,8 @@ import {GiftedChat} from "react-web-gifted-chat";
 import TopNavbar from "../components/TopNavBar";
 import {withStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import MemberList from "../components/GroupMember";
+import Paper from "@material-ui/core/Paper";
 
 import '../assets/styles/chatpages.css';
 
@@ -19,6 +21,25 @@ const useStyles = () => ({
     },
     chats: {
         backgroundColor: '#36393F',
+    },
+    channelSection: {
+        backgroundColor: '#2F3136',
+        maxHeight: '562px',
+        minHeight: '562px'
+    },
+    chatSection: {
+        backgroundColor: '#36393F',
+        maxHeight: '562px',
+        minHeight: '562px'
+    },
+    memberSection: {
+        backgroundColor: '#2F3136',
+        maxHeight: '562px',
+        minHeight: '562px'
+    },
+    myPaper: {
+        maxHeight: '562px',
+        overflowY: 'auto'
     }
 });
 
@@ -63,11 +84,13 @@ class Group extends React.Component {
                                 <TopNavbar/>
 
                                 <Grid container>
-                                    <Grid style={{backgroundColor: '#2F3136'}} item xs={12} lg={2}>
-                                        <ChannelNavbar/>
+                                    <Grid className={classes.channelSection} item xs={12} lg={2}>
+                                        <Paper className={classes.myPaper}>
+                                            <ChannelNavbar/>
+                                        </Paper>
                                     </Grid>
 
-                                    <Grid item xs={12} lg={8}>
+                                    <Grid className={classes.chatSection} item xs={12} lg={8}>
                                         <GiftedChat
                                             messages={this.state.messages}
                                             onSend={(messages) => this.onSend(messages)}
@@ -75,8 +98,10 @@ class Group extends React.Component {
                                         />
                                     </Grid>
 
-                                    <Grid style={{backgroundColor: '#2F3136'}} item xs={12} lg={2}>
-                                        Member Lists
+                                    <Grid className={classes.memberSection} item xs={12} lg={2}>
+                                        <Paper className={classes.myPaper}>
+                                            <MemberList/>
+                                        </Paper>
                                     </Grid>
                                 </Grid>
 

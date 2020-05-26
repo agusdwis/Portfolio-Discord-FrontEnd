@@ -141,7 +141,6 @@ export default function Explore () {
                         </Grid>
 
                         <Grid container>
-                            {/*<ProfileIndicator/>*/}
                             <BottomNavBar/>
                         </Grid>
 
