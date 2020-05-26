@@ -7,7 +7,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import PeopleIcon from "@material-ui/icons/People";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import ChatIcon from '@material-ui/icons/Chat';
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import {Link} from "react-router-dom";
@@ -114,9 +114,8 @@ export default function TopNavbar (){
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
-            <Link to={'#'}><MenuItem onClick={handleMenuClose}>My account</MenuItem></Link>
-            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Sign In</MenuItem></Link>
+            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Unread</MenuItem></Link>
+            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Mentions</MenuItem></Link>
         </Menu>
     );
 
@@ -154,9 +153,9 @@ export default function TopNavbar (){
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <AccountCircle />
+                    <ChatIcon />
                 </IconButton>
-                <p>Profile</p>
+                <p>Chat</p>
             </MenuItem>
         </Menu>
     );
@@ -201,7 +200,7 @@ export default function TopNavbar (){
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <AccountCircle />
+                            <ChatIcon />
                         </IconButton>
                     </div>
                     <div className={classes.sectionMobile}>

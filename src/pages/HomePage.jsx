@@ -1,6 +1,9 @@
 import React from "react";
 import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
+import SideNavbar from "../components/SideNavbar";
+import {connect} from "react-redux";
+import {changeInputUser, doLogin, doRegister, getProfile} from "../stores/action/userAction";
 
 const useStyles = () => ({
     root: {
@@ -12,6 +15,10 @@ const useStyles = () => ({
 });
 
 class Home extends React.Component {
+    componentDidMount = async () => {
+        this.props.getProfile();
+    };
+
   render() {
       const { classes } = this.props;
     return(
@@ -20,7 +27,7 @@ class Home extends React.Component {
                 <MainNavbar {...this.props}/>
                 <main className={classes.content}>
                     <React.Fragment>
-                        Home
+                        <SideNavbar {...this.props}/>
                     </React.Fragment>
                 </main>
             </div>
@@ -29,4 +36,17 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(Home)
+const mapStateToProps = (state) => {
+    return {
+        data: state.user,
+        info: state.user.infos,
+        login: state.user.is_login,
+    };
+};
+
+const mapDispatchToProps = {
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Home));

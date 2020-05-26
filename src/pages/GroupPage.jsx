@@ -10,6 +10,7 @@ import MemberList from "../components/GroupMember";
 import Paper from "@material-ui/core/Paper";
 
 import '../assets/styles/chatpages.css';
+import BottomNavBar from "../components/BottomNavBar";
 
 const useStyles = () => ({
     root: {
@@ -86,6 +87,8 @@ class Group extends React.Component {
                                         <Paper className={classes.myPaper}>
                                             <ChannelNavbar/>
                                         </Paper>
+
+                                        <BottomNavBar/>
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
