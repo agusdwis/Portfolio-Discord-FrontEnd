@@ -1,7 +1,6 @@
 import React from "react";
 import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
-import SideNavbar from "../components/SideNavbar";
 
 const useStyles = () => ({
     root: {
@@ -21,7 +20,7 @@ class Home extends React.Component {
                 <MainNavbar {...this.props}/>
                 <main className={classes.content}>
                     <React.Fragment>
-                        <SideNavbar {...this.props}/>
+                        Home
                     </React.Fragment>
                 </main>
             </div>

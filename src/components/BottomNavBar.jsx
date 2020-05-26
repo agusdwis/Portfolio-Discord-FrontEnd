@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import {HomeDiscordIcon, MicrophoneIcon, HeadphoneIcon, SettingIcon} from "../utils/CustomIcon";
+import {Link} from "react-router-dom";
 
 const status = '#0bff41';
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 'small',
         [theme.breakpoints.up('lg')]: {
             // display: 'none',
-            width: '16%',
+            width: '15.8%',
             zIndex: 0
         },
     },
@@ -54,7 +55,7 @@ export default function BottomNavBar() {
             <BottomNavigationAction classes={{root: classes.actionRoot, selected:classes.selectedRoot}} label="agsdws" icon={<HomeDiscordIcon style={{color: status}} />} />
             <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<MicrophoneIcon style={{color: '#fff'}} />} />
             <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<HeadphoneIcon style={{color: '#fff'}} />} />
-            <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<SettingIcon style={{color: '#fff'}} />} />
+            <BottomNavigationAction classes={{root: classes.actionRoot, wrapper:classes.wrapperRoot, selected:classes.selectedRoot}} label="" icon={<Link to={'/login'}><SettingIcon style={{color: '#fff'}} /></Link>} />
         </BottomNavigation>
     );
 }

@@ -5,6 +5,7 @@ import ExplorePage from "../pages/ExplorePage";
 import Home from "../pages/HomePage";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage"
+import Group from "../pages/GroupPage";
 
 export default function MainRoutes () {
     return(
@@ -14,6 +15,7 @@ export default function MainRoutes () {
                 <Route exact path={'/guild-discovery'} component={ExplorePage} />
                 <Route exact path={'/login'} component={Login}/>
                 <Route exact path={'/register'} component={Register}/>
+                <Route path={'/channel/:id'} component={Group} />
             </Switch>
         </BrowserRouter>
     )

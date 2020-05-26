@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import GuildDiscovery from "./GuildDiscovery";
-import BottomNavBar from "./BottomNavigation";
+import BottomNavBar from "./BottomNavBar";
 import {
     ExploreIcon,
     MusicIcon,
@@ -80,7 +80,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         fontSize: '24px',
         lineHeight: '30px',
-        color: '#fff'
+        color: '#fff',
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '120px'
+        },
     },
     icon: {
         paddingRight: theme.spacing(2),
@@ -138,7 +141,6 @@ export default function Explore () {
                         </Grid>
 
                         <Grid container>
-                            {/*<ProfileIndicator/>*/}
                             <BottomNavBar/>
                         </Grid>
 
