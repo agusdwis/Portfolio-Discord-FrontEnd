@@ -1,7 +1,6 @@
 import React from "react";
 import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
-import SideNavbar from "../components/SideNavbar";
 
 const useStyles = () => ({
     root: {

@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import GuildDiscovery from "./GuildDiscovery";
-import BottomNavBar from "./BottomNavigation";
+import BottomNavBar from "./BottomNavBar";
 import {
     ExploreIcon,
     MusicIcon,
