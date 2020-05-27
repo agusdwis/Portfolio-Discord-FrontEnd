@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 400,
+        maxWidth: 350,
         flexGrow: 1,
         borderRadius: 10,
         border: 'none',
