@@ -61,8 +61,7 @@ const useStyles = (theme) => ({
         flex: 1,
         flexDirection: "column",
         borderWidth: "1px",
-        // borderColor: "#292929",
-        borderColor: "#e4402b",
+        borderColor: "#292929",
         borderRightStyle: "solid",
         borderLeftStyle: "solid",
         [theme.breakpoints.down('sm')]: {
@@ -144,26 +143,6 @@ class Group extends React.Component {
                         avatar: 'https://facebook.github.io/react/img/logo_og.png',
                     },
                 },
-                {
-                    id: 4,
-                    text: 'Hello',
-                    createdAt: new Date(Date.UTC(2017, 5, 11, 17, 20, 0)),
-                    user: {
-                        id: 5,
-                        name: 'Suga',
-                        avatar: 'https://facebook.github.io/react/img/logo_og.png',
-                    },
-                },
-                {
-                    id: 6,
-                    text: 'AAABBBCCC',
-                    createdAt: new Date(Date.UTC(2018, 5, 11, 17, 20, 0)),
-                    user: {
-                        id: 5,
-                        name: 'Suga',
-                        avatar: 'https://facebook.github.io/react/img/logo_og.png',
-                    },
-                },
             ],
         });
     }
@@ -195,23 +174,15 @@ class Group extends React.Component {
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
-                                        {/*<GiftedChat*/}
-                                        {/*    messages={this.state.messages}*/}
-                                        {/*    onSend={(messages) => this.onSend(messages)}*/}
-                                        {/*    user={{ id: 1, name:'Johny'}}*/}
-                                        {/*    isAnimated={true}*/}
-                                        {/*    showUserAvatar={true}*/}
-                                        {/*/>*/}
                                         <Paper elevation={0} classes={{root:classes.chatPaper}}>
-
                                             <ChatList/>
-                                            <ChatList/>
-                                            <ChatList/>
-                                            <ChatList/>
-                                            <ChatList/>
-                                            <ChatList/>
-                                            <ChatList/>
-
+                                            <GiftedChat
+                                                messages={this.state.messages}
+                                                onSend={(messages) => this.onSend(messages)}
+                                                user={{ id: 1, name:'Johny'}}
+                                                isAnimated={true}
+                                                showUserAvatar={true}
+                                            />
                                         </Paper>
 
                                         <Grid container className={classes.containerForm}>
