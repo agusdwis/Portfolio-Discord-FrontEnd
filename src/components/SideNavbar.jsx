@@ -107,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#36393F',
             outline: 'none',
         },
+        cursor: 'pointer',
     },
 }));
 

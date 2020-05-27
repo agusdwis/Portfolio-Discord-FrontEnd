@@ -14,7 +14,7 @@ import BottomNavBar from "../components/BottomNavBar";
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
 import {connect} from "react-redux";
 
-const useStyles = () => ({
+const useStyles = (theme) => ({
     root: {
         display: 'flex',
     },
@@ -25,23 +25,51 @@ const useStyles = () => ({
     chats: {
         backgroundColor: '#36393F',
     },
+    container: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "row",
+        height: "100vh",
+        minHeight: '100vh',
+        [theme.breakpoints.down('sm')]: {
+            overflowY: 'scroll'
+        },
+    },
     channelSection: {
-        backgroundColor: '#2F3136',
-        maxHeight: '562px',
+        display: "flex",
+        // flex: 1,
+        flexDirection: "column",
+        backgroundColor: '#2F3136'
     },
     chatSection: {
         backgroundColor: '#36393F',
-        maxHeight: '562px',
-        minHeight: '562px'
+        height: `calc(100vh - 64px)`,
+        display: "flex",
+        flex: 3,
+        flexDirection: "column",
+        borderWidth: "1px",
+        borderColor: "#292929",
+        borderRightStyle: "solid",
+        borderLeftStyle: "solid",
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '57px',
+        },
     },
     memberSection: {
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
         backgroundColor: '#2F3136',
-        maxHeight: '562px',
+        [theme.breakpoints.down('sm')]: {
+            // marginBottom: '57px',
+            display: "none"
+        },
     },
     myPaper: {
-        maxHeight: '562px',
+        maxHeight: '100vh',
         overflowY: 'auto'
-    }
+    },
+
 });
 
 class Group extends React.Component {
@@ -97,15 +125,15 @@ class Group extends React.Component {
         return(
             <React.Fragment>
                 <div className={classes.root}>
-                    <MainNavbar/>
+                    <MainNavbar {...this.props}/>
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.chats} item xs={12} lg={12}>
                                 <TopNavbar {...this.props}/>
 
-                                <Grid container classes={}>
+                                <Grid container classes={classes.container}>
                                     <Grid className={classes.channelSection} item xs={12} lg={2}>
-                                        <Paper className={classes.myPaper}>
+                                        <Paper elevation={0} className={classes.myPaper}>
                                             <ChannelNavbar {...this.props}/>
                                         </Paper>
 
@@ -117,11 +145,13 @@ class Group extends React.Component {
                                             messages={this.state.messages}
                                             onSend={(messages) => this.onSend(messages)}
                                             user={{ id: 1,}}
+                                            isAnimated={true}
+                                            showUserAvatar={true}
                                         />
                                     </Grid>
 
                                     <Grid className={classes.memberSection} item xs={12} lg={2}>
-                                        <Paper className={classes.myPaper}>
+                                        <Paper elevation={0} className={classes.myPaper}>
                                             <MemberList username={'agsdws'}
                                                         fullName={'Agus D Sasongko'}
                                                         status={'happy man'}
