@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         position: 'fixed',
-        backgroundColor: '#202225',
+        backgroundColor: '#292B2F',
         color: '#fff',
         bottom: 0,
         zIndex: 1,

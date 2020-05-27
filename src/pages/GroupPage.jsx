@@ -61,7 +61,26 @@ class Group extends React.Component {
                         name: 'React',
                         avatar: 'https://facebook.github.io/react/img/logo_og.png',
                     },
-                    isAnimated: true
+                },
+                {
+                    id: 4,
+                    text: 'Hello',
+                    createdAt: new Date(Date.UTC(2017, 5, 11, 17, 20, 0)),
+                    user: {
+                        id: 5,
+                        name: 'Suga',
+                        avatar: 'https://facebook.github.io/react/img/logo_og.png',
+                    },
+                },
+                {
+                    id: 6,
+                    text: 'AAABBBCCC',
+                    createdAt: new Date(Date.UTC(2018, 5, 11, 17, 20, 0)),
+                    user: {
+                        id: 5,
+                        name: 'Suga',
+                        avatar: 'https://facebook.github.io/react/img/logo_og.png',
+                    },
                 },
             ],
         });
@@ -84,7 +103,7 @@ class Group extends React.Component {
                             <Grid className={classes.chats} item xs={12} lg={12}>
                                 <TopNavbar {...this.props}/>
 
-                                <Grid container>
+                                <Grid container classes={}>
                                     <Grid className={classes.channelSection} item xs={12} lg={2}>
                                         <Paper className={classes.myPaper}>
                                             <ChannelNavbar {...this.props}/>
