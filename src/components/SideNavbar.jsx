@@ -63,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
     },
     menuContainer: {
-        position: 'relative'
+        position: 'fixed',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        },
     },
     sideBar: {
         backgroundColor: '#2F3136',
@@ -107,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#36393F',
             outline: 'none',
         },
+        cursor: 'pointer',
     },
 }));
 

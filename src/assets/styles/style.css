@@ -4,6 +4,11 @@
     font-family: "Helvetica Neue",sans-serif;
 }
 
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
 a:-webkit-any-link {
     cursor: pointer;
     text-decoration: none;
@@ -12,6 +17,13 @@ a:-webkit-any-link {
 
 body {
     background: #2F3136;
+}
+
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
 }
 
 .MuiTab-wrapper:active, .MuiTab-wrapper:focus{
@@ -97,4 +109,8 @@ body {
 
 ::-webkit-scrollbar {
     width: 7px;
+}
+
+.MuiDrawer-paperAnchorDockedLeft {
+     border-right: 0 !important;
 }

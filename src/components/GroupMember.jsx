@@ -11,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         maxWidth: '36ch',
-        backgroundColor: 'transparent',
-        padding: theme.spacing(0)
+        backgroundColor: '#2F3136',
+        padding: theme.spacing(0),
+        border: 'none'
     },
     inline: {
         display: 'inline',
@@ -20,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
     myRoot: {
         paddingBottom: '4px',
         paddingTop: '4px'
-    }
+    },
+    avatar: {
+        backgroundColor: '#184dff',
+    },
 }));
 
 export default function MemberList(props) {
@@ -30,7 +34,7 @@ export default function MemberList(props) {
         <List className={classes.root}>
             <ListItem classes={{root: classes.myRoot}} button alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={props.fullName} src={props.avatar} />
+                    <Avatar classes={{root:classes.avatar}} alt={props.fullName} src={props.avatar} />
                 </ListItemAvatar>
                 <ListItemText style={{color: '#fff'}}
                     primary={props.username}
@@ -41,7 +45,7 @@ export default function MemberList(props) {
                                 variant="body2"
                                 className={classes.inline}
                                 color="textSecondary"
-                                style={{color: '#ffbcc1'}}
+                                style={{color: '#6a6fff'}}
                             >
                                 {props.status}
                             </Typography>

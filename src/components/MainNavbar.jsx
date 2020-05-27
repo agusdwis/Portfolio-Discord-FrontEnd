@@ -10,15 +10,16 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import {Link} from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
+import deepPurple from "@material-ui/core/colors/deepPurple";
 import PropTypes from 'prop-types';
-import '../assets/styles/style.css';
 import {
     AddServerIcon,
     DownloadIcon,
     ExploreIcon,
     HomeDiscordIcon} from "../utils/CustomIcon";
-import Avatar from "@material-ui/core/Avatar";
-import deepPurple from "@material-ui/core/colors/deepPurple";
+
+import '../assets/styles/style.css';
 
 
 const drawerWidth = 72;
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'none',
         },
+        zIndex: 99999
     },
     toolbar: {
         backgroundColor: 'none'
@@ -122,11 +124,6 @@ const Channel = [
     {
         label : "Dota 2",
         pathname: "/channel/1",
-        icon: <HomeDiscordIcon/>
-    },
-    {
-        label : "PUBG",
-        pathname: "/channel/2",
         icon: <HomeDiscordIcon/>
     }
 ];
