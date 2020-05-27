@@ -1,7 +1,6 @@
 import React from "react";
 import MainNavbar from "../components/MainNavbar";
 import {withStyles} from "@material-ui/core";
-import SideNavbar from "../components/SideNavbar";
 import {connect} from "react-redux";
 import {
     changeInputUser,
@@ -32,9 +31,7 @@ class Home extends React.Component {
                 <MainNavbar {...this.props}/>
                 <main className={classes.content}>
                     <React.Fragment>
-                        <SideNavbar {...this.props}
-                                doSignOut = {this.props.doSignOut}
-                        />
+                        CALON HOME!
                     </React.Fragment>
                 </main>
             </div>

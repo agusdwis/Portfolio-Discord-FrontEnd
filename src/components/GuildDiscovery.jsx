@@ -16,7 +16,7 @@ import {fade} from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
         color: '#fff'
     },
     text: {
