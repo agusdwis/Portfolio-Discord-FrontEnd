@@ -13,13 +13,20 @@ import List from '@material-ui/core/List';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        color: '#fff'
+        color: '#fff',
+        backgroundColor: '#2F3136',
+        border: 'none',
     },
     nested: {
         paddingLeft: theme.spacing(4),
+        '&:hover': {
+            backgroundColor: '#393D43',
+            borderRadius: theme.spacing(5)
+        }
     },
     listRoot: {
         minWidth: '20px',
+
     }
 }));
 

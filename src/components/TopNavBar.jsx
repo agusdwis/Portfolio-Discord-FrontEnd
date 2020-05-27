@@ -81,6 +81,10 @@ const useStyles = makeStyles((theme) => ({
     help: {
         display: 'flex',
         color: 'inherit'
+    },
+    appBar : {
+        boxShadow: 'none',
+        borderBottom: '1px solid #292929'
     }
 }));
 
@@ -168,8 +172,8 @@ export default function TopNavbar (){
 
     return(
         <React.Fragment>
-            <AppBar position="sticky">
-                <Toolbar>
+            <AppBar classes={{colorPrimary: classes.appBar}} position="sticky" >
+                <Toolbar style={{ backgroundColor: '#36393F', minHeight: '20px', maxHeight: '60px' }}>
                     <Typography className={classes.title} variant="h6" noWrap>
                         MINECRAFT
                     </Typography>
