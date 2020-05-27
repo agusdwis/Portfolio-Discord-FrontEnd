@@ -176,13 +176,14 @@ class Group extends React.Component {
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
                                         <Paper elevation={0} classes={{root:classes.chatPaper}}>
                                             <ChatList/>
-                                            <GiftedChat
-                                                messages={this.state.messages}
-                                                onSend={(messages) => this.onSend(messages)}
-                                                user={{ id: 1, name:'Johny'}}
-                                                isAnimated={true}
-                                                showUserAvatar={true}
-                                            />
+
+                                            {/*<GiftedChat*/}
+                                            {/*    messages={this.state.messages}*/}
+                                            {/*    onSend={(messages) => this.onSend(messages)}*/}
+                                            {/*    user={{ id: 1, name:'Johny'}}*/}
+                                            {/*    isAnimated={true}*/}
+                                            {/*    showUserAvatar={true}*/}
+                                            {/*/>*/}
                                         </Paper>
 
                                         <Grid container className={classes.containerForm}>
