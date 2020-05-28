@@ -1,14 +1,16 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import {withStyles} from "@material-ui/core";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+
+import TextField from "@material-ui/core/TextField";
 import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import {withStyles} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 import '../assets/styles/loginpage.css';
-import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import {changeInputUser, doLogin, doRegister} from "../stores/action/userAction";
-import {connect} from "react-redux";
+
+import { changeInputUser, doLogin, doRegister } from "../stores/action/userAction";
 
 const useStyles = (theme) => ({
     appMount: {
@@ -97,6 +99,7 @@ class Register extends React.Component {
     postRegister = async () => {
         await this.props.doRegister();
 
+        // Check Registration Status
         if(!this.props.data.reg_status){
             this.props.history.push('/register');
         } else {
@@ -113,6 +116,8 @@ class Register extends React.Component {
                         <div className={classes.appMount}>
                             <div className={classes.app}>
                                 <div className={classes.wrapper}>
+
+                                    {/*Background Cover*/}
                                     <div className={classes.cover}>
                                         <CardMedia
                                             component="img"
@@ -129,9 +134,10 @@ class Register extends React.Component {
                                             className={classes.coverImage}
                                         />
                                     </div>
+
+                                    {/*Main Form*/}
                                     <div className={classes.content}>
-                                        <Link to="/" className="logo11 logo12 logo13"
-                                           style={{opacity: 1, transform: 'translateY(0px) translateZ(0px)'}}/>
+                                        <Link to="/" className="logo11 logo12 logo13" style={{opacity: 1, transform: 'translateY(0px) translateZ(0px)'}}/>
 
                                         <div style={{ opacity: 1, transform: 'scale(1) translateY(0px) translateZ(0px)' }} className={classes.contentWrapper}>
                                             <div className="pageContainer">
@@ -144,36 +150,37 @@ class Register extends React.Component {
                                                                     <div className="title">
                                                                         Create an account
                                                                     </div>
+
                                                                     <div className="formBlock marginTop20">
                                                                         <form className={classes.form} noValidate>
                                                                             <TextField
                                                                                 variant="outlined"
-                                                                                margin="normal"
-                                                                                required
-                                                                                fullWidth
-                                                                                name="name"
                                                                                 label="Full Name"
+                                                                                margin="normal"
+                                                                                name="name"
                                                                                 type="name"
                                                                                 id="name"
                                                                                 autoComplete="off"
-                                                                                InputLabelProps={{ className: classes.inputLabel }}
-                                                                                onChange={(e) => this.props.changeInput(e)}
-
-                                                                            />
-                                                                            <TextField
-                                                                                variant="outlined"
-                                                                                margin="normal"
                                                                                 required
                                                                                 fullWidth
-                                                                                name="username"
-                                                                                label="Username"
-                                                                                type="username"
-                                                                                id="username"
-                                                                                autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
                                                                                 onChange={(e) => this.props.changeInput(e)}
-
                                                                             />
+
+                                                                            <TextField
+                                                                                variant="outlined"
+                                                                                label="Username"
+                                                                                type="username"
+                                                                                margin="normal"
+                                                                                name="username"
+                                                                                id="username"
+                                                                                autoComplete="off"
+                                                                                required
+                                                                                fullWidth
+                                                                                InputLabelProps={{ className: classes.inputLabel }}
+                                                                                onChange={(e) => this.props.changeInput(e)}
+                                                                            />
+
                                                                             <TextField
                                                                                 variant="outlined"
                                                                                 margin="normal"
@@ -186,18 +193,18 @@ class Register extends React.Component {
                                                                                 autoComplete="off"
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
                                                                                 onChange={(e) => this.props.changeInput(e)}
-
                                                                             />
+
                                                                             <TextField
+                                                                                label="Email Address"
                                                                                 variant="outlined"
+                                                                                autoComplete="off"
                                                                                 margin="normal"
+                                                                                name="email"
+                                                                                id="email"
+                                                                                autoFocus
                                                                                 required
                                                                                 fullWidth
-                                                                                id="email"
-                                                                                label="Email Address"
-                                                                                name="email"
-                                                                                autoComplete="off"
-                                                                                autoFocus
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
                                                                                 onChange={(e) => this.props.changeInput(e)}
 
@@ -207,6 +214,7 @@ class Register extends React.Component {
                                                                                     Forgot your password?
                                                                                 </Link>
                                                                             </Grid>
+
                                                                             <Button
                                                                                 fullWidth
                                                                                 variant="contained"
@@ -216,6 +224,7 @@ class Register extends React.Component {
                                                                             >
                                                                                 Continue
                                                                             </Button>
+
                                                                             <Grid container>
                                                                                 <Grid item xs>
                                                                                     <Link className={classes.loginLink} to="/login" variant="body2">
@@ -223,12 +232,14 @@ class Register extends React.Component {
                                                                                     </Link>
                                                                                 </Grid>
                                                                             </Grid>
+
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </Grid>
+
                                                 </Grid>
                                             </div>
                                         </div>

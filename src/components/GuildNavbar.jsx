@@ -109,7 +109,7 @@ export default function GuildNavbar (props) {
         <React.Fragment>
             <h2 className={classes.titleTab}>Discover</h2>
             {myTab.map((item, index) => (
-                <Link key={index} to={item.pathname} onClick={() => props.handleRouter(item.category)}>
+                <Link key={index} to="#" onClick={() => props.handleRouter(item.category)}>
                     <div className="categoryItem" role="listitem" tabIndex={index}>
                         <div className={classes.itemInner}>
                             <div className={classes.icon}>

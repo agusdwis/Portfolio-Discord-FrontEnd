@@ -48,6 +48,9 @@ const useStyles = () => ({
         '&:hover': {
             color: '#ff0003'
         }
+    },
+    span: {
+        color: '#ff0c19'
     }
 });
 
@@ -66,7 +69,7 @@ class Home extends React.Component {
                     <React.Fragment>
                         <div className={classes.appHome}>
                             <Paper elevation={0} classes={{root:classes.appPaper}}>
-                                <h1 className={classes.titleHome}>Welcome to Discord! </h1>
+                                <h1 className={classes.titleHome}>Welcome to Discord <span className={classes.span}>{this.props.data.username}!</span> </h1>
                                 <br/>
                                 <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                             </Paper>

@@ -51,7 +51,7 @@ const myTag = [
 
 export default function ChannelNavbar() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
         setOpen(!open);

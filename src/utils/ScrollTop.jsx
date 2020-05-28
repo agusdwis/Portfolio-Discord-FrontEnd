@@ -1,14 +1,16 @@
+import React from "react";
+
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import Zoom from "@material-ui/core/Zoom";
 import PropTypes from "prop-types";
-import React from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'fixed',
         bottom: theme.spacing(8),
         right: theme.spacing(1),
+        zIndex: 99
     },
 }));
 
