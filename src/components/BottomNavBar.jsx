@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import DialogActions from "@material-ui/core/DialogActions";
@@ -109,7 +110,7 @@ export default function BottomNavBar(props, postLogout) {
             >
                 <DialogTitle style={{color: '#ff1513'}} id="responsive-dialog-title"><strong><h3>Profile</h3></strong></DialogTitle>
                 <DialogContent>
-                    {/*<DialogContentText>*/}
+
                     <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
                         {props.info.name ?
                             <p>Name: {props.info.name}</p>
@@ -124,13 +125,14 @@ export default function BottomNavBar(props, postLogout) {
                         <p>Email: {props.info.email}</p>
                     </Paper>
 
-                    {/*</DialogContentText>*/}
                 </DialogContent>
+
                 <DialogActions>
                     <Button onClick={handleClickClose} color="secondary" autoFocus>
                         Close
                     </Button>
                 </DialogActions>
+
             </Dialog>
             <BottomNavigation
                 value={value}

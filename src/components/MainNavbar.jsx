@@ -21,7 +21,7 @@ import {
 
 import '../assets/styles/style.css';
 
-
+// MainBar Width
 const drawerWidth = 72;
 
 const useStyles = makeStyles((theme) => ({
@@ -132,15 +132,18 @@ function MainNavbar(props) {
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
+
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
+    // Fixed Menu
     const drawer = (
         <div>
             <List style={{padding: '0px'}}>
+
                 {Menu.map((item, index) => (
                     <Link to={item.pathname} key={index}>
                         <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
@@ -152,6 +155,7 @@ function MainNavbar(props) {
         </div>
     );
 
+    // Dynamic Menu
     const channels = (
         <div>
             <List style={{padding: '0px'}}>

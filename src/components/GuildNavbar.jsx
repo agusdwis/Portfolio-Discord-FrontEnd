@@ -17,49 +17,41 @@ const myTab = [
         name: 'Home',
         category: '',
         icon: <ExploreIcon/>,
-        pathname: '/guilds-discovery'
     },
     {
         name: 'Gaming',
         category: 'Gaming',
         icon: <GamingIcon/>,
-        pathname: '/guilds-discovery/gaming'
     },
     {
         name: 'Music',
         category: 'Music',
         icon: <MusicIcon/>,
-        pathname: '/guilds-discovery/music'
     },
     {
         name: 'Education',
         category: 'Education',
         icon: <EducationIcon/>,
-        pathname: '/guilds-discovery/education'
     },
     {
         name: 'Science',
         category: 'Science',
         icon: <ScienceIcon/>,
-        pathname: '/guilds-discovery/science'
     },
     {
         name: 'Content Creator',
         category: 'Content Creator',
         icon: <ContentIcon/>,
-        pathname: '/guilds-discovery/content-creator'
     },
     {
         name: 'Anime & Manga',
         category: 'Anime & Manga',
         icon: <AnimeMangaIcon/>,
-        pathname: '/guilds-discovery/anime-manga'
     },
     {
         name: 'Movies & TV',
         category: 'Movies & TV',
         icon: <MoviesTVIcon/>,
-        pathname: '/guilds-discovery/movies-tv'
     }
 
 ];
@@ -107,7 +99,11 @@ export default function GuildNavbar (props) {
     const classes = useStyles();
     return (
         <React.Fragment>
+
+            {/*Sidebar Title*/}
             <h2 className={classes.titleTab}>Discover</h2>
+
+            {/*Loop List Channel*/}
             {myTab.map((item, index) => (
                 <Link key={index} to="#" onClick={() => props.handleRouter(item.category)}>
                     <div className="categoryItem" role="listitem" tabIndex={index}>
@@ -124,6 +120,7 @@ export default function GuildNavbar (props) {
                     </div>
                 </Link>
             ))}
+
         </React.Fragment>
     );
 }

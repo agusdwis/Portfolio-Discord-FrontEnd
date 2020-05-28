@@ -1,17 +1,18 @@
 import React from "react";
+import {connect} from "react-redux";
+
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { withStyles } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
+
 import GuildDiscovery from "../components/GuildDiscovery";
 import BottomNavBar from "../components/BottomNavBar";
 import GuildNavbar from "../components/GuildNavbar";
 import MainNavbar from "../components/MainNavbar";
-import { withStyles } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-
 import ScrollTop from "../utils/ScrollTop";
-import Fab from "@material-ui/core/Fab";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
-import {connect} from "react-redux";
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
 import {getAllGuild, handleCategory} from "../stores/action/guildAction";
 
@@ -97,16 +98,20 @@ class ExplorePage extends React.Component {
 
     render() {
         const { classes } = this.props;
-        // console.warn('cek', this.props.listGuilds);
         return(
             <React.Fragment>
                 <div id="back-to-top-anchor" className={classes.root}>
+
+                    {/*Main Navbar*/}
                     <MainNavbar {...this.props}/>
+
+                    {/*Main Container*/}
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.discovery} item xs={12} lg={12}>
-
                                 <Grid container className={classes.container}>
+
+                                    {/*Category*/}
                                     <Grid className={classes.categorySection} item xs={12} lg={2}>
                                         <Paper elevation={0} classes={{root:classes.myPaper}}>
                                             <GuildNavbar {...this.props}
@@ -117,6 +122,7 @@ class ExplorePage extends React.Component {
                                         <BottomNavBar {...this.props}/>
                                     </Grid>
 
+                                    {/*Content*/}
                                     <Grid className={classes.guildSection} item xs={12} lg={10}>
                                         <Paper elevation={0} classes={{root:classes.guildPaper}}>
                                             <GuildDiscovery {...this.props}/>
@@ -130,8 +136,8 @@ class ExplorePage extends React.Component {
                                             </div>
                                         </Paper>
                                     </Grid>
-                                </Grid>
 
+                                </Grid>
                             </Grid>
                         </Grid>
 

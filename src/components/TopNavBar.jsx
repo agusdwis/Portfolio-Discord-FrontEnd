@@ -90,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopNavbar (){
     const classes = useStyles();
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -177,7 +178,9 @@ export default function TopNavbar (){
                     <Typography className={classes.title} variant="h6" noWrap>
                         MINECRAFT
                     </Typography>
+
                     <div className={classes.grow} />
+                    
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new notifications" color="inherit">
                             <Badge badgeContent={4} color="secondary">

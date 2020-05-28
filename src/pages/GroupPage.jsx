@@ -2,24 +2,24 @@ import React from "react";
 import {connect} from "react-redux";
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
 
-import MainNavbar from "../components/MainNavbar";
-import ChannelNavbar from "../components/ChannelBar";
-import {GiftedChat} from "react-web-gifted-chat";
-import TopNavbar from "../components/TopNavBar";
-import {withStyles} from "@material-ui/core";
-import MemberList from "../components/GroupMember";
-import Paper from "@material-ui/core/Paper";
-import BottomNavBar from "../components/BottomNavBar";
-import ChatList from "../components/ChatList";
-import InputBase from "@material-ui/core/InputBase";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import GifIcon from '@material-ui/icons/Gif';
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import ScrollTop from "../utils/ScrollTop";
+import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
+import GifIcon from '@material-ui/icons/Gif';
+import {withStyles} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
+import BottomNavBar from "../components/BottomNavBar";
+import ChannelNavbar from "../components/ChannelBar";
+import MemberList from "../components/GroupMember";
+import MainNavbar from "../components/MainNavbar";
+import TopNavbar from "../components/TopNavBar";
+import ChatList from "../components/ChatList";
+import ScrollTop from "../utils/ScrollTop";
 
 import '../assets/styles/chatpages.css';
 
@@ -126,33 +126,6 @@ const useStyles = (theme) => ({
 });
 
 class Group extends React.Component {
-    state = {
-        messages: [],
-    };
-
-    componentDidMount() {
-        this.setState({
-            messages: [
-                {
-                    id: 1,
-                    text: 'My message',
-                    createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-                    user: {
-                        id: 2,
-                        name: 'React',
-                        avatar: 'https://facebook.github.io/react/img/logo_og.png',
-                    },
-                },
-            ],
-        });
-    }
-
-    onSend(messages = []) {
-        this.setState((previousState) => ({
-            messages: GiftedChat.append(previousState.messages, messages),
-        }));
-    }
-
     render() {
         const { classes } = this.props;
         return(
@@ -162,10 +135,14 @@ class Group extends React.Component {
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.chats} item xs={12} lg={12}>
+
+                                {/*Top Fixed Navbar*/}
                                 <TopNavbar {...this.props}/>
 
+                                {/*Channel Navbar*/}
                                 <Grid container className={classes.container}>
                                     <Grid className={classes.channelSection} item xs={12} lg={2}>
+
                                         <Paper elevation={0} classes={{root:classes.myPaper}}>
                                             <ChannelNavbar {...this.props}/>
                                         </Paper>
@@ -187,6 +164,7 @@ class Group extends React.Component {
                                                     placeholder="# Minecraft"
                                                     inputProps={{ 'aria-label': 'search google maps' }}
                                                 />
+
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
                                                     <CardGiftcardIcon/>
                                                 </IconButton>
@@ -196,6 +174,7 @@ class Group extends React.Component {
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="emoji">
                                                     <EmojiEmotionsIcon />
                                                 </IconButton>
+
                                             </Paper>
                                         </Grid>
 
@@ -208,17 +187,15 @@ class Group extends React.Component {
                                                         status={'happy man'}
                                                         avatar={'...'}
                                             />
-                                            <MemberList username={'johndoe'}
-                                                        fullName={'John Doe'}
-                                                        status={'strong'}
-                                                        avatar={'...'}
-                                            />
                                         </Paper>
                                     </Grid>
+
                                 </Grid>
                             </Grid>
                         </Grid>
                     </main>
+
+                    {/*Scroll To Top*/}
                     <div className={classes.scrollTop}>
                         <ScrollTop {...this.props}>
                             <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -226,6 +203,7 @@ class Group extends React.Component {
                             </Fab>
                         </ScrollTop>
                     </div>
+
                 </div>
             </React.Fragment>
         )
