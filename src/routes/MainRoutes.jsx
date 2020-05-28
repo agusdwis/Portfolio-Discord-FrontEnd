@@ -15,10 +15,11 @@ export default function MainRoutes () {
             <BrowserRouter>
                 <Switch>
                     <Route exact path={'/'} component={Home}/>
-                    <Route exact path={'/guild-discovery'} component={ExplorePage} />
+                    <Route exact path={'/guilds-discovery'} component={ExplorePage} />
                     <Route exact path={'/login'} component={Login}/>
                     <Route exact path={'/register'} component={Register}/>
                     <Route path={'/channel/:id'} component={Group} />
+                    <Route path={'/guilds-discovery/:category'} component={ExplorePage} />
                 </Switch>
             </BrowserRouter>
         </Provider>

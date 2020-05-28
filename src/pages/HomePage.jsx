@@ -68,7 +68,7 @@ class Home extends React.Component {
                             <Paper elevation={0} classes={{root:classes.appPaper}}>
                                 <h1 className={classes.titleHome}>Welcome to Discord! </h1>
                                 <br/>
-                                <Link to={'/guild-discovery'}><HomeIcon className={classes.iconHome}/></Link>
+                                <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                             </Paper>
                         </div>
                     </React.Fragment>

@@ -138,6 +138,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GuildDiscovery (props) {
     const classes = useStyles();
+
     return (
         <React.Fragment>
             <Container className={classes.root} maxWidth={'lg'}>
@@ -185,9 +186,14 @@ export default function GuildDiscovery (props) {
 
                     <Grid item xs={12}>
                         <Grid className={classes.card} container spacing={2}>
-                            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
-                                <Grid key={value} item xs={12} sm={6} md={4} lg={4} xl={3}>
-                                    <MediaCard/>
+                            {props.listGuilds.map((item, index) => (
+                                <Grid key={index} item xs={12} sm={6} md={4} lg={4} xl={3}>
+                                    <MediaCard {...props}
+                                               name={item.name}
+                                               desc={item.description}
+                                               image={item.banner}
+                                               category={item.category}
+                                    />
                                 </Grid>
                             ))}
                         </Grid>

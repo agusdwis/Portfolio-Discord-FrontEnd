@@ -1,13 +1,19 @@
 import React from "react";
-import { withStyles } from "@material-ui/core";
-import MainNavbar from "../components/MainNavbar";
-import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
-import {connect} from "react-redux";
-import Grid from "@material-ui/core/Grid";
 import GuildDiscovery from "../components/GuildDiscovery";
-import Paper from "@material-ui/core/Paper";
 import BottomNavBar from "../components/BottomNavBar";
 import GuildNavbar from "../components/GuildNavbar";
+import MainNavbar from "../components/MainNavbar";
+import { withStyles } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+import ScrollTop from "../utils/ScrollTop";
+import Fab from "@material-ui/core/Fab";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
+import {connect} from "react-redux";
+import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
+import {getAllGuild, handleCategory} from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
     root: {
@@ -69,11 +75,29 @@ const useStyles = (theme) => ({
         padding: theme.spacing(2),
         color: '#fff',
     },
+    scrollY : {
+        paddingBottom: theme.spacing(5),
+        justifyContent: 'flex-end',
+        [theme.breakpoints.up('lg')]: {
+            paddingBottom: theme.spacing(0),
+        },
+        position: 'fixed',
+        zIndex: 1
+    },
 });
 
 class ExplorePage extends React.Component {
+    componentDidMount = async () => {
+        this.props.getAllGuild()
+    };
+
+    handleCategory = async (category) => {
+        this.props.handleCategory(category)
+    };
+
     render() {
         const { classes } = this.props;
+        // console.warn('cek', this.props.listGuilds);
         return(
             <React.Fragment>
                 <div id="back-to-top-anchor" className={classes.root}>
@@ -85,7 +109,9 @@ class ExplorePage extends React.Component {
                                 <Grid container className={classes.container}>
                                     <Grid className={classes.categorySection} item xs={12} lg={2}>
                                         <Paper elevation={0} classes={{root:classes.myPaper}}>
-                                            <GuildNavbar {...this.props}/>
+                                            <GuildNavbar {...this.props}
+                                                         handleRouter={(e) => this.handleCategory(e)}
+                                            />
                                         </Paper>
 
                                         <BottomNavBar {...this.props}/>
@@ -94,6 +120,14 @@ class ExplorePage extends React.Component {
                                     <Grid className={classes.guildSection} item xs={12} lg={10}>
                                         <Paper elevation={0} classes={{root:classes.guildPaper}}>
                                             <GuildDiscovery {...this.props}/>
+
+                                            <div className={classes.scrollY}>
+                                                <ScrollTop {...this.props}>
+                                                    <Fab color="secondary" size="small" aria-label="scroll back to top">
+                                                        <KeyboardArrowUpIcon />
+                                                    </Fab>
+                                                </ScrollTop>
+                                            </div>
                                         </Paper>
                                     </Grid>
                                 </Grid>
@@ -113,11 +147,15 @@ const mapStateToProps = (state) => {
         data: state.user,
         info: state.user.infos,
         login: state.user.is_login,
+
+        listGuilds: state.guild.listGuilds,
     };
 };
 
 const mapDispatchToProps = {
-    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
+
+    getAllGuild, handleCategory
 
 };
 
