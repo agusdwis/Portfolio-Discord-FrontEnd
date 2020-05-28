@@ -11,6 +11,7 @@ import {
     doRegister,
     getProfile,
     doSignOut } from "../stores/action/userAction";
+import {Link} from "react-router-dom";
 
 const useStyles = () => ({
     root: {
@@ -67,7 +68,7 @@ class Home extends React.Component {
                             <Paper elevation={0} classes={{root:classes.appPaper}}>
                                 <h1 className={classes.titleHome}>Welcome to Discord! </h1>
                                 <br/>
-                                <HomeIcon className={classes.iconHome}/>
+                                <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                             </Paper>
                         </div>
                     </React.Fragment>

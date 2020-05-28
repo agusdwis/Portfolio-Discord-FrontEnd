@@ -9,40 +9,57 @@ import {
     ContentIcon,
     AnimeMangaIcon,
     MoviesTVIcon,} from '../utils/CustomIcon';
+import {Link} from "react-router-dom";
 
 
 const myTab = [
     {
         name: 'Home',
+        category: '',
         icon: <ExploreIcon/>,
+        pathname: '/guilds-discovery'
     },
     {
         name: 'Gaming',
-        icon: <GamingIcon/>
+        category: 'Gaming',
+        icon: <GamingIcon/>,
+        pathname: '/guilds-discovery/gaming'
     },
     {
         name: 'Music',
-        icon: <MusicIcon/>
+        category: 'Music',
+        icon: <MusicIcon/>,
+        pathname: '/guilds-discovery/music'
     },
     {
         name: 'Education',
-        icon: <EducationIcon/>
+        category: 'Education',
+        icon: <EducationIcon/>,
+        pathname: '/guilds-discovery/education'
     },
     {
         name: 'Science',
-        icon: <ScienceIcon/>
+        category: 'Science',
+        icon: <ScienceIcon/>,
+        pathname: '/guilds-discovery/science'
     },
     {
         name: 'Content Creator',
-        icon: <ContentIcon/>
+        category: 'Content Creator',
+        icon: <ContentIcon/>,
+        pathname: '/guilds-discovery/content-creator'
     },
     {
         name: 'Anime & Manga',
-        icon: <AnimeMangaIcon/>
+        category: 'Anime & Manga',
+        icon: <AnimeMangaIcon/>,
+        pathname: '/guilds-discovery/anime-manga'
     },
     {
         name: 'Movies & TV',
-        icon: <MoviesTVIcon/>
+        category: 'Movies & TV',
+        icon: <MoviesTVIcon/>,
+        pathname: '/guilds-discovery/movies-tv'
     }
 
 ];
@@ -92,18 +109,20 @@ export default function GuildNavbar (props) {
         <React.Fragment>
             <h2 className={classes.titleTab}>Discover</h2>
             {myTab.map((item, index) => (
-                <div key={index} className="categoryItem" role="listitem" tabIndex={index}>
-                    <div className={classes.itemInner}>
-                        <div className={classes.icon}>
-                            {item.icon}
-                        </div>
-                        <div className="content">
-                            <div className="nameAndDecorators">
-                                <div className="name">{item.name}</div>
+                <Link key={index} to={item.pathname} onClick={() => props.handleRouter(item.category)}>
+                    <div className="categoryItem" role="listitem" tabIndex={index}>
+                        <div className={classes.itemInner}>
+                            <div className={classes.icon}>
+                                {item.icon}
+                            </div>
+                            <div className="content">
+                                <div className="nameAndDecorators">
+                                    <div className="name">{item.name}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </React.Fragment>
     );

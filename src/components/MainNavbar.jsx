@@ -110,7 +110,7 @@ const Menu = [
     },
     {
         label: "Explore",
-        pathname: "/guild-discovery",
+        pathname: "/guilds-discovery",
         icon: <ExploreIcon/>
     },
     {
