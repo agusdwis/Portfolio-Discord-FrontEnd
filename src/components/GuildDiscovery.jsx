@@ -1,17 +1,19 @@
 import React from "react";
+
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CardMedia from "@material-ui/core/CardMedia";
 import InputBase from "@material-ui/core/InputBase";
-import {SearchIcon} from "../utils/CustomIcon";
-import ScrollTop from "../utils/ScrollTop";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import MediaCard from "./CardComponent";
 import Fab from "@material-ui/core/Fab";
 import {fade} from "@material-ui/core";
+
+import {SearchIcon} from "../utils/CustomIcon";
+import MediaCard from "./CardComponent";
+import ScrollTop from "../utils/ScrollTop";
 
 const useStyles = makeStyles((theme) => ({
     root: {

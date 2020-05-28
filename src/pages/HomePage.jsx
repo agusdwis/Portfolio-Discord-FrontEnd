@@ -1,17 +1,18 @@
 import React from "react";
-import MainNavbar from "../components/MainNavbar";
-import {withStyles} from "@material-ui/core";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+
+import {withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import HomeIcon from '@material-ui/icons/Home';
 
+import MainNavbar from "../components/MainNavbar";
 import {
     changeInputUser,
     doLogin,
     doRegister,
     getProfile,
     doSignOut } from "../stores/action/userAction";
-import {Link} from "react-router-dom";
 
 const useStyles = () => ({
     root: {
@@ -34,7 +35,6 @@ const useStyles = () => ({
         height: '100vh',
         backgroundColor: '#36393F !important',
         color: '#fff',
-        // lineHeight: '100vh'
     },
     titleHome: {
         fontWeight: 800,
@@ -48,6 +48,9 @@ const useStyles = () => ({
         '&:hover': {
             color: '#ff0003'
         }
+    },
+    span: {
+        color: '#ff0c19'
     }
 });
 
@@ -58,7 +61,7 @@ class Home extends React.Component {
 
   render() {
       const { classes } = this.props;
-    return(
+      return(
         <React.Fragment>
             <div className={classes.root}>
                 <MainNavbar {...this.props}/>
@@ -66,7 +69,7 @@ class Home extends React.Component {
                     <React.Fragment>
                         <div className={classes.appHome}>
                             <Paper elevation={0} classes={{root:classes.appPaper}}>
-                                <h1 className={classes.titleHome}>Welcome to Discord! </h1>
+                                <h1 className={classes.titleHome}>Welcome to Discord <span className={classes.span}>{this.props.data.username}!</span> </h1>
                                 <br/>
                                 <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                             </Paper>

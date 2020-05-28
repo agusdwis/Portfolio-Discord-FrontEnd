@@ -97,6 +97,8 @@ const useStyles = (theme) => ({
 class Login extends React.Component {
     postLogin = async () => {
         await this.props.doLogin();
+
+        // Cek Login Status
         const is_login = this.props.login;
         if (is_login) {
             this.props.history.push("/");
@@ -112,6 +114,7 @@ class Login extends React.Component {
                         <div className={classes.appMount}>
                             <div className={classes.app}>
                                 <div className={classes.wrapper}>
+                                    {/*Cover Image*/}
                                     <div className={classes.cover}>
                                         <CardMedia
                                             component="img"
@@ -120,6 +123,7 @@ class Login extends React.Component {
                                             title="Login Cover"
                                             className={classes.coverImage}
                                         />
+
                                         <CardMedia
                                             component="img"
                                             alt="Cover"
@@ -128,6 +132,8 @@ class Login extends React.Component {
                                             className={classes.coverImage}
                                         />
                                     </div>
+
+                                    {/*Main Form*/}
                                     <div className={classes.content}>
                                         <Link to="/" className="logo11 logo12 logo13"
                                               style={{opacity: 1, transform: 'translateY(0px) translateZ(0px)'}}/>
@@ -154,9 +160,11 @@ class Login extends React.Component {
                                                                     <div className="title">
                                                                         Welcome back!
                                                                     </div>
+
                                                                     <div className="subTitle">
                                                                         We're so excited to see you again!
                                                                     </div>
+
                                                                     <div className="formBlock marginTop20">
                                                                         <form className={classes.form} noValidate>
                                                                             <TextField
@@ -172,6 +180,7 @@ class Login extends React.Component {
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
                                                                                 onChange={(e) => this.props.changeInput(e)}
                                                                             />
+
                                                                             <TextField
                                                                                 variant="outlined"
                                                                                 margin="normal"
@@ -185,11 +194,13 @@ class Login extends React.Component {
                                                                                 InputLabelProps={{ className: classes.inputLabel }}
                                                                                 onChange={(e) => this.props.changeInput(e)}
                                                                             />
+
                                                                             <Grid item xs>
                                                                                 <Link className={classes.loginLink} to="#" variant="body2">
                                                                                     Forgot your password?
                                                                                 </Link>
                                                                             </Grid>
+
                                                                             <Button
                                                                                 fullWidth
                                                                                 variant="contained"
@@ -199,6 +210,7 @@ class Login extends React.Component {
                                                                             >
                                                                                 Login
                                                                             </Button>
+
                                                                             <Grid container>
                                                                                 <Grid item xs>
                                                                                     <Link className={classes.loginLink} to="/register" variant="body2">
@@ -206,12 +218,14 @@ class Login extends React.Component {
                                                                                     </Link>
                                                                                 </Grid>
                                                                             </Grid>
+
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </Grid>
+
                                                 </Grid>
                                             </div>
                                         </div>
