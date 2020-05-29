@@ -13,6 +13,7 @@ import {
     doRegister,
     getProfile,
     doSignOut } from "../stores/action/userAction";
+import { memberGuild } from "../stores/action/messageAction";
 
 const useStyles = () => ({
     root: {
@@ -56,7 +57,15 @@ const useStyles = () => ({
 
 class Home extends React.Component {
     componentDidMount = async () => {
+        // load profile
         this.props.getProfile();
+
+        // list guild current user
+        this.props.memberGuild();
+    };
+
+    changeRouter = async (channelID) => {
+        this.props.history.replace("/channel/"+ channelID);
     };
 
   render() {
@@ -64,7 +73,9 @@ class Home extends React.Component {
       return(
         <React.Fragment>
             <div className={classes.root}>
-                <MainNavbar {...this.props}/>
+                <MainNavbar {...this.props}
+                    changeRouter={(e) => this.changeRouter(e)}
+                />
                 <main className={classes.content}>
                     <React.Fragment>
                         <div className={classes.appHome}>
@@ -87,11 +98,15 @@ const mapStateToProps = (state) => {
         data: state.user,
         info: state.user.infos,
         login: state.user.is_login,
+
+        my_guild: state.members.myGuilds
     };
 };
 
 const mapDispatchToProps = {
-    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
+
+    memberGuild,
 
 };
 

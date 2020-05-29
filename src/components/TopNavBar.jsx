@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+        fontSize: '16px',
+        fontWeight: 'bold'
     },
     search: {
         position: 'relative',
@@ -88,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function TopNavbar (){
+export default function TopNavbar (props){
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -176,7 +178,7 @@ export default function TopNavbar (){
             <AppBar classes={{colorPrimary: classes.appBar}} position="sticky" >
                 <Toolbar style={{ backgroundColor: '#36393F', minHeight: '20px', maxHeight: '60px' }}>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        MINECRAFT
+                        {props.guild_info.name}
                     </Typography>
 
                     <div className={classes.grow} />
