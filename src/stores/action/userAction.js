@@ -61,7 +61,7 @@ export const doLogin = () => {
 
             })
             .catch(function (error) {
-                console.log(error);
+                console.log('%c Error! ', 'background: #ff0033; color: ##0f0f0f; font-weight: 600', error);
             });
 
     };
@@ -90,7 +90,7 @@ export const getProfile = () => {
 
             })
             .catch(function (error) {
-                console.log(error);
+                console.log('%c Error! ', 'background: #ff0033; color: ##0f0f0f; font-weight: 600', error);
             });
     }
 };

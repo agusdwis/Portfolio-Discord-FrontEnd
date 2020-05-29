@@ -120,14 +120,6 @@ const Menu = [
     },
 ];
 
-const Channel = [
-    {
-        label : "Dota 2",
-        pathname: "/channel/1",
-        icon: <HomeDiscordIcon/>
-    }
-];
-
 function MainNavbar(props) {
     const { window } = props;
     const classes = useStyles();
@@ -159,10 +151,10 @@ function MainNavbar(props) {
     const channels = (
         <div>
             <List style={{padding: '0px'}}>
-                {Channel.map((item, index) => (
-                    <Link to={item.pathname} key={index}>
+                {props.my_guild.map((item, index) => (
+                    <Link to="#" onClick={() => props.changeRouter(item.guild_id.id)} key={index}>
                         <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
-                            <Avatar className={classes.purple}>{item.label.slice(0,1)}</Avatar>
+                            <Avatar className={classes.purple}>{item.guild_id.name.slice(0,1)}</Avatar>
                         </ListItem>
                     </Link>
                 ))}

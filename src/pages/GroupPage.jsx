@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
-
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import IconButton from "@material-ui/core/IconButton";
@@ -12,16 +11,24 @@ import {withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
-
 import BottomNavBar from "../components/BottomNavBar";
+
 import ChannelNavbar from "../components/ChannelBar";
 import MemberList from "../components/GroupMember";
 import MainNavbar from "../components/MainNavbar";
 import TopNavbar from "../components/TopNavBar";
 import ChatList from "../components/ChatList";
 import ScrollTop from "../utils/ScrollTop";
-
 import '../assets/styles/chatpages.css';
+
+import {
+    changeInputUser,
+    doLogin,
+    doRegister,
+    doSignOut,
+    getProfile} from "../stores/action/userAction";
+import { memberGuild, messageGuild } from "../stores/action/messageAction";
+import { getGuildByID } from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
     root: {
@@ -109,7 +116,8 @@ const useStyles = (theme) => ({
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
-        color: '#fff'
+        color: '#fff',
+        fontSize: '14px'
     },
     iconButton: {
         padding: 10,
@@ -126,12 +134,38 @@ const useStyles = (theme) => ({
 });
 
 class Group extends React.Component {
+
+    componentDidMount = async () => {
+        const channelID = await this.props.match.params.id;
+        // list guild current user
+        this.props.memberGuild();
+
+        // load message selected guild
+        this.props.messageGuild(channelID);
+
+        //load guild infos on mounting phase
+        this.props.getGuildByID(channelID);
+    };
+
+    changeRouter = async (channelID) => {
+        this.props.history.replace("/channel/"+ channelID);
+
+        //render messages
+        this.props.messageGuild(channelID);
+
+        //load guild infos on select
+        this.props.getGuildByID(channelID);
+    };
+
     render() {
         const { classes } = this.props;
         return(
             <React.Fragment>
                 <div id="back-to-top-anchor" className={classes.root}>
-                    <MainNavbar {...this.props}/>
+                    <MainNavbar {...this.props}
+                        changeRouter={(e) => this.changeRouter(e)}
+                    />
+
                     <main className={classes.content}>
                         <Grid container>
                             <Grid className={classes.chats} item xs={12} lg={12}>
@@ -153,7 +187,17 @@ class Group extends React.Component {
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
                                         <Paper elevation={0} classes={{root:classes.chatPaper}}>
 
-                                            <ChatList/>
+                                            {this.props.message.map((item, index) => (
+                                                <div key={index}>
+                                                    <ChatList {...this.props}
+                                                              name={item.user_id.name}
+                                                              avatar={item.user_id.avatar}
+                                                              username={item.user_id.username}
+                                                              dtime={item.created_at}
+                                                              message={item.content}
+                                                    />
+                                                </div>
+                                            ))}
 
                                         </Paper>
 
@@ -161,7 +205,7 @@ class Group extends React.Component {
                                             <Paper elevation={0} component="form" className={classes.rootInput}>
                                                 <InputBase
                                                     className={classes.input}
-                                                    placeholder="# Minecraft"
+                                                    placeholder={this.props.guild_info.name}
                                                     inputProps={{ 'aria-label': 'search google maps' }}
                                                 />
 
@@ -215,11 +259,18 @@ const mapStateToProps = (state) => {
         data: state.user,
         info: state.user.infos,
         login: state.user.is_login,
+
+        guild_info: state.guild.oneGuild,
+
+        my_guild: state.members.myGuilds,
+        message: state.members.messages,
     };
 };
 
 const mapDispatchToProps = {
-    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut
+    changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
+
+    memberGuild, messageGuild, getGuildByID
 
 };
 

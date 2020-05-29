@@ -69,7 +69,7 @@ export default function ChannelNavbar() {
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="loop" disablePadding>
+                <List disablePadding>
                     {myTag.map((item, index) => (
                         <ListItem key={index} button className={classes.nested}>
                             <ListItemIcon className={classes.listRoot}>

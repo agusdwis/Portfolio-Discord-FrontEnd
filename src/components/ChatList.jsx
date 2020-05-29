@@ -63,7 +63,7 @@ export default function ChatList(props) {
         <List className={classes.root}>
             <ListItem classes={{root: classes.myRoot}} alignItems="flex-start">
                 <ListItemAvatar style={{cursor: 'pointer'}}>
-                    <Avatar classes={{root:classes.avatar}} alt="Agus D Sasongko" src="#" />
+                    <Avatar classes={{root:classes.avatar}} alt={props.username} src={props.avatar} />
                 </ListItemAvatar>
                 <ListItemText
                     className={classes.message}
@@ -71,7 +71,7 @@ export default function ChatList(props) {
                         <React.Fragment>
                             <div style={{display: 'flex'}}>
                                 <Typography classes={{root:classes.username}}>
-                                    @agsdws
+                                    {props.username}
                                 </Typography>
                                 <Typography className={classes.datetime}>
                                     Today at 1:45 PM
@@ -89,7 +89,7 @@ export default function ChatList(props) {
                               color="textSecondary"
                               style={{color: '#dcddde'}}
                           >
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dicta dolore fugit laborum libero ratione reiciendis, unde ut velit voluptatibus? Culpa dolores eligendi excepturi inventore maiores minima omnis ullam velit.
+                              {props.message}
                           </Typography>
                       </React.Fragment>
                       }

@@ -15,6 +15,7 @@ import ScrollTop from "../utils/ScrollTop";
 
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
 import {getAllGuild, handleCategory} from "../stores/action/guildAction";
+import { memberGuild } from "../stores/action/messageAction";
 
 const useStyles = (theme) => ({
     root: {
@@ -89,11 +90,19 @@ const useStyles = (theme) => ({
 
 class ExplorePage extends React.Component {
     componentDidMount = async () => {
-        this.props.getAllGuild()
+        // load all guild
+        this.props.getAllGuild();
+
+        // list guild current user
+        this.props.memberGuild();
     };
 
     handleCategory = async (category) => {
         this.props.handleCategory(category)
+    };
+
+    changeRouter = async (channelID) => {
+        this.props.history.replace("/channel/"+ channelID);
     };
 
     render() {
@@ -103,7 +112,9 @@ class ExplorePage extends React.Component {
                 <div id="back-to-top-anchor" className={classes.root}>
 
                     {/*Main Navbar*/}
-                    <MainNavbar {...this.props}/>
+                    <MainNavbar {...this.props}
+                        changeRouter={(e) => this.changeRouter(e)}
+                    />
 
                     {/*Main Container*/}
                     <main className={classes.content}>
@@ -155,13 +166,16 @@ const mapStateToProps = (state) => {
         login: state.user.is_login,
 
         listGuilds: state.guild.listGuilds,
+        my_guild: state.members.myGuilds
     };
 };
 
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    getAllGuild, handleCategory
+    getAllGuild, handleCategory,
+
+    memberGuild,
 
 };
 
