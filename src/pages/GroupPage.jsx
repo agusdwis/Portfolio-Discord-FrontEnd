@@ -106,17 +106,18 @@ const useStyles = (theme) => ({
         width: '95%',
         maxWidth: '95%',
         backgroundColor: '#40444B !important',
-        color: '#fff'
+        color: '#fff',
+        borderRadius: 8,
     },
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
         color: '#fff',
-        fontSize: '14px'
+        fontSize: '14px',
     },
     iconButton: {
         padding: 10,
-        color: '#fff'
+        color: '#B9BBBE'
     },
     scrollTop : {
         paddingBottom: theme.spacing(5),
@@ -237,11 +238,12 @@ class Group extends React.Component {
                                             <Paper elevation={0} className={classes.rootInput}>
                                                 <InputBase
                                                     className={classes.input}
-                                                    placeholder={this.props.guild_info.name}
+                                                    placeholder={'Message #'+ (this.props.guild_info.name)}
                                                     onKeyDown={this.inputMessage}
                                                     onChange={(e) => this.props.changeMessage(e)}
                                                     name="post_message"
                                                     id="post_message"
+                                                    autoComplete="off"
                                                 />
 
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
@@ -264,7 +266,6 @@ class Group extends React.Component {
                                             <MemberList username={'agsdws'}
                                                         fullName={'Agus D Sasongko'}
                                                         status={'happy man'}
-                                                        avatar={'...'}
                                             />
                                         </Paper>
                                     </Grid>

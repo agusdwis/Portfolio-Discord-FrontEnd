@@ -54,10 +54,6 @@ const useStyles = (theme) => ({
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        borderWidth: "1px",
-        borderColor: "#292929",
-        borderRightStyle: "solid",
-        borderLeftStyle: "solid",
         [theme.breakpoints.down('sm')]: {
             marginBottom: '57px',
             zIndex: 0,

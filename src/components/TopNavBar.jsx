@@ -18,6 +18,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import ChatIcon from '@material-ui/icons/Chat';
 import HelpIcon from '@material-ui/icons/Help';
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
             display: 'block',
         },
         fontSize: '16px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     search: {
         position: 'relative',
@@ -190,8 +191,13 @@ export default function TopNavbar (props){
         <React.Fragment>
             <AppBar classes={{colorPrimary: classes.appBar}} position="sticky" >
                 <Toolbar style={{ backgroundColor: '#36393F', minHeight: '20px', maxHeight: '60px' }}>
+                    <Grid item lg={2}>
                     <Typography className={classes.title} variant="h6" noWrap>
                         {props.guild_info.name}
+                    </Typography>
+                    </Grid>
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        # general
                     </Typography>
 
                     <div className={classes.grow} />
