@@ -27,7 +27,7 @@ import {
     doRegister,
     doSignOut,
     getProfile} from "../stores/action/userAction";
-import { memberGuild, messageGuild } from "../stores/action/messageAction";
+import { memberGuild, messageGuild, changeInputMessage, postMessage } from "../stores/action/messageAction";
 import { getGuildByID } from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
@@ -157,6 +157,17 @@ class Group extends React.Component {
         this.props.getGuildByID(channelID);
     };
 
+    inputMessage = (e) => {
+        if(e.keyCode === 13){
+            // post message
+            const channel = this.props.match.params.id;
+            this.props.postMessage(channel);
+
+            // reset input form
+            document.getElementById("post_message").value="";
+        }
+    };
+
     render() {
         const { classes } = this.props;
         return(
@@ -202,11 +213,14 @@ class Group extends React.Component {
                                         </Paper>
 
                                         <Grid container className={classes.containerForm}>
-                                            <Paper elevation={0} component="form" className={classes.rootInput}>
+                                            <Paper elevation={0} className={classes.rootInput}>
                                                 <InputBase
                                                     className={classes.input}
                                                     placeholder={this.props.guild_info.name}
-                                                    inputProps={{ 'aria-label': 'search google maps' }}
+                                                    onKeyDown={this.inputMessage}
+                                                    onChange={(e) => this.props.changeMessage(e)}
+                                                    name="post_message"
+                                                    id="post_message"
                                                 />
 
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
@@ -270,7 +284,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    memberGuild, messageGuild, getGuildByID
+    memberGuild, messageGuild, getGuildByID,
+
+    changeMessage: (e) => changeInputMessage(e), postMessage
 
 };
 
