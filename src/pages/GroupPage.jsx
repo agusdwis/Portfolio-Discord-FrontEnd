@@ -19,7 +19,6 @@ import MainNavbar from "../components/MainNavbar";
 import TopNavbar from "../components/TopNavBar";
 import ChatList from "../components/ChatList";
 import ScrollTop from "../utils/ScrollTop";
-import '../assets/styles/chatpages.css';
 
 import {
     changeInputUser,
@@ -45,7 +44,7 @@ const useStyles = (theme) => ({
         flex: 1,
         display: "flex",
         flexDirection: "row",
-        height: `calc(100vh - 50px)`,
+        // height: `calc(100vh - 50px)`,
         maxHeight: `calc(100vh - 50px)`,
         [theme.breakpoints.down('sm')]: {
             overflowY: 'scroll'
@@ -58,7 +57,7 @@ const useStyles = (theme) => ({
         backgroundColor: '#2F3136',
         [theme.breakpoints.down('sm')]: {
             position: 'sticky'
-        },
+        }
     },
     chatSection: {
         backgroundColor: '#36393F',
@@ -67,10 +66,6 @@ const useStyles = (theme) => ({
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        borderWidth: "1px",
-        borderColor: "#292929",
-        borderRightStyle: "solid",
-        borderLeftStyle: "solid",
         [theme.breakpoints.down('sm')]: {
             marginBottom: '57px',
             zIndex: 0,
@@ -145,6 +140,9 @@ class Group extends React.Component {
 
         // load guild infos on mounting phase
         this.props.getGuildByID(channelID);
+
+        // scroll to latest message
+        this.scrollToBottom();
     };
 
     componentDidUpdate = async () => {
