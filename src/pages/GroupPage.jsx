@@ -143,8 +143,20 @@ class Group extends React.Component {
         // load message selected guild
         this.props.messageGuild(channelID);
 
-        //load guild infos on mounting phase
+        // load guild infos on mounting phase
         this.props.getGuildByID(channelID);
+    };
+
+    componentDidUpdate = async () => {
+        // update message if the data has changed
+        const channelID = await this.props.match.params.id;
+
+        if (this.props.update) {
+            this.props.messageGuild(channelID);
+        }
+
+        // scroll to latest message
+        this.scrollToBottom();
     };
 
     changeRouter = async (channelID) => {
@@ -161,10 +173,21 @@ class Group extends React.Component {
         if(e.keyCode === 13){
             // post message
             const channel = this.props.match.params.id;
-            this.props.postMessage(channel);
+
+            // post message if input not null
+            if (e.target.value !== "") {
+                this.props.postMessage(channel);
+            }
 
             // reset input form
             document.getElementById("post_message").value="";
+        }
+    };
+
+    scrollToBottom = () => {
+        const messagesContainer = document.getElementById("messagesContainer");
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     };
 
@@ -196,7 +219,7 @@ class Group extends React.Component {
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
-                                        <Paper elevation={0} classes={{root:classes.chatPaper}}>
+                                        <Paper id="messagesContainer" elevation={0} classes={{root:classes.chatPaper}}>
 
                                             {this.props.message.map((item, index) => (
                                                 <div key={index}>
@@ -278,6 +301,7 @@ const mapStateToProps = (state) => {
 
         my_guild: state.members.myGuilds,
         message: state.members.messages,
+        update: state.members.updated
     };
 };
 
