@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         height: '35px',
         maxWidth: '35px',
         width: '35px'
-    }
+    },
 }));
 
 export default function BottomNavBar(props, postLogout) {
@@ -107,31 +107,34 @@ export default function BottomNavBar(props, postLogout) {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
+                classes={{root:classes.dialog}}
             >
-                <DialogTitle style={{color: '#ff1513'}} id="responsive-dialog-title"><strong><h3>Profile</h3></strong></DialogTitle>
-                <DialogContent>
+                <Paper style={{minWidth: '30vw'}}>
+                    <DialogTitle style={{color: '#ff1513'}} id="responsive-dialog-title"><strong><h3>Profile</h3></strong></DialogTitle>
+                    <DialogContent>
 
-                    <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
-                        {props.info.name ?
-                            <p>Name: {props.info.name}</p>
-                            :
-                            <p>Name: {props.info.username}</p>
-                        }
-                    </Paper>
-                    <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
-                        <p>Username: {props.info.username}</p>
-                    </Paper>
-                    <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
-                        <p>Email: {props.info.email}</p>
-                    </Paper>
+                        <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
+                            {props.info.name ?
+                                <p>Name: {props.info.name}</p>
+                                :
+                                <p>Name: {props.info.username}</p>
+                            }
+                        </Paper>
+                        <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
+                            <p>Username: {props.info.username}</p>
+                        </Paper>
+                        <Paper elevation={0} style={{padding: '10px', color: 'white'}}>
+                            <p>Email: {props.info.email}</p>
+                        </Paper>
 
-                </DialogContent>
+                    </DialogContent>
 
-                <DialogActions>
-                    <Button onClick={handleClickClose} color="secondary" autoFocus>
-                        Close
-                    </Button>
-                </DialogActions>
+                    <DialogActions>
+                        <Button onClick={handleClickClose} color="secondary" autoFocus>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Paper>
 
             </Dialog>
             <BottomNavigation

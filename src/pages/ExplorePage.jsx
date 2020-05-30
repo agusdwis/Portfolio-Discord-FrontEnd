@@ -100,6 +100,9 @@ const useStyles = (theme) => ({
 
 class ExplorePage extends React.Component {
     componentDidMount = async () => {
+        // load profile
+        this.props.getProfile();
+
         // load all guild
         this.props.getAllGuild();
 

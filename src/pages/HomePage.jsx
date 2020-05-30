@@ -15,7 +15,7 @@ import {
     doSignOut } from "../stores/action/userAction";
 import { memberGuild } from "../stores/action/messageAction";
 
-const useStyles = () => ({
+const useStyles = (theme) => ({
     root: {
         display: 'flex',
     },
@@ -36,6 +36,10 @@ const useStyles = () => ({
         height: '100vh',
         backgroundColor: '#36393F !important',
         color: '#fff',
+        [theme.breakpoints.down('sm')]: {
+            width: '100vw'
+        },
+
     },
     titleHome: {
         fontWeight: 800,
@@ -82,7 +86,7 @@ class Home extends React.Component {
                             <div className={classes.appHome}>
                                 <Paper elevation={0} classes={{root: classes.appPaper}}>
                                     <h1 className={classes.titleHome}>Welcome to Discord <span
-                                        className={classes.span}>{this.props.data.username}!</span></h1>
+                                        className={classes.span}>{this.props.data.infos.username}!</span></h1>
                                     <br/>
                                     <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                                 </Paper>

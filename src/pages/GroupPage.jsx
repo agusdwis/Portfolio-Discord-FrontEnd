@@ -141,6 +141,10 @@ class Group extends React.Component {
 
     componentDidMount = async () => {
         const channelID = await this.props.match.params.id;
+
+        // load profile
+        this.props.getProfile();
+
         // list guild current user
         this.props.memberGuild();
 

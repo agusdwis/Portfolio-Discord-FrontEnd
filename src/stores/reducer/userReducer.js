@@ -52,6 +52,7 @@ export default function userReducer(userState = initialState, action) {
             return {
                 ...userState,
                 is_login: false,
+                isLaunch: false,
             };
         case "ACTIVATE_LAUNCH":
             return {
