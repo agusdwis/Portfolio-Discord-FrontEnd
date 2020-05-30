@@ -28,6 +28,7 @@ import {
     getProfile} from "../stores/action/userAction";
 import { memberGuild, messageGuild, changeInputMessage, postMessage } from "../stores/action/messageAction";
 import { getGuildByID } from "../stores/action/guildAction";
+import GuildModal from "../components/GuildModal";
 
 const useStyles = (theme) => ({
     root: {
@@ -192,8 +193,10 @@ class Group extends React.Component {
 
     render() {
         const { classes } = this.props;
+
         return(
             <React.Fragment>
+                <GuildModal init={true} {...this.props}/>
                 <div id="back-to-top-anchor" className={classes.root}>
                     <MainNavbar {...this.props}
                         changeRouter={(e) => this.changeRouter(e)}
