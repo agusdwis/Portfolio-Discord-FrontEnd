@@ -16,6 +16,7 @@ import BottomNavBar from "../components/BottomNavBar";
 import ChannelNavbar from "../components/ChannelBar";
 import MemberList from "../components/GroupMember";
 import MainNavbar from "../components/MainNavbar";
+import GuildModal from "../components/GuildModal";
 import TopNavbar from "../components/TopNavBar";
 import ChatList from "../components/ChatList";
 import ScrollTop from "../utils/ScrollTop";
@@ -26,9 +27,15 @@ import {
     doRegister,
     doSignOut,
     getProfile} from "../stores/action/userAction";
-import { memberGuild, messageGuild, changeInputMessage, postMessage } from "../stores/action/messageAction";
-import { getGuildByID } from "../stores/action/guildAction";
-import GuildModal from "../components/GuildModal";
+
+import {
+    postMember,
+    memberGuild,
+    messageGuild,
+    changeInputMessage,
+    postMessage } from "../stores/action/messageAction";
+import {
+    getGuildByID } from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
     root: {
@@ -148,11 +155,17 @@ class Group extends React.Component {
     };
 
     componentDidUpdate = async () => {
-        // update message if the data has changed
+        // update state
         const channelID = await this.props.match.params.id;
 
-        if (this.props.update) {
+        if (this.props.update.updateMessages) {
+            // update guild messages
             this.props.messageGuild(channelID);
+        }
+
+        if (this.props.update.updateMyGuild) {
+            // update user's guild list
+            this.props.memberGuild();
         }
 
         // scroll to latest message
@@ -167,6 +180,13 @@ class Group extends React.Component {
 
         //load guild infos on select
         this.props.getGuildByID(channelID);
+    };
+
+    postNewMember = async () => {
+        const toChannel = await this.props.match.params.id;
+
+        //post member
+        this.props.postMember(toChannel)
     };
 
     inputMessage = (e) => {
@@ -196,7 +216,9 @@ class Group extends React.Component {
 
         return(
             <React.Fragment>
-                <GuildModal init={true} {...this.props}/>
+                <GuildModal init={true} {...this.props}
+                            postNewMember={()=>this.postNewMember()}
+                />
                 <div id="back-to-top-anchor" className={classes.root}>
                     <MainNavbar {...this.props}
                         changeRouter={(e) => this.changeRouter(e)}
@@ -303,7 +325,7 @@ const mapStateToProps = (state) => {
 
         my_guild: state.members.myGuilds,
         message: state.members.messages,
-        update: state.members.updated
+        update: state.members
     };
 };
 
@@ -312,7 +334,7 @@ const mapDispatchToProps = {
 
     memberGuild, messageGuild, getGuildByID,
 
-    changeMessage: (e) => changeInputMessage(e), postMessage
+    changeMessage: (e) => changeInputMessage(e), postMessage, postMember
 
 };
 

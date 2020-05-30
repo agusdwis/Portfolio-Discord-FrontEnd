@@ -2,7 +2,8 @@ const initialState = {
     myGuilds: [],
     messages: [],
     post_message:"",
-    updated: false
+    updateMessages: false,
+    updateMyGuild: false,
 };
 
 export default function memberReducer(messageState = initialState, action) {
@@ -10,18 +11,24 @@ export default function memberReducer(messageState = initialState, action) {
         case "SUCCESS_GET_MY_GUILDS":
             return {
                 ...messageState,
-                myGuilds: action.payload
+                myGuilds: action.payload,
+                updateMyGuild: false
+            };
+        case "SUCCESS_POST_MEMBER":
+            return {
+                ...messageState,
+                updateMyGuild: true
             };
         case "SUCCESS_GET_MESSAGES":
             return {
                 ...messageState,
                 messages: action.payload,
-                updated: false
+                updateMessages: false
             };
         case "SUCCESS_POST_MESSAGE":
             return {
                 ...messageState,
-                updated: true
+                updateMessages: true
             };
         case "CHANGE_INPUT_MESSAGE":
             return {

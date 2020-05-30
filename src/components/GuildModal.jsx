@@ -85,6 +85,7 @@ export default function GuildModal(props) {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleClose = () => {
+        props.postNewMember();
         setOpen(false);
     };
 
