@@ -14,7 +14,7 @@ import MainNavbar from "../components/MainNavbar";
 import ScrollTop from "../utils/ScrollTop";
 
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
-import {getAllGuild, handleCategory} from "../stores/action/guildAction";
+import {getAllGuild, handleCategory,handleSearch, changeInputSearch} from "../stores/action/guildAction";
 import { memberGuild } from "../stores/action/messageAction";
 
 const useStyles = (theme) => ({
@@ -54,10 +54,6 @@ const useStyles = (theme) => ({
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        borderWidth: "1px",
-        borderColor: "#292929",
-        borderRightStyle: "solid",
-        borderLeftStyle: "solid",
         [theme.breakpoints.down('sm')]: {
             marginBottom: '57px',
             zIndex: 0,
@@ -67,7 +63,10 @@ const useStyles = (theme) => ({
         maxHeight: `calc(100vh)`,
         overflowY: 'auto',
         backgroundColor: '#2F3136 !important',
-        color: '#B9BBBE'
+        color: '#B9BBBE',
+        '&:focus': {
+            outline: 'none',
+        },
     },
     guildPaper : {
         backgroundColor: '#36393F !important',
@@ -136,15 +135,9 @@ class ExplorePage extends React.Component {
                                     {/*Content*/}
                                     <Grid className={classes.guildSection} item xs={12} lg={10}>
                                         <Paper elevation={0} classes={{root:classes.guildPaper}}>
-                                            <GuildDiscovery {...this.props}/>
-
-                                            <div className={classes.scrollY}>
-                                                <ScrollTop {...this.props}>
-                                                    <Fab color="secondary" size="small" aria-label="scroll back to top">
-                                                        <KeyboardArrowUpIcon />
-                                                    </Fab>
-                                                </ScrollTop>
-                                            </div>
+                                            <GuildDiscovery {...this.props}
+                                                changeSearch={(e)=> this.props.changeSearch(e)}
+                                            />
                                         </Paper>
                                     </Grid>
 
@@ -153,6 +146,15 @@ class ExplorePage extends React.Component {
                         </Grid>
 
                     </main>
+
+                    <div className={classes.scrollY}>
+                        <ScrollTop {...this.props}>
+                            <Fab color="secondary" size="small" aria-label="scroll back to top">
+                                <KeyboardArrowUpIcon />
+                            </Fab>
+                        </ScrollTop>
+                    </div>
+
                 </div>
             </React.Fragment>
         )
@@ -173,7 +175,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    getAllGuild, handleCategory,
+    getAllGuild, handleCategory, changeSearch: (e) => changeInputSearch(e), handleSearch,
 
     memberGuild,
 

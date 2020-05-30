@@ -7,9 +7,16 @@
 a {
     text-decoration: none;
     cursor: pointer;
+    color: #fff;
 }
 
 a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+a:-moz-any-link {
     cursor: pointer;
     text-decoration: none;
     font-size: 14px;
@@ -51,10 +58,6 @@ body {
     background-color: #292B2F;
 }
 
-.categoryItem {
-    margin-left: 8px;
-}
-
 .name {
     text-decoration: none;
 }
@@ -66,8 +69,9 @@ body {
 .breadcrumb {
     color: red;
     width: 20px;
-    z-index: -1;
+    z-index: 99 !important;
     -webkit-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
+    -moz-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
     animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
 }
 
@@ -95,17 +99,19 @@ body {
 /** scroller **/
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #2F3136;
+    background: #40444B;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #202225;
+    border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #712118;
+    background: #2e2e2e;
 }
 
 ::-webkit-scrollbar {

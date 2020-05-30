@@ -35,7 +35,12 @@ export default function MemberList(props) {
         <List className={classes.root}>
             <ListItem classes={{root: classes.myRoot}} button alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar classes={{root:classes.avatar}} alt={props.fullName} src={props.avatar} />
+                    {props.avatar ?
+                        <Avatar classes={{root: classes.avatar}} alt={props.fullName} src={props.avatar}/>
+                        :
+                        <Avatar classes={{root: classes.avatar}} alt={props.fullName}
+                                src={require('../assets/images/Chat/default_avatar.png')}/>
+                    }
                 </ListItemAvatar>
                 <ListItemText style={{color: '#fff'}}
                     primary={props.username}

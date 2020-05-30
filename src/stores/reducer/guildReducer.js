@@ -1,6 +1,8 @@
 const initialState = {
     listGuilds: [],
     oneGuild: [],
+
+    search:"",
 };
 
 export default function guildReducer(guildState = initialState, action) {
@@ -18,6 +20,16 @@ export default function guildReducer(guildState = initialState, action) {
             return {
                 ...guildState,
                 listGuilds: action.payload
+            };
+        case "SUCCESS_GET_SEARCH":
+            return {
+                ...guildState,
+                listGuilds: action.payload
+            };
+        case "CHANGE_INPUT_SEARCH":
+            return {
+                ...guildState,
+                [action.payload.target.name]: action.payload.target.value,
             };
         default:
             return guildState;

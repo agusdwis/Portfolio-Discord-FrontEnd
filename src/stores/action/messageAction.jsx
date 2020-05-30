@@ -58,32 +58,46 @@ export const messageGuild = (guildID) => {
     };
 };
 
-// export const handleCategory = (category) => {
-//     return async (dispatch, getState) => {
-//         let token;
-//         if (getState().user.token) {
-//             token = getState().user.token;
-//         } else {
-//             token = localStorage.getItem('token')
-//         }
-//
-//         await axios({
-//             method: 'get',
-//             url: "http://0.0.0.0:5000/guilds/search",
-//             headers: {'Authorization':'Bearer ' + token},
-//             params: {
-//                 keyword: category
-//             }
-//         })
-//             .then(async (response) => {
-//                 if (response.status === 200) {
-//                     dispatch({
-//                         type: "SUCCESS_GET_CATEGORY",
-//                         payload: response.data});
-//                 }
-//             })
-//             .catch(function (error) {
-//                 console.log(error);
-//             });
-//     };
-// };
+export const postMessage = (channelID) => {
+    return async (dispatch, getState) => {
+        let token;
+        if (getState().user.token) {
+            token = getState().user.token;
+        } else {
+            token = localStorage.getItem('token')
+        }
+
+        const bodyRequest= {
+            guild_id: channelID,
+            content: getState().members.post_message,
+        };
+
+        const myJSON = JSON.stringify(bodyRequest);
+
+        await axios
+            .post("http://0.0.0.0:5000/messages", myJSON, {
+                headers: {
+                    'Authorization':'Bearer ' + token,
+                    "Content-Type": "application/json; charset=utf-8",
+                    Accept: "application/json; charset=utf-8"
+                }
+            })
+            .then(async (response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: "SUCCESS_POST_MESSAGE",
+                        payload: response.data});
+                }
+            })
+            .catch(function (error) {
+                console.log('%c Error! ', 'background: #ff0033; color: ##0f0f0f; font-weight: 600', error);
+            });
+    };
+};
+
+export const changeInputMessage = (e) => {
+    return {
+        type: "CHANGE_INPUT_MESSAGE",
+        payload: e,
+    };
+};

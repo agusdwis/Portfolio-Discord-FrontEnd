@@ -72,17 +72,22 @@ const useStyles = makeStyles((theme) => ({
     icon: {
         paddingRight: theme.spacing(2),
         textDecoration: 'none',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     itemInner: {
         marginBottom: theme.spacing(1),
         borderRadius: 5,
+        color: '#B9BBBE',
+        fontSize: '15px',
+        fontWeight: 500,
         paddingTop: '5px',
         paddingRight: '10px',
         paddingBottom: '5px',
-        paddingLeft: '8px',
+        paddingLeft: '12px',
         alignItems: 'center',
         display: 'flex',
+        cursor: 'pointer',
+        width: '89%',
         '&:active': {
             backgroundColor: '#7289da',
             outline: 'none',
@@ -91,8 +96,17 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#36393F',
             outline: 'none',
         },
-        cursor: 'pointer',
+        '&:focus': {
+            backgroundColor: '#7289DA'
+        }
     },
+    categoryItem: {
+        paddingLeft: '8px',
+        paddingRight: '8px',
+        '&:focus': {
+            outline: 'none',
+        },
+    }
 }));
 
 export default function GuildNavbar (props) {
@@ -106,7 +120,7 @@ export default function GuildNavbar (props) {
             {/*Loop List Channel*/}
             {myTab.map((item, index) => (
                 <Link key={index} to="#" onClick={() => props.handleRouter(item.category)}>
-                    <div className="categoryItem" role="listitem" tabIndex={index}>
+                    <div className={classes.categoryItem} role="listitem" tabIndex={index}>
                         <div className={classes.itemInner}>
                             <div className={classes.icon}>
                                 {item.icon}

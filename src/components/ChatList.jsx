@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import Avatar from '@material-ui/core/Avatar';
 import List from "@material-ui/core/List";
+import * as moment from 'moment-timezone';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     username: {
         fontSize: '1rem',
-        fontWeight: '500',
+        fontWeight: '600',
         lineHeight: '1.375rem',
         marginRight: '0.25rem',
         cursor: 'pointer'
@@ -63,7 +64,12 @@ export default function ChatList(props) {
         <List className={classes.root}>
             <ListItem classes={{root: classes.myRoot}} alignItems="flex-start">
                 <ListItemAvatar style={{cursor: 'pointer'}}>
-                    <Avatar classes={{root:classes.avatar}} alt={props.username} src={props.avatar} />
+                    {props.avatar ?
+                        <Avatar classes={{root:classes.avatar}} alt={props.username} src={props.avatar} />
+                        :
+                        <Avatar classes={{root:classes.avatar}} alt={props.username}
+                                src={require('../assets/images/Chat/default_avatar.png')} />
+                    }
                 </ListItemAvatar>
                 <ListItemText
                     className={classes.message}
@@ -74,7 +80,7 @@ export default function ChatList(props) {
                                     {props.username}
                                 </Typography>
                                 <Typography className={classes.datetime}>
-                                    Today at 1:45 PM
+                                    {moment.utc(props.dtime).format('LLL')}
                                 </Typography>
                             </div>
 

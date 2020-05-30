@@ -1,18 +1,20 @@
 import React from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import deepPurple from "@material-ui/core/colors/deepPurple";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import Toolbar from '@material-ui/core/Toolbar';
+import Divider from "@material-ui/core/Divider";
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import {Link} from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
-import deepPurple from "@material-ui/core/colors/deepPurple";
 import PropTypes from 'prop-types';
+
 import {
     AddServerIcon,
     DownloadIcon,
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
             width: drawerWidth,
             flexShrink: 0,
         },
-        backgroundColor: '#202225 !important'
+        backgroundColor: '#202225 !important',
     },
     appBar: {
         [theme.breakpoints.up('sm')]: {
@@ -55,28 +57,34 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        paddingTop: '8px',
         backgroundColor: '#202225',
+        '::-webkit-scrollbar': {
+            display: 'none !important',
+        }
     },
     listRoot: {
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: theme.spacing(8),
-        minWidth: theme.spacing(8),
+        minHeight: theme.spacing(6),
+        minWidth: theme.spacing(6),
+        width: theme.spacing(1),
         padding: theme.spacing(1),
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(1),
     },
     listGutter:{
         borderRadius: 40,
         backgroundColor: '#36393F',
-        width: theme.spacing(8),
-        height: theme.spacing(8),
-        marginLeft: '4px',
-        marginTop: '2px',
+        width: theme.spacing(6),
+        height: theme.spacing(6),
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '4px',
         '&:hover': {
             borderRadius: 10,
             backgroundColor: '#7289DB',
-        }
+        },
     },
     iconRoot: {
         display: 'flex',
@@ -95,14 +103,16 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.getContrastText(deepPurple[500]),
         backgroundColor: deepPurple[500],
     },
+    divider: {
+        backgroundColor: '#2D2F32',
+        paddingBottom: '1px',
+        marginBottom: '5px',
+        borderRadius: 10
+
+    }
 }));
 
 const Menu = [
-    {
-        label: "Home",
-        pathname: "/",
-        icon: <HomeDiscordIcon/>
-    },
     {
         label: "Add Server",
         pathname: "#",
@@ -130,6 +140,19 @@ function MainNavbar(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    // Home section
+    const home = (
+        <div>
+            <List style={{padding: '0px'}}>
+                <Link to={'/'}>
+                    <ListItem classes={{root: classes.listRoot, gutters: classes.listGutter}}>
+                        <ListItemIcon classes={{root: classes.iconRoot}}><HomeDiscordIcon style={{color: '#fff'}}/></ListItemIcon>
+                    </ListItem>
+                </Link>
+            </List>
+        </div>
+    );
 
     // Fixed Menu
     const drawer = (
@@ -196,8 +219,11 @@ function MainNavbar(props) {
                             keepMounted: true,
                         }}
                     >
-                        {drawer}
+
+                        {home}
+                        <Divider variant="middle" classes={{root:classes.divider}} />
                         {channels}
+                        {drawer}
                     </Drawer>
 
                 </Hidden>
@@ -209,8 +235,10 @@ function MainNavbar(props) {
                         variant="permanent"
                         open
                     >
-                        {drawer}
+                        {home}
+                        <Divider variant="middle" classes={{root:classes.divider}} />
                         {channels}
+                        {drawer}
                     </Drawer>
                 </Hidden>
             </nav>

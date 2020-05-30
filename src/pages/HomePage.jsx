@@ -70,24 +70,26 @@ class Home extends React.Component {
 
   render() {
       const { classes } = this.props;
+
       return(
         <React.Fragment>
             <div className={classes.root}>
-                <MainNavbar {...this.props}
-                    changeRouter={(e) => this.changeRouter(e)}
-                />
-                <main className={classes.content}>
-                    <React.Fragment>
-                        <div className={classes.appHome}>
-                            <Paper elevation={0} classes={{root:classes.appPaper}}>
-                                <h1 className={classes.titleHome}>Welcome to Discord <span className={classes.span}>{this.props.data.username}!</span> </h1>
-                                <br/>
-                                <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
-                            </Paper>
-                        </div>
-                    </React.Fragment>
-                </main>
-            </div>
+                    <MainNavbar {...this.props}
+                                changeRouter={(e) => this.changeRouter(e)}
+                    />
+                    <main className={classes.content}>
+                        <React.Fragment>
+                            <div className={classes.appHome}>
+                                <Paper elevation={0} classes={{root: classes.appPaper}}>
+                                    <h1 className={classes.titleHome}>Welcome to Discord <span
+                                        className={classes.span}>{this.props.data.username}!</span></h1>
+                                    <br/>
+                                    <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
+                                </Paper>
+                            </div>
+                        </React.Fragment>
+                    </main>
+                </div>
         </React.Fragment>
     )
   }

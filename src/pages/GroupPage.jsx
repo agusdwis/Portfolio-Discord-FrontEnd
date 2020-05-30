@@ -19,7 +19,6 @@ import MainNavbar from "../components/MainNavbar";
 import TopNavbar from "../components/TopNavBar";
 import ChatList from "../components/ChatList";
 import ScrollTop from "../utils/ScrollTop";
-import '../assets/styles/chatpages.css';
 
 import {
     changeInputUser,
@@ -27,7 +26,7 @@ import {
     doRegister,
     doSignOut,
     getProfile} from "../stores/action/userAction";
-import { memberGuild, messageGuild } from "../stores/action/messageAction";
+import { memberGuild, messageGuild, changeInputMessage, postMessage } from "../stores/action/messageAction";
 import { getGuildByID } from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
@@ -45,7 +44,7 @@ const useStyles = (theme) => ({
         flex: 1,
         display: "flex",
         flexDirection: "row",
-        height: `calc(100vh - 50px)`,
+        // height: `calc(100vh - 50px)`,
         maxHeight: `calc(100vh - 50px)`,
         [theme.breakpoints.down('sm')]: {
             overflowY: 'scroll'
@@ -58,7 +57,7 @@ const useStyles = (theme) => ({
         backgroundColor: '#2F3136',
         [theme.breakpoints.down('sm')]: {
             position: 'sticky'
-        },
+        }
     },
     chatSection: {
         backgroundColor: '#36393F',
@@ -67,10 +66,6 @@ const useStyles = (theme) => ({
         display: "flex",
         flex: 1,
         flexDirection: "column",
-        borderWidth: "1px",
-        borderColor: "#292929",
-        borderRightStyle: "solid",
-        borderLeftStyle: "solid",
         [theme.breakpoints.down('sm')]: {
             marginBottom: '57px',
             zIndex: 0,
@@ -111,17 +106,18 @@ const useStyles = (theme) => ({
         width: '95%',
         maxWidth: '95%',
         backgroundColor: '#40444B !important',
-        color: '#fff'
+        color: '#fff',
+        borderRadius: 8,
     },
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
         color: '#fff',
-        fontSize: '14px'
+        fontSize: '14px',
     },
     iconButton: {
         padding: 10,
-        color: '#fff'
+        color: '#B9BBBE'
     },
     scrollTop : {
         paddingBottom: theme.spacing(5),
@@ -143,8 +139,23 @@ class Group extends React.Component {
         // load message selected guild
         this.props.messageGuild(channelID);
 
-        //load guild infos on mounting phase
+        // load guild infos on mounting phase
         this.props.getGuildByID(channelID);
+
+        // scroll to latest message
+        this.scrollToBottom();
+    };
+
+    componentDidUpdate = async () => {
+        // update message if the data has changed
+        const channelID = await this.props.match.params.id;
+
+        if (this.props.update) {
+            this.props.messageGuild(channelID);
+        }
+
+        // scroll to latest message
+        this.scrollToBottom();
     };
 
     changeRouter = async (channelID) => {
@@ -155,6 +166,28 @@ class Group extends React.Component {
 
         //load guild infos on select
         this.props.getGuildByID(channelID);
+    };
+
+    inputMessage = (e) => {
+        if(e.keyCode === 13){
+            // post message
+            const channel = this.props.match.params.id;
+
+            // post message if input not null
+            if (e.target.value !== "") {
+                this.props.postMessage(channel);
+            }
+
+            // reset input form
+            document.getElementById("post_message").value="";
+        }
+    };
+
+    scrollToBottom = () => {
+        const messagesContainer = document.getElementById("messagesContainer");
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
     };
 
     render() {
@@ -185,7 +218,7 @@ class Group extends React.Component {
                                     </Grid>
 
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
-                                        <Paper elevation={0} classes={{root:classes.chatPaper}}>
+                                        <Paper id="messagesContainer" elevation={0} classes={{root:classes.chatPaper}}>
 
                                             {this.props.message.map((item, index) => (
                                                 <div key={index}>
@@ -202,11 +235,15 @@ class Group extends React.Component {
                                         </Paper>
 
                                         <Grid container className={classes.containerForm}>
-                                            <Paper elevation={0} component="form" className={classes.rootInput}>
+                                            <Paper elevation={0} className={classes.rootInput}>
                                                 <InputBase
                                                     className={classes.input}
-                                                    placeholder={this.props.guild_info.name}
-                                                    inputProps={{ 'aria-label': 'search google maps' }}
+                                                    placeholder={'Message #'+ (this.props.guild_info.name)}
+                                                    onKeyDown={this.inputMessage}
+                                                    onChange={(e) => this.props.changeMessage(e)}
+                                                    name="post_message"
+                                                    id="post_message"
+                                                    autoComplete="off"
                                                 />
 
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
@@ -229,7 +266,6 @@ class Group extends React.Component {
                                             <MemberList username={'agsdws'}
                                                         fullName={'Agus D Sasongko'}
                                                         status={'happy man'}
-                                                        avatar={'...'}
                                             />
                                         </Paper>
                                     </Grid>
@@ -264,13 +300,16 @@ const mapStateToProps = (state) => {
 
         my_guild: state.members.myGuilds,
         message: state.members.messages,
+        update: state.members.updated
     };
 };
 
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    memberGuild, messageGuild, getGuildByID
+    memberGuild, messageGuild, getGuildByID,
+
+    changeMessage: (e) => changeInputMessage(e), postMessage
 
 };
 

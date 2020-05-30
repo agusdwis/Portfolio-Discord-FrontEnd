@@ -12,6 +12,10 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 store.subscribe(() => {
-    console.log('%c Success! ', 'background: #67D868; color: #ff0033; font-weight: 600', store.getState());
+    console.log('%c Success! ',
+        'background: #67D868; ' +
+        'color: #ff0033; ' +
+        'font-weight: 600',
+        store.getState());
 });
 export default store;
