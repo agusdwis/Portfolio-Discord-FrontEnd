@@ -8,6 +8,7 @@ const initialState = {
     status: false,
     is_login: false,
     reg_status: false,
+    isLaunch: false,
 
     infos:[],
 };
@@ -51,6 +52,11 @@ export default function userReducer(userState = initialState, action) {
             return {
                 ...userState,
                 is_login: false,
+            };
+        case "ACTIVATE_LAUNCH":
+            return {
+                ...userState,
+                isLaunch: true,
             };
         default:
             return userState;

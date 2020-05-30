@@ -57,8 +57,11 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        paddingTop: '8px',
         backgroundColor: '#202225',
-        overflow: 'hidden'
+        '::-webkit-scrollbar': {
+            display: 'none !important',
+        }
     },
     listRoot: {
         textAlign: 'center',

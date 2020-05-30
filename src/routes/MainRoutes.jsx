@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import store from "../stores";
 
 import ExplorePage from "../pages/ExplorePage";
 import Home from "../pages/HomePage";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage"
 import Group from "../pages/GroupPage";
-import store from "../stores";
 
 export default function MainRoutes () {
     return(
