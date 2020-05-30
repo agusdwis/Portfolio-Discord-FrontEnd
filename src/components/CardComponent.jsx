@@ -77,8 +77,7 @@ export default function MediaCard(props) {
 
     return (
         <React.Fragment>
-
-            <Card className={classes.root}>
+            <Card onClick={(e)=>props.changeRouter(props.guildID)} className={classes.root}>
                 <CardActionArea className={classes.main}>
                     <CardMedia
                         className={classes.media}

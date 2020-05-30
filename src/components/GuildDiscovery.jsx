@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(1),
             width: 'auto',
         },
+        zIndex: 0,
     },
     searchIcon: {
         padding: theme.spacing(0, 2),
@@ -89,6 +90,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         color: '#95999D',
+        cursor: 'pointer',
+        paddingTop: '4px'
     },
     inputRoot: {
         color: '#2e3338',
@@ -174,8 +177,8 @@ export default function GuildDiscovery (props) {
                                     <Grid container className={classes.searchContainer} spacing={0}>
                                         <div className={classes.searchBox}>
                                             <div className={classes.search}>
-                                                <div className={classes.searchIcon}>
-                                                    <SearchIcon />
+                                                <div onClick={props.handleSearch} className={classes.searchIcon}>
+                                                    <SearchIcon style={{zIndex: '9999'}}/>
                                                 </div>
                                                 <InputBase
                                                     placeholder="Explore Communities..."
@@ -210,6 +213,8 @@ export default function GuildDiscovery (props) {
                                                desc={item.description}
                                                image={item.banner}
                                                category={item.category}
+                                               guildID={item.id}
+                                               changeRouter={(e) => props.changeRouter(e)}
                                     />
                                 </Grid>
                             ))}

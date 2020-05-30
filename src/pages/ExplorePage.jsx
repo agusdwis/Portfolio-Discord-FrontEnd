@@ -13,8 +13,19 @@ import GuildNavbar from "../components/GuildNavbar";
 import MainNavbar from "../components/MainNavbar";
 import ScrollTop from "../utils/ScrollTop";
 
-import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
-import {getAllGuild, handleCategory,handleSearch, changeInputSearch} from "../stores/action/guildAction";
+import {
+    changeInputUser,
+    doLogin,
+    doRegister,
+    doSignOut,
+    getProfile} from "../stores/action/userAction";
+
+import {
+    getAllGuild,
+    handleCategory,
+    handleSearch,
+    changeInputSearch} from "../stores/action/guildAction";
+
 import { memberGuild } from "../stores/action/messageAction";
 
 const useStyles = (theme) => ({
@@ -136,7 +147,8 @@ class ExplorePage extends React.Component {
                                     <Grid className={classes.guildSection} item xs={12} lg={10}>
                                         <Paper elevation={0} classes={{root:classes.guildPaper}}>
                                             <GuildDiscovery {...this.props}
-                                                changeSearch={(e)=> this.props.changeSearch(e)}
+                                                            changeSearch={(e)=> this.props.changeSearch(e)}
+                                                            changeRouter={(e) => this.changeRouter(e)}
                                             />
                                         </Paper>
                                     </Grid>
