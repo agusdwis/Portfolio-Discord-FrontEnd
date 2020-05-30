@@ -14,7 +14,7 @@ import MainNavbar from "../components/MainNavbar";
 import ScrollTop from "../utils/ScrollTop";
 
 import {changeInputUser, doLogin, doRegister, doSignOut, getProfile} from "../stores/action/userAction";
-import {getAllGuild, handleCategory} from "../stores/action/guildAction";
+import {getAllGuild, handleCategory,handleSearch, changeInputSearch} from "../stores/action/guildAction";
 import { memberGuild } from "../stores/action/messageAction";
 
 const useStyles = (theme) => ({
@@ -135,7 +135,9 @@ class ExplorePage extends React.Component {
                                     {/*Content*/}
                                     <Grid className={classes.guildSection} item xs={12} lg={10}>
                                         <Paper elevation={0} classes={{root:classes.guildPaper}}>
-                                            <GuildDiscovery {...this.props}/>
+                                            <GuildDiscovery {...this.props}
+                                                changeSearch={(e)=> this.props.changeSearch(e)}
+                                            />
                                         </Paper>
                                     </Grid>
 
@@ -173,7 +175,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    getAllGuild, handleCategory,
+    getAllGuild, handleCategory, changeSearch: (e) => changeInputSearch(e), handleSearch,
 
     memberGuild,
 

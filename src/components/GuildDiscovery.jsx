@@ -141,6 +141,17 @@ const useStyles = makeStyles((theme) => ({
 export default function GuildDiscovery (props) {
     const classes = useStyles();
 
+    const inputSearch = (e) => {
+        if(e.keyCode === 13){
+            if (e.target.value !== "") {
+                props.handleSearch();
+            }
+
+            // reset input form
+            document.getElementById("search").value="";
+        }
+    };
+
     return (
         <React.Fragment>
             <Container className={classes.root} maxWidth={'lg'}>
@@ -168,11 +179,15 @@ export default function GuildDiscovery (props) {
                                                 </div>
                                                 <InputBase
                                                     placeholder="Explore Communities..."
+                                                    name={"search"}
+                                                    id={"search"}
+                                                    autoComplete="off"
+                                                    onKeyDown={(e) => inputSearch(e)}
+                                                    onChange={(e) => props.changeSearch(e)}
                                                     classes={{
                                                         root: classes.inputRoot,
                                                         input: classes.inputInput,
                                                     }}
-                                                    inputProps={{ 'aria-label': 'search' }}
                                                 />
                                             </div>
                                         </div>

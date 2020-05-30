@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 import Grid from "@material-ui/core/Grid";
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 400,
@@ -67,55 +68,58 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
-    }
-
+    },
 }));
+
 
 export default function MediaCard(props) {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardActionArea className={classes.main}>
-                <CardMedia
-                    className={classes.media}
-                    image={props.image}
-                    title={props.name}
-                />
+        <React.Fragment>
 
-                <CardContent className={classes.content}>
-                    <Grid item xs={12}>
-                        <Typography className={classes.title} gutterBottom variant="h5" component="h2">
-                            {props.name}
-                        </Typography>
-                        <Typography className={classes.description} variant="body2" color="textSecondary" component="p">
-                            {props.desc}
-                        </Typography>
-                    </Grid>
-                </CardContent>
+            <Card className={classes.root}>
+                <CardActionArea className={classes.main}>
+                    <CardMedia
+                        className={classes.media}
+                        image={props.image}
+                        title={props.name}
+                    />
 
-                <Grid className={classes.infos} item xs={12}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={6}>
-                            <Grid className={classes.descDetail} container spacing={1}>
-                                <FiberManualRecordIcon className={classes.icon1} fontSize="small" />
-                                <Typography className={classes.fontColor}>
-                                    &nbsp;12.345 Online
-                                </Typography>
+                    <CardContent className={classes.content}>
+                        <Grid item xs={12}>
+                            <Typography className={classes.title} gutterBottom variant="h5" component="h2">
+                                {props.name}
+                            </Typography>
+                            <Typography className={classes.description} variant="body2" color="textSecondary" component="p">
+                                {props.desc}
+                            </Typography>
+                        </Grid>
+                    </CardContent>
+
+                    <Grid className={classes.infos} item xs={12}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={6}>
+                                <Grid className={classes.descDetail} container spacing={1}>
+                                    <FiberManualRecordIcon className={classes.icon1} fontSize="small" />
+                                    <Typography className={classes.fontColor}>
+                                        &nbsp;12.345 Online
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Grid className={classes.descDetail} container spacing={1}>
+                                    <FiberManualRecordIcon className={classes.icon2} fontSize="small" />
+                                    <Typography className={classes.fontColor}>
+                                        &nbsp;45.678 Members
+                                    </Typography>
+                                </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Grid className={classes.descDetail} container spacing={1}>
-                                <FiberManualRecordIcon className={classes.icon2} fontSize="small" />
-                                <Typography className={classes.fontColor}>
-                                    &nbsp;45.678 Members
-                                </Typography>
-                            </Grid>
-                        </Grid>
                     </Grid>
-                </Grid>
 
-            </CardActionArea>
-        </Card>
+                </CardActionArea>
+            </Card>
+        </React.Fragment>
     );
 }
