@@ -37,6 +37,7 @@ import {
 import {
     getGuildByID,
     getMemberList } from "../stores/action/guildAction";
+import {Redirect} from "react-router-dom";
 
 const useStyles = (theme) => ({
     root: {
@@ -178,6 +179,9 @@ class Group extends React.Component {
 
             //load guild infos on select
             this.props.getGuildByID(channelID);
+
+            //load member
+            this.props.getMemberList(channelID)
         }
 
         // scroll to latest message
@@ -228,132 +232,141 @@ class Group extends React.Component {
 
     render() {
         const { classes } = this.props;
-
         const listMessages = this.props.message;
-
         const listMember = this.props.listMember;
+        const isMember = this.props.guild_info.isMember;
 
-        const isMember = this.props.guild_info.is_member;
+        const is_login = localStorage.getItem("is_login");
+        if (!this.props.login && !is_login) {
+            return (
+                <Redirect to={{ pathname: "/login"}} />
+            );
+        } else {
 
-        return(
-            <React.Fragment>
-                <div id="back-to-top-anchor" className={classes.root}>
-                    <MainNavbar {...this.props}
-                        changeRouter={(e) => this.changeRouter(e)}
-                    />
+            return (
+                <React.Fragment>
+                    <div id="back-to-top-anchor" className={classes.root}>
+                        <MainNavbar {...this.props}
+                                    changeRouter={(e) => this.changeRouter(e)}
+                        />
 
-                    <main className={classes.content}>
-                        <Grid container>
-                            <Grid className={classes.chats} item xs={12} lg={12}>
+                        <main className={classes.content}>
+                            <Grid container>
+                                <Grid className={classes.chats} item xs={12} lg={12}>
 
-                                {/*Top Fixed Navbar*/}
-                                <TopNavbar {...this.props}/>
+                                    {/*Top Fixed Navbar*/}
+                                    <TopNavbar {...this.props}/>
 
-                                {/*Channel Navbar*/}
-                                <Grid container className={classes.container}>
-                                    <Grid className={classes.channelSection} item xs={12} lg={2}>
+                                    {/*Channel Navbar*/}
+                                    <Grid container className={classes.container}>
+                                        <Grid className={classes.channelSection} item xs={12} lg={2}>
 
-                                        <Paper elevation={0} classes={{root:classes.myPaper}}>
-                                            <ChannelNavbar {...this.props}/>
-                                        </Paper>
+                                            <Paper elevation={0} classes={{root: classes.myPaper}}>
+                                                <ChannelNavbar {...this.props}/>
+                                            </Paper>
 
-                                        <BottomNavBar {...this.props}/>
-                                    </Grid>
+                                            <BottomNavBar {...this.props}/>
+                                        </Grid>
 
-                                    <Grid className={classes.chatSection} item xs={12} lg={8}>
-                                        <Paper id="messagesContainer" elevation={0} classes={{root:classes.chatPaper}}>
+                                        <Grid className={classes.chatSection} item xs={12} lg={8}>
+                                            <Paper id="messagesContainer" elevation={0}
+                                                   classes={{root: classes.chatPaper}}>
 
-                                            {listMessages.map((item, index) => (
-                                                <div key={index}>
-                                                    <ChatList {...this.props}
-                                                              name={item.user_id.name}
-                                                              avatar={item.user_id.avatar}
-                                                              username={item.user_id.username}
-                                                              dtime={item.created_at}
-                                                              message={item.content}
+                                                {listMessages.map((item, index) => (
+                                                    <div key={index}>
+                                                        <ChatList {...this.props}
+                                                                  name={item.user_id.name}
+                                                                  avatar={item.user_id.avatar}
+                                                                  username={item.user_id.username}
+                                                                  dtime={item.created_at}
+                                                                  message={item.content}
+                                                        />
+                                                    </div>
+                                                ))}
+
+                                            </Paper>
+
+                                            <Grid container className={classes.containerForm}>
+                                                <Paper elevation={0} className={classes.rootInput}>
+                                                    {isMember ?
+                                                        <InputBase
+                                                            className={classes.input}
+                                                            placeholder={'Message #' + (this.props.guild_info.name)}
+                                                            onKeyDown={this.inputMessage}
+                                                            onChange={(e) => this.props.changeMessage(e)}
+                                                            name="post_message"
+                                                            id="post_message"
+                                                            autoComplete="off"
+                                                        />
+                                                        :
+                                                        <InputBase
+                                                            className={classes.input}
+                                                            placeholder={'Join to send message in #' + (this.props.guild_info.name)}
+                                                            name="post_message"
+                                                            id="post_message"
+                                                            autoComplete="off"
+                                                            disabled={true}
+                                                        />
+                                                    }
+
+                                                    <IconButton color="primary" className={classes.iconButton}
+                                                                aria-label="giftcard">
+                                                        <CardGiftcardIcon/>
+                                                    </IconButton>
+                                                    <IconButton color="primary" className={classes.iconButton}
+                                                                aria-label="gif">
+                                                        <GifIcon/>
+                                                    </IconButton>
+                                                    <IconButton color="primary" className={classes.iconButton}
+                                                                aria-label="emoji">
+                                                        <EmojiEmotionsIcon/>
+                                                    </IconButton>
+
+                                                </Paper>
+                                            </Grid>
+
+                                        </Grid>
+
+                                        <Grid className={classes.memberSection} item xs={12} lg={2}>
+                                            <Paper elevation={0} className={classes.myPaper}>
+                                                {listMember.map((item, index) => (
+                                                    <MemberList key={index} username={item.username}
+                                                                fullName={item.name}
+                                                                admin={item.is_admin}
+                                                                {...this.props}
                                                     />
-                                                </div>
-                                            ))}
-
-                                        </Paper>
-
-                                        <Grid container className={classes.containerForm}>
-                                            <Paper elevation={0} className={classes.rootInput}>
-                                                {isMember ?
-                                                    <InputBase
-                                                        className={classes.input}
-                                                        placeholder={'Message #' + (this.props.guild_info.name)}
-                                                        onKeyDown={this.inputMessage}
-                                                        onChange={(e) => this.props.changeMessage(e)}
-                                                        name="post_message"
-                                                        id="post_message"
-                                                        autoComplete="off"
-                                                    />
-                                                    :
-                                                    <InputBase
-                                                        className={classes.input}
-                                                        placeholder={'Join to send message in #' + (this.props.guild_info.name)}
-                                                        name="post_message"
-                                                        id="post_message"
-                                                        autoComplete="off"
-                                                        disabled={true}
-                                                    />
-                                                }
-
-                                                <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
-                                                    <CardGiftcardIcon/>
-                                                </IconButton>
-                                                <IconButton color="primary" className={classes.iconButton} aria-label="gif">
-                                                    <GifIcon />
-                                                </IconButton>
-                                                <IconButton color="primary" className={classes.iconButton} aria-label="emoji">
-                                                    <EmojiEmotionsIcon />
-                                                </IconButton>
-
+                                                ))}
                                             </Paper>
                                         </Grid>
 
                                     </Grid>
-
-                                    <Grid className={classes.memberSection} item xs={12} lg={2}>
-                                        <Paper elevation={0} className={classes.myPaper}>
-                                            {listMember.map((item, index) => (
-                                            <MemberList key={index} username={item.username}
-                                                        fullName={item.name}
-                                                        admin={item.is_admin}
-                                                        {...this.props}
-                                            />
-                                            ))}
-                                        </Paper>
-                                    </Grid>
-
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </main>
+                        </main>
 
-                    {/*Scroll To Top*/}
-                    <div className={classes.scrollTop}>
-                        <ScrollTop {...this.props}>
-                            <Fab color="secondary" size="small" aria-label="scroll back to top">
-                                <KeyboardArrowUpIcon />
-                            </Fab>
-                        </ScrollTop>
+                        {/*Scroll To Top*/}
+                        <div className={classes.scrollTop}>
+                            <ScrollTop {...this.props}>
+                                <Fab color="secondary" size="small" aria-label="scroll back to top">
+                                    <KeyboardArrowUpIcon/>
+                                </Fab>
+                            </ScrollTop>
+                        </div>
+
                     </div>
 
-                </div>
-
-                {isMember ?
-                    <GuildModal init={false} {...this.props}
-                                postNewMember={() => this.postNewMember()}
-                    />
-                    :
-                    <GuildModal init={true} {...this.props}
-                                postNewMember={() => this.postNewMember()}
-                    />
-                }
-            </React.Fragment>
-        )
+                    {isMember ?
+                        <GuildModal init={false} {...this.props}
+                                    postNewMember={() => this.postNewMember()}
+                        />
+                        :
+                        <GuildModal init={true} {...this.props}
+                                    postNewMember={() => this.postNewMember()}
+                        />
+                    }
+                </React.Fragment>
+            )
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {withStyles} from "@material-ui/core";
@@ -77,27 +77,34 @@ class Home extends React.Component {
 
       const userName = this.props.data.infos.username;
 
-      return(
-        <React.Fragment>
-            <div className={classes.root}>
-                    <MainNavbar {...this.props}
-                                changeRouter={(e) => this.changeRouter(e)}
-                    />
-                    <main className={classes.content}>
-                        <React.Fragment>
-                            <div className={classes.appHome}>
-                                <Paper elevation={0} classes={{root: classes.appPaper}}>
-                                    <h1 className={classes.titleHome}>Welcome to Discord <span
-                                        className={classes.span}>{userName}!</span></h1>
-                                    <br/>
-                                    <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
-                                </Paper>
-                            </div>
-                        </React.Fragment>
-                    </main>
-                </div>
-        </React.Fragment>
-    )
+      const is_login = localStorage.getItem("is_login");
+      if (!this.props.login && !is_login) {
+          return (
+              <Redirect to={{ pathname: "/login"}} />
+          );
+      } else {
+          return (
+              <React.Fragment>
+                  <div className={classes.root}>
+                      <MainNavbar {...this.props}
+                                  changeRouter={(e) => this.changeRouter(e)}
+                      />
+                      <main className={classes.content}>
+                          <React.Fragment>
+                              <div className={classes.appHome}>
+                                  <Paper elevation={0} classes={{root: classes.appPaper}}>
+                                      <h1 className={classes.titleHome}>Welcome to Discord <span
+                                          className={classes.span}>{userName}!</span></h1>
+                                      <br/>
+                                      <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
+                                  </Paper>
+                              </div>
+                          </React.Fragment>
+                      </main>
+                  </div>
+              </React.Fragment>
+          )
+      }
   }
 }
 

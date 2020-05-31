@@ -137,6 +137,9 @@ export default function BottomNavBar(props, postLogout) {
                 </Paper>
 
             </Dialog>
+
+
+
             <BottomNavigation
                 value={value}
                 onChange={(event, newValue) => {
@@ -147,7 +150,7 @@ export default function BottomNavBar(props, postLogout) {
             >
                 {props.login || is_login ?
                     <BottomNavigationAction onClick={handleClickOpen} classes={{root: classes.actionRoot, selected: classes.selectedRoot}}
-                                            label={props.data.username} icon={<HomeDiscordIcon style={{color: status}}/>}/>
+                                            label={props.data.infos.username} icon={<HomeDiscordIcon style={{color: status}}/>}/>
                     :
                     <BottomNavigationAction classes={{root: classes.actionRoot, selected: classes.selectedRoot}}
                                             label="guest" icon={<HomeDiscordIcon style={{color: '#ff150c'}}/>}/>

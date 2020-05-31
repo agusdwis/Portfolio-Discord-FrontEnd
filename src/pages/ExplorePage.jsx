@@ -27,6 +27,7 @@ import {
     changeInputSearch} from "../stores/action/guildAction";
 
 import { memberGuild } from "../stores/action/messageAction";
+import {Redirect} from "react-router-dom";
 
 const useStyles = (theme) => ({
     root: {
@@ -120,59 +121,67 @@ class ExplorePage extends React.Component {
 
     render() {
         const { classes } = this.props;
-        return(
-            <React.Fragment>
-                <div id="back-to-top-anchor" className={classes.root}>
 
-                    {/*Main Navbar*/}
-                    <MainNavbar {...this.props}
-                        changeRouter={(e) => this.changeRouter(e)}
-                    />
+        const is_login = localStorage.getItem("is_login");
+        if (!this.props.login && !is_login) {
+            return (
+                <Redirect to={{ pathname: "/login"}} />
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <div id="back-to-top-anchor" className={classes.root}>
 
-                    {/*Main Container*/}
-                    <main className={classes.content}>
-                        <Grid container>
-                            <Grid className={classes.discovery} item xs={12} lg={12}>
-                                <Grid container className={classes.container}>
+                        {/*Main Navbar*/}
+                        <MainNavbar {...this.props}
+                                    changeRouter={(e) => this.changeRouter(e)}
+                        />
 
-                                    {/*Category*/}
-                                    <Grid className={classes.categorySection} item xs={12} lg={2}>
-                                        <Paper elevation={0} classes={{root:classes.myPaper}}>
-                                            <GuildNavbar {...this.props}
-                                                         handleRouter={(e) => this.handleCategory(e)}
-                                            />
-                                        </Paper>
+                        {/*Main Container*/}
+                        <main className={classes.content}>
+                            <Grid container>
+                                <Grid className={classes.discovery} item xs={12} lg={12}>
+                                    <Grid container className={classes.container}>
 
-                                        <BottomNavBar {...this.props}/>
+                                        {/*Category*/}
+                                        <Grid className={classes.categorySection} item xs={12} lg={2}>
+                                            <Paper elevation={0} classes={{root: classes.myPaper}}>
+                                                <GuildNavbar {...this.props}
+                                                             handleRouter={(e) => this.handleCategory(e)}
+                                                />
+                                            </Paper>
+
+                                            <BottomNavBar {...this.props}/>
+                                        </Grid>
+
+                                        {/*Content*/}
+                                        <Grid className={classes.guildSection} item xs={12} lg={10}>
+                                            <Paper elevation={0} classes={{root: classes.guildPaper}}>
+                                                <GuildDiscovery {...this.props}
+                                                                changeSearch={(e) => this.props.changeSearch(e)}
+                                                                changeRouter={(e) => this.changeRouter(e)}
+                                                />
+                                            </Paper>
+                                        </Grid>
+
                                     </Grid>
-
-                                    {/*Content*/}
-                                    <Grid className={classes.guildSection} item xs={12} lg={10}>
-                                        <Paper elevation={0} classes={{root:classes.guildPaper}}>
-                                            <GuildDiscovery {...this.props}
-                                                            changeSearch={(e)=> this.props.changeSearch(e)}
-                                                            changeRouter={(e) => this.changeRouter(e)}
-                                            />
-                                        </Paper>
-                                    </Grid>
-
                                 </Grid>
                             </Grid>
-                        </Grid>
 
-                    </main>
+                        </main>
 
-                    <div className={classes.scrollY}>
-                        <ScrollTop {...this.props}>
-                            <Fab color="secondary" size="small" aria-label="scroll back to top">
-                                <KeyboardArrowUpIcon />
-                            </Fab>
-                        </ScrollTop>
+                        <div className={classes.scrollY}>
+                            <ScrollTop {...this.props}>
+                                <Fab color="secondary" size="small" aria-label="scroll back to top">
+                                    <KeyboardArrowUpIcon/>
+                                </Fab>
+                            </ScrollTop>
+                        </div>
+
                     </div>
-
-                </div>
-            </React.Fragment>
-        )
+                </React.Fragment>
+            )
+        }
     }
 }
 
