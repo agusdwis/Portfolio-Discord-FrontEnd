@@ -69,7 +69,7 @@ body {
 .breadcrumb {
     color: red;
     width: 20px;
-    z-index: 99 !important;
+    z-index: 999999999 !important;
     -webkit-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
     -moz-animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;
     animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate both;

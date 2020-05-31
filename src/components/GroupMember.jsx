@@ -11,7 +11,7 @@ import List from "@material-ui/core/List";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: '36ch',
+        // maxWidth: '36ch',
         backgroundColor: '#2F3136',
         padding: theme.spacing(0),
         border: 'none'
