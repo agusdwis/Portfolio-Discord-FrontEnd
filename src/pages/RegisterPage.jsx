@@ -95,6 +95,28 @@ const useStyles = (theme) => ({
     },
 });
 
+const TextFieldComp = withStyles({
+    root: {
+        '& label.Mui-focused': {
+            color: 'white',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: 'blue',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'white',
+            },
+            '&:hover fieldset': {
+                borderColor: 'white',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'blue',
+            },
+        },
+    },
+})(TextField);
+
 class Register extends React.Component {
     postRegister = async () => {
         await this.props.doRegister();
@@ -153,7 +175,7 @@ class Register extends React.Component {
 
                                                                     <div className="formBlock marginTop20">
                                                                         <form className={classes.form} noValidate>
-                                                                            <TextField
+                                                                            <TextFieldComp
                                                                                 variant="outlined"
                                                                                 label="Full Name"
                                                                                 margin="normal"
@@ -167,7 +189,7 @@ class Register extends React.Component {
                                                                                 onChange={(e) => this.props.changeInput(e)}
                                                                             />
 
-                                                                            <TextField
+                                                                            <TextFieldComp
                                                                                 variant="outlined"
                                                                                 label="Username"
                                                                                 type="username"
@@ -181,7 +203,7 @@ class Register extends React.Component {
                                                                                 onChange={(e) => this.props.changeInput(e)}
                                                                             />
 
-                                                                            <TextField
+                                                                            <TextFieldComp
                                                                                 variant="outlined"
                                                                                 margin="normal"
                                                                                 required
@@ -195,14 +217,13 @@ class Register extends React.Component {
                                                                                 onChange={(e) => this.props.changeInput(e)}
                                                                             />
 
-                                                                            <TextField
+                                                                            <TextFieldComp
                                                                                 label="Email Address"
                                                                                 variant="outlined"
                                                                                 autoComplete="off"
                                                                                 margin="normal"
                                                                                 name="email"
                                                                                 id="email"
-                                                                                autoFocus
                                                                                 required
                                                                                 fullWidth
                                                                                 InputLabelProps={{ className: classes.inputLabel }}

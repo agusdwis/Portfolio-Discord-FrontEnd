@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import {makeStyles} from "@material-ui/core/styles";
@@ -104,10 +103,9 @@ const useStyles = makeStyles((theme) => ({
 export default function TopNavbar (props){
     const classes = useStyles();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event) => {
@@ -118,30 +116,9 @@ export default function TopNavbar (props){
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
-
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
-
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Unread</MenuItem></Link>
-            <Link to={'#'}><MenuItem onClick={handleMenuClose}>Mentions</MenuItem></Link>
-        </Menu>
-    );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -157,7 +134,7 @@ export default function TopNavbar (props){
         >
             <MenuItem>
                 <IconButton aria-label="show 4 new mails" className={classes.iconButton}>
-                    <Badge badgeContent={4} color="secondary">
+                    <Badge badgeContent={0} color="secondary">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
@@ -165,7 +142,7 @@ export default function TopNavbar (props){
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 7 new notifications" className={classes.iconButton}>
-                    <Badge badgeContent={7} color="secondary">
+                    <Badge badgeContent={0} color="secondary">
                         <PeopleIcon />
                     </Badge>
                 </IconButton>
@@ -178,7 +155,7 @@ export default function TopNavbar (props){
                     aria-haspopup="true"
                     className={classes.iconButton}
                 >
-                    <Badge badgeContent={4} color="secondary">
+                    <Badge badgeContent={0} color="secondary">
                         <ChatIcon />
                     </Badge>
                 </IconButton>
@@ -204,24 +181,17 @@ export default function TopNavbar (props){
                     
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new notifications" className={classes.iconButton}>
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={0} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
                         <IconButton aria-label="show 4 friend request" className={classes.iconButton}>
-                            <Badge badgeContent={7} color="secondary">
+                            <Badge badgeContent={0} color="secondary">
                                 <PeopleIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            className={classes.iconButton}
-                        >
-                            <Badge badgeContent={4} color="secondary">
+                        <IconButton aria-label="account of current user" className={classes.iconButton}>
+                            <Badge badgeContent={0} color="secondary">
                                 <ChatIcon />
                             </Badge>
                         </IconButton>
@@ -264,7 +234,6 @@ export default function TopNavbar (props){
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
-            {renderMenu}
         </React.Fragment>
     )
 }

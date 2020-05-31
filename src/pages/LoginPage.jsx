@@ -95,6 +95,28 @@ const useStyles = (theme) => ({
     },
 });
 
+const TextFieldComp = withStyles({
+    root: {
+        '& label.Mui-focused': {
+            color: 'white',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: 'blue',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'white',
+            },
+            '&:hover fieldset': {
+                borderColor: 'white',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'blue',
+            },
+        },
+    },
+})(TextField);
+
 class Login extends React.Component {
     postLogin = async () => {
         await this.props.doLogin();
@@ -180,7 +202,7 @@ class Login extends React.Component {
 
                                                                         <div className="formBlock marginTop20">
                                                                             <form className={classes.form} noValidate>
-                                                                                <TextField
+                                                                                <TextFieldComp
                                                                                     variant="outlined"
                                                                                     margin="normal"
                                                                                     required
@@ -189,12 +211,11 @@ class Login extends React.Component {
                                                                                     label="Username"
                                                                                     name="username"
                                                                                     autoComplete="username"
-                                                                                    autoFocus
                                                                                     InputLabelProps={{className: classes.inputLabel}}
                                                                                     onChange={(e) => this.props.changeInput(e)}
                                                                                 />
 
-                                                                                <TextField
+                                                                                <TextFieldComp
                                                                                     variant="outlined"
                                                                                     margin="normal"
                                                                                     required

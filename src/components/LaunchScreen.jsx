@@ -20,7 +20,7 @@ export default function LaunchScreen () {
                 <video width="320" height="240" loop={100} autoPlay>
                     <source src={require('../assets/images/Loading/loading.webm')} type="video/webm"/>
                 </video>
-                Checking, Please Wait...
+                <p style={{fontSize: '16px', fontStyle: 'italic', textTransform: 'uppercase', fontWeight: 500}}>Please Wait...</p>
             </div>
         </React.Fragment>
     )

@@ -88,6 +88,11 @@ export default function GuildModal(props) {
         setOpen(false);
     };
 
+    const handleSubmit = () => {
+        props.postNewMember();
+        setOpen(false);
+    };
+
     return (
         <div>
             <Dialog
@@ -137,7 +142,10 @@ export default function GuildModal(props) {
                 </DialogContent>
 
                 <DialogActions className={classes.action}>
-                    <Button style={{color: '#fff'}} onClick={handleClose} color="secondary" autoFocus>
+                    <Button style={{color: '#fff'}} onClick={handleClose} color="secondary">
+                        Not Now
+                    </Button>
+                    <Button style={{color: '#fff'}} onClick={handleSubmit} color="secondary" autoFocus>
                         Join
                     </Button>
                 </DialogActions>

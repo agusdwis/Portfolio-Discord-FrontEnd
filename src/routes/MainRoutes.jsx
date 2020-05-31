@@ -3,11 +3,12 @@ import { Provider } from "react-redux";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import store from "../stores";
 
-import ExplorePage from "../pages/ExplorePage";
 import Home from "../pages/HomePage";
-import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage"
+import Login from "../pages/LoginPage";
+import ExplorePage from "../pages/ExplorePage";
 import Group from "../pages/GroupPage";
+import NotFound from "../pages/NotFoundPage";
 
 export default function MainRoutes () {
     return(
@@ -20,6 +21,7 @@ export default function MainRoutes () {
                     <Route exact path={'/guilds-discovery'} component={ExplorePage} />
                     <Route path={'/guilds-discovery/:category'} component={ExplorePage} />
                     <Route path={'/channel/:id'} component={Group} />
+                    <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>
         </Provider>

@@ -47,7 +47,7 @@ export const doLogin = () => {
 
         await timeout(500);
         await dispatch({type: "ACTIVATE_LAUNCH"});
-        await timeout(2000);
+        await timeout(1000);
 
         await axios({method:"post",
             url:"http://0.0.0.0:5000/users/login",

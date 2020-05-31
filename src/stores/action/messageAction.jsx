@@ -1,6 +1,42 @@
 import axios from "axios"
 
 
+export const postMember = (guildID) => {
+    return async (dispatch, getState) => {
+        let token;
+        if (getState().user.token) {
+            token = getState().user.token;
+        } else {
+            token = localStorage.getItem('token')
+        }
+
+        const bodyRequest= {
+            guild_id: guildID,
+        };
+
+        const myJSON = JSON.stringify(bodyRequest);
+
+        await axios
+            .post("http://0.0.0.0:5000/members", myJSON, {
+                headers: {
+                    'Authorization':'Bearer ' + token,
+                    "Content-Type": "application/json; charset=utf-8",
+                    Accept: "application/json; charset=utf-8"
+                }
+            })
+            .then(async (response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: "SUCCESS_POST_MEMBER",
+                        payload: response.data});
+                }
+            })
+            .catch(function (error) {
+                console.log('%c Error! ', 'background: #ff0033; color: ##0f0f0f; font-weight: 600', error);
+            });
+    };
+};
+
 export const memberGuild = () => {
     return async (dispatch, getState) => {
         let token;
