@@ -35,7 +35,8 @@ import {
     changeInputMessage,
     postMessage } from "../stores/action/messageAction";
 import {
-    getGuildByID } from "../stores/action/guildAction";
+    getGuildByID,
+    getMemberList } from "../stores/action/guildAction";
 
 const useStyles = (theme) => ({
     root: {
@@ -142,6 +143,9 @@ class Group extends React.Component {
     componentDidMount = async () => {
         const channelID = await this.props.match.params.id;
 
+        // load guild infos on mounting phase
+        this.props.getGuildByID(channelID);
+
         // load profile
         this.props.getProfile();
 
@@ -151,8 +155,8 @@ class Group extends React.Component {
         // load message selected guild
         this.props.messageGuild(channelID);
 
-        // load guild infos on mounting phase
-        this.props.getGuildByID(channelID);
+        // get list member
+        this.props.getMemberList(channelID);
 
         // scroll to latest message
         this.scrollToBottom();
@@ -163,13 +167,17 @@ class Group extends React.Component {
         const channelID = await this.props.match.params.id;
 
         if (this.props.update.updateMessages) {
-            // update guild messages
+            // update guild messages and member guild
             this.props.messageGuild(channelID);
+            this.props.getMemberList(channelID);
         }
 
         if (this.props.update.updateMyGuild) {
             // update user's guild list
             this.props.memberGuild();
+
+            //load guild infos on select
+            this.props.getGuildByID(channelID);
         }
 
         // scroll to latest message
@@ -184,13 +192,16 @@ class Group extends React.Component {
 
         //load guild infos on select
         this.props.getGuildByID(channelID);
+
+        //load member
+        this.props.getMemberList(channelID)
     };
 
     postNewMember = async () => {
         const toChannel = await this.props.match.params.id;
 
         //post member
-        this.props.postMember(toChannel)
+        this.props.postMember(toChannel);
     };
 
     inputMessage = (e) => {
@@ -218,11 +229,14 @@ class Group extends React.Component {
     render() {
         const { classes } = this.props;
 
+        const listMessages = this.props.message;
+
+        const listMember = this.props.listMember;
+
+        const isMember = this.props.guild_info.is_member;
+
         return(
             <React.Fragment>
-                <GuildModal init={true} {...this.props}
-                            postNewMember={()=>this.postNewMember()}
-                />
                 <div id="back-to-top-anchor" className={classes.root}>
                     <MainNavbar {...this.props}
                         changeRouter={(e) => this.changeRouter(e)}
@@ -249,7 +263,7 @@ class Group extends React.Component {
                                     <Grid className={classes.chatSection} item xs={12} lg={8}>
                                         <Paper id="messagesContainer" elevation={0} classes={{root:classes.chatPaper}}>
 
-                                            {this.props.message.map((item, index) => (
+                                            {listMessages.map((item, index) => (
                                                 <div key={index}>
                                                     <ChatList {...this.props}
                                                               name={item.user_id.name}
@@ -265,15 +279,26 @@ class Group extends React.Component {
 
                                         <Grid container className={classes.containerForm}>
                                             <Paper elevation={0} className={classes.rootInput}>
-                                                <InputBase
-                                                    className={classes.input}
-                                                    placeholder={'Message #'+ (this.props.guild_info.name)}
-                                                    onKeyDown={this.inputMessage}
-                                                    onChange={(e) => this.props.changeMessage(e)}
-                                                    name="post_message"
-                                                    id="post_message"
-                                                    autoComplete="off"
-                                                />
+                                                {isMember ?
+                                                    <InputBase
+                                                        className={classes.input}
+                                                        placeholder={'Message #' + (this.props.guild_info.name)}
+                                                        onKeyDown={this.inputMessage}
+                                                        onChange={(e) => this.props.changeMessage(e)}
+                                                        name="post_message"
+                                                        id="post_message"
+                                                        autoComplete="off"
+                                                    />
+                                                    :
+                                                    <InputBase
+                                                        className={classes.input}
+                                                        placeholder={'Join to send message in #' + (this.props.guild_info.name)}
+                                                        name="post_message"
+                                                        id="post_message"
+                                                        autoComplete="off"
+                                                        disabled={true}
+                                                    />
+                                                }
 
                                                 <IconButton color="primary" className={classes.iconButton} aria-label="giftcard">
                                                     <CardGiftcardIcon/>
@@ -292,10 +317,13 @@ class Group extends React.Component {
 
                                     <Grid className={classes.memberSection} item xs={12} lg={2}>
                                         <Paper elevation={0} className={classes.myPaper}>
-                                            <MemberList username={'agsdws'}
-                                                        fullName={'Agus D Sasongko'}
-                                                        status={'happy man'}
+                                            {listMember.map((item, index) => (
+                                            <MemberList key={index} username={item.username}
+                                                        fullName={item.name}
+                                                        admin={item.is_admin}
+                                                        {...this.props}
                                             />
+                                            ))}
                                         </Paper>
                                     </Grid>
 
@@ -314,6 +342,16 @@ class Group extends React.Component {
                     </div>
 
                 </div>
+
+                {isMember ?
+                    <GuildModal init={false} {...this.props}
+                                postNewMember={() => this.postNewMember()}
+                    />
+                    :
+                    <GuildModal init={true} {...this.props}
+                                postNewMember={() => this.postNewMember()}
+                    />
+                }
             </React.Fragment>
         )
     }
@@ -326,6 +364,8 @@ const mapStateToProps = (state) => {
         login: state.user.is_login,
 
         guild_info: state.guild.oneGuild,
+        listMember: state.guild.listMember,
+        updateMember: state.guild.updateMember,
 
         my_guild: state.members.myGuilds,
         message: state.members.messages,
@@ -336,7 +376,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     changeInput: (e) => changeInputUser(e), doLogin, doRegister, getProfile, doSignOut,
 
-    memberGuild, messageGuild, getGuildByID,
+    memberGuild, messageGuild, getGuildByID, getMemberList,
 
     changeMessage: (e) => changeInputMessage(e), postMessage, postMember
 

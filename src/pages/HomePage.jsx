@@ -75,6 +75,8 @@ class Home extends React.Component {
   render() {
       const { classes } = this.props;
 
+      const userName = this.props.data.infos.username;
+
       return(
         <React.Fragment>
             <div className={classes.root}>
@@ -86,7 +88,7 @@ class Home extends React.Component {
                             <div className={classes.appHome}>
                                 <Paper elevation={0} classes={{root: classes.appPaper}}>
                                     <h1 className={classes.titleHome}>Welcome to Discord <span
-                                        className={classes.span}>{this.props.data.infos.username}!</span></h1>
+                                        className={classes.span}>{userName}!</span></h1>
                                     <br/>
                                     <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
                                 </Paper>

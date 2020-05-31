@@ -53,7 +53,7 @@ export default function MemberList(props) {
                                 color="textSecondary"
                                 style={{color: '#6a6fff'}}
                             >
-                                {props.status}
+                                {/*status/bio*/}
                             </Typography>
                         </React.Fragment>
                     }
