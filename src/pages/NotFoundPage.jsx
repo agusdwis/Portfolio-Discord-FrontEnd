@@ -68,11 +68,15 @@ const NotFound = () => {
             <div className={classes.root}>
                 <div className={classes.textSection}>
                     <div className={classes.glitchWrapper}>
-                        <div className={classes.glitch}>
-                            404
-                        </div>
+                        <Link to="/">
+                            <div className={classes.glitch}>
+                                404
+                            </div>
+                        </Link>
                     </div>
-                    <h6 style={{fontSize: '20px', lineHeight: '40px', textTransform: 'uppercase', color: '#72767d'}}>Page Not Found</h6>
+                    <Link to="/">
+                        <h6 style={{fontSize: '20px', lineHeight: '40px', textTransform: 'uppercase', color: '#72767d'}}>Page Not Found</h6>
+                    </Link>
                     <div className={classes.logoBottom}>
                         <Link to="/">
                         <img alt="Home" src={require("../assets/images/LogoBottom.svg")} style={{width: '200px'}}/>
