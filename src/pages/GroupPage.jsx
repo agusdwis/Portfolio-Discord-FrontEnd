@@ -4,15 +4,17 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
+import AddIcon from '@material-ui/icons/Add';
 import GifIcon from '@material-ui/icons/Gif';
 import {withStyles} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
-import BottomNavBar from "../components/BottomNavBar";
 
+import BottomNavBar from "../components/BottomNavBar";
 import ChannelNavbar from "../components/ChannelBar";
 import MemberList from "../components/GroupMember";
 import MainNavbar from "../components/MainNavbar";
@@ -38,6 +40,7 @@ import {
     getGuildByID,
     getMemberList } from "../stores/action/guildAction";
 import {Redirect} from "react-router-dom";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = (theme) => ({
     root: {
@@ -140,6 +143,10 @@ const useStyles = (theme) => ({
 });
 
 class Group extends React.Component {
+    constructor(props) {
+        super (props);
+        this.state = { show: false };
+    }
 
     componentDidMount = async () => {
         const channelID = await this.props.match.params.id;
@@ -163,7 +170,7 @@ class Group extends React.Component {
         this.scrollToBottom();
     };
 
-    componentDidUpdate = async () => {
+    componentDidUpdate = async (prevProps, prevState) => {
         // update state
         const channelID = await this.props.match.params.id;
 
@@ -230,11 +237,22 @@ class Group extends React.Component {
         }
     };
 
+    handleClick = () => {
+        this.setState({ show: true });
+    };
+
+    handleClickAway = () => {
+        this.setState({ show: false });
+    };
+
     render() {
+        const { show } = this.state;
+
         const { classes } = this.props;
         const listMessages = this.props.message;
         const listMember = this.props.listMember;
         const isMember = this.props.guild_info.isMember;
+        console.log("AAAAAAAAAAAAAAAA", isMember);
 
         const is_login = localStorage.getItem("is_login");
         if (!this.props.login && !is_login) {
@@ -307,15 +325,27 @@ class Group extends React.Component {
                                                             autoComplete="off"
                                                             disabled={true}
                                                         />
+
                                                     }
 
+                                                    {!isMember ?
+                                                        <IconButton onClick={()=> this.postNewMember()} color="primary" className={classes.iconButton}>
+                                                            <AddCircleIcon style={{color: 'red'}}/>
+                                                        </IconButton>
+                                                        :
+                                                        null }
+
+                                                    <IconButton onClick={() => this.handleClick()} color="primary" className={classes.iconButton}
+                                                                aria-label="gif">
+                                                        <AddIcon />
+                                                    </IconButton>
                                                     <IconButton color="primary" className={classes.iconButton}
                                                                 aria-label="giftcard">
-                                                        <CardGiftcardIcon/>
+                                                        <CardGiftcardIcon />
                                                     </IconButton>
                                                     <IconButton color="primary" className={classes.iconButton}
                                                                 aria-label="gif">
-                                                        <GifIcon/>
+                                                        <GifIcon />
                                                     </IconButton>
                                                     <IconButton color="primary" className={classes.iconButton}
                                                                 aria-label="emoji">
@@ -330,7 +360,8 @@ class Group extends React.Component {
                                         <Grid className={classes.memberSection} item xs={12} lg={2}>
                                             <Paper elevation={0} className={classes.myPaper}>
                                                 {listMember.map((item, index) => (
-                                                    <MemberList key={index} username={item.username}
+                                                    <MemberList key={index}
+                                                                username={item.username}
                                                                 fullName={item.name}
                                                                 admin={item.is_admin}
                                                                 {...this.props}
@@ -355,7 +386,18 @@ class Group extends React.Component {
 
                     </div>
 
-                    {isMember ?
+                    {/*Show or not modal*/}
+                    {/*By Click*/}
+                    { show &&
+                    <ClickAwayListener onClickAway={()=>this.handleClickAway()}>
+                        <div>
+                            <GuildModal init={true} {...this.props} postNewMember={() => this.postNewMember()}/>
+                        </div>
+                    </ClickAwayListener>
+                    }
+
+                    {/*By Conditions*/}
+                    {isMember || isMember === undefined ?
                         <GuildModal init={false} {...this.props}
                                     postNewMember={() => this.postNewMember()}
                         />
@@ -382,7 +424,7 @@ const mapStateToProps = (state) => {
 
         my_guild: state.members.myGuilds,
         message: state.members.messages,
-        update: state.members
+        update: state.members,
     };
 };
 

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+function timeout (ms) {return new Promise((resolve) => setTimeout(resolve, ms))}
+
 export const doRegister = () => {
     return async (dispatch, getState) => {
         const bodyRequest= {
@@ -41,11 +43,6 @@ export const doRegister = () => {
 
 export const doLogin = () => {
     return async (dispatch, getState) => {
-        function timeout (ms) {
-            return new Promise((resolve) => setTimeout(resolve, ms));
-        }
-
-        await timeout(500);
         await dispatch({type: "ACTIVATE_LAUNCH"});
         await timeout(1000);
 
@@ -82,6 +79,9 @@ export const getProfile = () => {
         } else {
             token = localStorage.getItem('token')
         }
+
+        await dispatch({type: 'LOADING_SCREEN'});
+        await timeout(500);
 
         await axios({
             method: 'get',

@@ -12,7 +12,7 @@ export const getAllGuild = () => {
         }
 
         await dispatch({type: 'LOADING_SCREEN'});
-        await timeout(1000);
+        await timeout(500);
 
         await axios({
             method: 'get',

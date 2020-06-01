@@ -14,6 +14,7 @@ import {
     getProfile,
     doSignOut } from "../stores/action/userAction";
 import { memberGuild } from "../stores/action/messageAction";
+import LoadingScreen from "../components/LoadingScreen";
 
 const useStyles = (theme) => ({
     root: {
@@ -90,16 +91,18 @@ class Home extends React.Component {
                                   changeRouter={(e) => this.changeRouter(e)}
                       />
                       <main className={classes.content}>
-                          <React.Fragment>
-                              <div className={classes.appHome}>
-                                  <Paper elevation={0} classes={{root: classes.appPaper}}>
-                                      <h1 className={classes.titleHome}>Welcome to Discord <span
-                                          className={classes.span}>{userName}!</span></h1>
-                                      <br/>
-                                      <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
-                                  </Paper>
-                              </div>
-                          </React.Fragment>
+                          {this.props.isLoading ? <LoadingScreen/> :
+                              <React.Fragment>
+                                  <div className={classes.appHome}>
+                                      <Paper elevation={0} classes={{root: classes.appPaper}}>
+                                          <h1 className={classes.titleHome}>Welcome to Discord <span
+                                              className={classes.span}>{userName}!</span></h1>
+                                          <br/>
+                                          <Link to={'/guilds-discovery'}><HomeIcon className={classes.iconHome}/></Link>
+                                      </Paper>
+                                  </div>
+                              </React.Fragment>
+                          }
                       </main>
                   </div>
               </React.Fragment>
@@ -113,6 +116,7 @@ const mapStateToProps = (state) => {
         data: state.user,
         info: state.user.infos,
         login: state.user.is_login,
+        isLoading: state.user.isLoading,
 
         my_guild: state.members.myGuilds
     };
