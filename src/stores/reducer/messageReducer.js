@@ -23,12 +23,12 @@ export default function memberReducer(messageState = initialState, action) {
             return {
                 ...messageState,
                 messages: action.payload,
-                updateMessages: false
+                updateMessages: false,
             };
         case "SUCCESS_POST_MESSAGE":
             return {
                 ...messageState,
-                updateMessages: true
+                updateMessages: true,
             };
         case "CHANGE_INPUT_MESSAGE":
             return {

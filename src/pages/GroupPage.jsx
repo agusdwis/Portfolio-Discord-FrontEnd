@@ -1,7 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import {Redirect} from "react-router-dom";
 
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -29,7 +31,6 @@ import {
     doRegister,
     doSignOut,
     getProfile} from "../stores/action/userAction";
-
 import {
     postMember,
     memberGuild,
@@ -39,8 +40,6 @@ import {
 import {
     getGuildByID,
     getMemberList } from "../stores/action/guildAction";
-import {Redirect} from "react-router-dom";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = (theme) => ({
     root: {
@@ -288,19 +287,19 @@ class Group extends React.Component {
                                         <Grid className={classes.chatSection} item xs={12} lg={8}>
                                             <Paper id="messagesContainer" elevation={0}
                                                    classes={{root: classes.chatPaper}}>
-
-                                                {listMessages.map((item, index) => (
-                                                    <div key={index}>
-                                                        <ChatList {...this.props}
-                                                                  name={item.user_id.name}
-                                                                  avatar={item.user_id.avatar}
-                                                                  username={item.user_id.username}
-                                                                  dtime={item.created_at}
-                                                                  message={item.content}
-                                                        />
-                                                    </div>
-                                                ))}
-
+                                                <React.Fragment>
+                                                    {listMessages.map((item, index) => (
+                                                        <div key={index}>
+                                                            <ChatList {...this.props}
+                                                                      name={item.user_id.name}
+                                                                      avatar={item.user_id.avatar}
+                                                                      username={item.user_id.username}
+                                                                      dtime={item.created_at}
+                                                                      message={item.content}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </React.Fragment>
                                             </Paper>
 
                                             <Grid container className={classes.containerForm}>
@@ -358,14 +357,16 @@ class Group extends React.Component {
 
                                         <Grid className={classes.memberSection} item xs={12} lg={2}>
                                             <Paper elevation={0} className={classes.myPaper}>
-                                                {listMember.map((item, index) => (
-                                                    <MemberList key={index}
-                                                                username={item.username}
-                                                                fullName={item.name}
-                                                                admin={item.is_admin}
-                                                                {...this.props}
-                                                    />
-                                                ))}
+                                                    <React.Fragment>
+                                                        {listMember.map((item, index) => (
+                                                            <MemberList key={index}
+                                                                        username={item.username}
+                                                                        fullName={item.name}
+                                                                        admin={item.is_admin}
+                                                                        {...this.props}
+                                                            />
+                                                        ))}
+                                                    </React.Fragment>
                                             </Paper>
                                         </Grid>
 
