@@ -19,39 +19,6 @@ import {
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`vertical-tabpanel-${index}`}
-            aria-labelledby={`vertical-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={4}>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-    return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
-    };
-}
-
 const myStyles = makeStyles((theme) => ({
     rootNavBar:{
         width: '100%',
@@ -59,7 +26,7 @@ const myStyles = makeStyles((theme) => ({
         backgroundColor: '#292B2F',
         color: '#fff',
         bottom: 0,
-        zIndex: 9999,
+        zIndex: 1500,
         fontSize: 'small',
         [theme.breakpoints.up('lg')]: {
             width: '15.8%',
@@ -73,13 +40,14 @@ const myStyles = makeStyles((theme) => ({
         color: '#fff',
         minWidth: '40px',
     },
+
     root: {
         flexGrow: 1,
         backgroundColor: '#36393F',
         color: '#fff',
         display: 'flex',
-        height: '80vh',
-        zIndex: 1500,
+        height: `calc(100vh-3vmax)`,
+        zIndex: 2000,
         border: 'none',
         [theme.breakpoints.down('sm')]: {
             width: '100vw'
@@ -90,11 +58,39 @@ const myStyles = makeStyles((theme) => ({
         backgroundColor: '#2F3136',
         width: '30vw',
         alignItems: 'flex-end',
-        paddingTop: theme.spacing(6),
-        [theme.breakpoints.down('sm')]: {
+        paddingTop: '30px',
+        height: `calc(100vh-30px)`,
+        [theme.breakpoints.down('md')]: {
             width: '100vw'
         },
-        height: '100vh',
+    },
+    tabPanel:{
+        maxHeight: `calc(100vh-8)`,
+        height: `calc(100vh-8)`,
+        overflowY: 'auto',
+        width: '70vw',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#36393F !important',
+        color: '#fff',
+        [theme.breakpoints.down('sm')]: {
+            width: '50vw'
+        },
+    },
+    tabPanel2:{
+        maxHeight: `calc(100vh-8)`,
+        height: `calc(100vh-80)`,
+        overflowY: 'auto',
+        width: '70vw',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#36393F !important',
+        color: '#fff',
+        overflow: 'auto',
+        [theme.breakpoints.down('sm')]: {
+            width: '50vw'
+        },
     },
     noUpper: {
         textTransform: 'none',
@@ -108,7 +104,7 @@ const myStyles = makeStyles((theme) => ({
         },
     },
     rootPaper:{
-        width: '40vw',
+        width: '50vw',
         padding: theme.spacing(2),
         marginTop: theme.spacing(2),
         border: '1px solid black',
@@ -157,6 +153,40 @@ const myStyles = makeStyles((theme) => ({
     }
 }));
 
+function TabPanel(props) {
+    const classes = myStyles();
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`vertical-tabpanel-${index}`}
+            aria-labelledby={`vertical-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box component="div" p={4} className={classes.tabPanel}>
+                    {children}
+                </Box>
+            )}
+        </div>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `vertical-tab-${index}`,
+        'aria-controls': `vertical-tabpanel-${index}`,
+    };
+}
+
 const renderPanel = (
         <React.Fragment>
             <video width="320" height="240" loop={100} autoPlay>
@@ -203,7 +233,7 @@ export default function BottomNavBar(props, postLogout) {
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Authorized Apps" {...a11yProps(2)} />
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Connections" {...a11yProps(3)} />
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Billing" {...a11yProps(4)} />
-                            <Tab style={{color: '#5E6EAA'}} classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Discord Nitro" {...a11yProps(5)} />
+                            <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Discord Nitro" {...a11yProps(5)} />
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Gift Inventory" {...a11yProps(6)} />
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Server Boost" {...a11yProps(7)} />
                             <Tab classes={{root:classes.noUpper, wrapper: classes.wrapper}} label="Notification" {...a11yProps(8)} />
@@ -212,53 +242,55 @@ export default function BottomNavBar(props, postLogout) {
                             <Tab classes={{wrapper: classes.wrapper}} style={{color: '#31ff00', fontWeight: 'bold'}}
                                  onClick={handleClickClose} label="Close" {...a11yProps(10)} />
                         </Tabs>
-                        <TabPanel value={value} index={0} style={{height: '100vh'}}>
-                            <Typography variant="h6" style={{fontWeight: 'bold'}}>
-                                MY ACCOUNT
-                            </Typography>
-                            <Paper elevation={0} className={classes.rootPaper}>
-                                {props.info.avatar ?
-                                    <Avatar classes={{root: classes.avatar}} alt={props.info.name} src={props.info.avatar}/>
-                                    :
-                                    <Avatar classes={{root: classes.avatar}} alt={props.info.name}
-                                            src={require('../assets/images/Chat/default_avatar.png')}/>
-                                }
+                        <TabPanel value={value} index={0} >
+                            <Paper elevation={0} className={classes.tabPanel}>
+                                <Typography variant="h6" style={{fontWeight: 'bold'}}>
+                                    MY ACCOUNT
+                                </Typography>
+                                <Paper elevation={0} className={classes.rootPaper}>
+                                    {props.info.avatar ?
+                                        <Avatar classes={{root: classes.avatar}} alt={props.info.name} src={props.info.avatar}/>
+                                        :
+                                        <Avatar classes={{root: classes.avatar}} alt={props.info.name}
+                                                src={require('../assets/images/Chat/default_avatar.png')}/>
+                                    }
 
-                                <div className={classes.textProfile}>
-                                    <div>
-                                        <Typography variant={'h6'} style={{fontSize: '13px', fontWeight: 500 }}>
-                                            USERNAME
-                                        </Typography>
-                                        {props.info.username}
+                                    <div className={classes.textProfile}>
+                                        <div>
+                                            <Typography variant={'h6'} style={{fontSize: '13px', fontWeight: 500 }}>
+                                                USERNAME
+                                            </Typography>
+                                            {props.info.username}
+                                        </div>
+                                        <div style={{ paddingTop: '1vmax' }}>
+                                            <Typography variant={'h6'} style={{fontSize: '13px', fontWeight: 500 }}>
+                                                EMAIL
+                                            </Typography>
+                                            {props.info.email}
+                                        </div>
                                     </div>
-                                    <div style={{ paddingTop: '1vmax' }}>
-                                        <Typography variant={'h6'} style={{fontSize: '13px', fontWeight: 500 }}>
-                                            EMAIL
-                                        </Typography>
-                                        {props.info.email}
-                                    </div>
+                                </Paper>
+                                <div className={classes.textContainer}>
+                                    <Typography variant="h6" style={{fontWeight: 'bold', color: '#fff'}}>
+                                        TWO-FACTOR AUTHENTICATION
+                                    </Typography>
+                                    <Typography style={{paddingTop: '1vmax'}}>
+                                        Protect your Discord account with an extra layer of security. Once configured you'll be required
+                                        to enter both your password and an authentication code from your mobile phone in order to sign in.
+                                    </Typography>
                                 </div>
+                                <Button variant="contained" color="secondary" style={{marginTop: '1vmax', backgroundColor: '#7289DB', textTransform: 'none', padding: '5px'}}>
+                                    Enable Two-Factor Auth
+                                </Button>
                             </Paper>
-                            <div className={classes.textContainer}>
-                                <Typography variant="h6" style={{fontWeight: 'bold', color: '#fff'}}>
-                                    TWO-FACTOR AUTHENTICATION
-                                </Typography>
-                                <Typography style={{paddingTop: '1vmax'}}>
-                                    Protect your Discord account with an extra layer of security. Once configured you'll be required
-                                    to enter both your password and an authentication code from your mobile phone in order to sign in.
-                                </Typography>
-                            </div>
-                            <Button variant="contained" color="secondary" style={{marginTop: '1vmax', backgroundColor: '#7289DB', textTransform: 'none', padding: '5px'}}>
-                                Enable Two-Factor Auth
-                            </Button>
                         </TabPanel>
                         {[1,2,3,4,5,6,7,8].map((item, index) => (
                         <TabPanel key={index} value={value} index={item}>
-                            <div className={classes.wrap}>
+                            <Paper elevation={0} className={classes.tabPanel2}>
                                 <div className={classes.cPanel}>
                                     {renderPanel}
                                 </div>
-                            </div>
+                            </Paper>
                         </TabPanel>
                         ))}
                     </div>
@@ -266,9 +298,8 @@ export default function BottomNavBar(props, postLogout) {
 
                 {/*Bottom NavBar*/}
                 <BottomNavigation
-                    value={value}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
+                    onClick={(event, newValue) => {
+                        setValue(0);
                     }}
                     showLabels
                     classes={{root:classes.rootNavBar}}
