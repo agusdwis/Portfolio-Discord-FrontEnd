@@ -247,14 +247,13 @@ class Group extends React.Component {
 
     render() {
         const { show } = this.state;
-
         const { classes } = this.props;
         const listMessages = this.props.message;
         const listMember = this.props.listMember;
         const isMember = this.props.guild_info.isMember;
-        console.log("AAAAAAAAAAAAAAAA", isMember);
-
         const is_login = localStorage.getItem("is_login");
+
+
         if (!this.props.login && !is_login) {
             return (
                 <Redirect to={{ pathname: "/login"}} />
