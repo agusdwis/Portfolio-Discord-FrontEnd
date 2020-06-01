@@ -1,5 +1,6 @@
 import axios from "axios"
 
+function timeout (ms) {return new Promise((resolve) => setTimeout(resolve, ms))}
 
 export const getAllGuild = () => {
     return async (dispatch, getState) => {
@@ -9,6 +10,9 @@ export const getAllGuild = () => {
         } else {
             token = localStorage.getItem('token')
         }
+
+        await dispatch({type: 'LOADING_SCREEN'});
+        await timeout(500);
 
         await axios({
             method: 'get',

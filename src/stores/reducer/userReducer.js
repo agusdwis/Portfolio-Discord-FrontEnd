@@ -9,6 +9,7 @@ const initialState = {
     is_login: false,
     reg_status: false,
     isLaunch: false,
+    isLoading: false,
 
     infos:[],
 };
@@ -29,7 +30,8 @@ export default function userReducer(userState = initialState, action) {
         case "SUCCESS_GET_PROFILE":
             return {
                 ...userState,
-                infos: action.payload
+                infos: action.payload,
+                isLoading: false,
             };
         case "SUCCESS_REGISTER":
             return {
@@ -58,6 +60,11 @@ export default function userReducer(userState = initialState, action) {
             return {
                 ...userState,
                 isLaunch: true,
+            };
+        case "LOADING_SCREEN":
+            return {
+                ...userState,
+                isLoading: true
             };
         default:
             return userState;

@@ -28,6 +28,7 @@ import {
 
 import { memberGuild } from "../stores/action/messageAction";
 import {Redirect} from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
 
 const useStyles = (theme) => ({
     root: {
@@ -136,8 +137,7 @@ class ExplorePage extends React.Component {
                         <MainNavbar {...this.props}
                                     changeRouter={(e) => this.changeRouter(e)}
                         />
-
-                        {/*Main Container*/}
+                        {/*Main Content*/}
                         <main className={classes.content}>
                             <Grid container>
                                 <Grid className={classes.discovery} item xs={12} lg={12}>
@@ -157,10 +157,12 @@ class ExplorePage extends React.Component {
                                         {/*Content*/}
                                         <Grid className={classes.guildSection} item xs={12} lg={10}>
                                             <Paper elevation={0} classes={{root: classes.guildPaper}}>
-                                                <GuildDiscovery {...this.props}
-                                                                changeSearch={(e) => this.props.changeSearch(e)}
-                                                                changeRouter={(e) => this.changeRouter(e)}
-                                                />
+                                                {this.props.isLoading ? <LoadingScreen/> :
+                                                    <GuildDiscovery {...this.props}
+                                                                    changeSearch={(e) => this.props.changeSearch(e)}
+                                                                    changeRouter={(e) => this.changeRouter(e)}
+                                                    />
+                                                }
                                             </Paper>
                                         </Grid>
 
@@ -192,7 +194,8 @@ const mapStateToProps = (state) => {
         login: state.user.is_login,
 
         listGuilds: state.guild.listGuilds,
-        my_guild: state.members.myGuilds
+        isLoading: state.guild.isLoading,
+        my_guild: state.members.myGuilds,
     };
 };
 

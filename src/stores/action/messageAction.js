@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 export const postMember = (guildID) => {
     return async (dispatch, getState) => {
         let token;
