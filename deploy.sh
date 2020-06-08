@@ -6,4 +6,4 @@ echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-st
 sudo docker stop discordfe
 sudo docker rm discordfe
 sudo docker rmi agusdwis17/discord_fe:latest
-sudo docker run -d --name discordfe -p 5000:5000 agusdwis17/discord_fe:latest
+sudo docker run -d --name discordfe -p 8443:80 agusdwis17/discord_fe:latest
