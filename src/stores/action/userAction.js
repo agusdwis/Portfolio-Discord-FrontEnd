@@ -2,6 +2,7 @@ import axios from "axios";
 
 function timeout (ms) {return new Promise((resolve) => setTimeout(resolve, ms))}
 
+const url = "https://discordbe.agusdwisasongko.my.id";
 export const doRegister = () => {
     return async (dispatch, getState) => {
         const bodyRequest= {
@@ -20,7 +21,7 @@ export const doRegister = () => {
         const myJSON = JSON.stringify(bodyRequest);
 
         await axios
-            .post("http://localhost:5000/users/register", myJSON, {
+            .post(url + "/users/register", myJSON, {
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                     Accept: "application/json; charset=utf-8"
@@ -47,7 +48,7 @@ export const doLogin = () => {
         await timeout(1000);
 
         await axios({method:"post",
-            url:"http://0.0.0.0:5000/users/login",
+            url: url + "/users/login",
             params: {
                 username: getState().user.username,
                 password: getState().user.password,
@@ -85,7 +86,7 @@ export const getProfile = () => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/users/info",
+            url: url + "/users/info",
             headers: {'Authorization':'Bearer ' + token}
         })
             .then(async (response) => {

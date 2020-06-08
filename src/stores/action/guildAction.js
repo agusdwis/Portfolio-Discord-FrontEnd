@@ -2,6 +2,7 @@ import axios from "axios"
 
 function timeout (ms) {return new Promise((resolve) => setTimeout(resolve, ms))}
 
+const url = "https://discordbe.agusdwisasongko.my.id";
 export const getAllGuild = () => {
     return async (dispatch, getState) => {
         let token;
@@ -16,7 +17,7 @@ export const getAllGuild = () => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/guilds",
+            url: url + "/guilds",
             headers: {'Authorization':'Bearer ' + token},
         })
             .then(async (response) => {
@@ -43,7 +44,7 @@ export const getGuildByID = (guildID) => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/guilds/" + guildID,
+            url: url + "/guilds/" + guildID,
             headers: {'Authorization':'Bearer ' + token}
         })
             .then(async (response) => {
@@ -70,7 +71,7 @@ export const handleCategory = (category) => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/guilds/search",
+            url: url + "/guilds/search",
             headers: {'Authorization':'Bearer ' + token},
             params: {
                 keyword: category
@@ -100,7 +101,7 @@ export const handleSearch = () => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/guilds/search",
+            url: url + "/guilds/search",
             headers: {'Authorization':'Bearer ' + token},
             params: {
                 keyword: getState().guild.search
@@ -130,7 +131,7 @@ export const getMemberList = (guildID) => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/guilds/members/" + guildID,
+            url: url + "/guilds/members/" + guildID,
             headers: {'Authorization':'Bearer ' + token},
         })
             .then(async (response) => {

@@ -1,5 +1,6 @@
 import axios from "axios"
 
+const url = "https://discordbe.agusdwisasongko.my.id";
 export const postMember = (guildID) => {
     return async (dispatch, getState) => {
         let token;
@@ -16,7 +17,7 @@ export const postMember = (guildID) => {
         const myJSON = JSON.stringify(bodyRequest);
 
         await axios
-            .post("http://0.0.0.0:5000/members", myJSON, {
+            .post(url + "/members", myJSON, {
                 headers: {
                     'Authorization':'Bearer ' + token,
                     "Content-Type": "application/json; charset=utf-8",
@@ -47,7 +48,7 @@ export const memberGuild = () => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/members",
+            url: url + "/members",
             headers: {'Authorization':'Bearer ' + token},
         })
             .then(async (response) => {
@@ -74,7 +75,7 @@ export const messageGuild = (guildID) => {
 
         await axios({
             method: 'get',
-            url: "http://0.0.0.0:5000/messages",
+            url: url + "/messages",
             headers: {'Authorization':'Bearer ' + token},
             params: {
                 guild_id: guildID,
@@ -110,7 +111,7 @@ export const postMessage = (channelID) => {
         const myJSON = JSON.stringify(bodyRequest);
 
         await axios
-            .post("http://0.0.0.0:5000/messages", myJSON, {
+            .post(url + "/messages", myJSON, {
                 headers: {
                     'Authorization':'Bearer ' + token,
                     "Content-Type": "application/json; charset=utf-8",
