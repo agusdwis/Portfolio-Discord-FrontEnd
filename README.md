@@ -1,1 +1,1 @@
-This project was deployed in [SUGA DISCORD](https://discord.agusdwisasongko.my.id/).
+This project was deployed in [THIS](https://discord.agusdwisasongko.my.id/) Link.
