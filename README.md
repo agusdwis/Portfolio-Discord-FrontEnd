@@ -1,1 +1,1 @@
-This project was deployed in [SUGA DISCORD](https://suga-discord.netlify.app/).
+This project was deployed in [SUGA DISCORD](https://discord.agusdwisasongko.my.id/).
